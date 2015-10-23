@@ -1,0 +1,26 @@
+body { background-color: #EEEEEE; font-family: Microsoft Yahei, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, Arial, Verdana, sans-serif; font-size: 12px; color: #333; margin: 0; padding: 0;}
+body, button, input, textarea { font-size: 12px; line-height: 1.531; outline: none; margin: 0; padding: 0; border: 0;}
+p, ul, ol, dl, dt, dd, form, blockquote { margin: 0; padding: 0;}
+h1, h2, h3, h4, h5, h6 { font-size: 12px; margin: 0; padding: 0; font-weight: normal;}
+img { border: 0;}
+ul, ol { list-style: none;}
+img { border: 0;}
+a { text-decoration: none; color: #626262;}
+a:hover { text-decoration: none;}
+input, textarea, select { vertical-align: middle;}
+*:focus { outline: none;}
+em, i { font-style: normal;}
+.bold { font-weight: bold;}
+.clear { clear: both; display: block; height: 0; line-height: 0; font-size: 0;}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+*html .clearfix { height: 1%;}
+*+html .clearfix { height: 1%;}
+.none { display: none;}
+.cue { color: #999;}
+p.cue { margin-top: 5px;}
+.cueRed { color: #C00;}
+.ml { padding-left: 10px;}
+.pl { padding-left: 10px;}
+.pr { padding-right: 10px;}
+.unread { font-weight: bold;}
+#vcode { cursor: pointer;}
