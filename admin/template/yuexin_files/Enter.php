@@ -1,1 +1,0 @@
-BDBridge.rcvbase.__handleEnter({"bid":"81c45f8c692f9596e7e7d477", "wordid":0, "word":"", "from":"广东深圳", "wordtype":0, "lv":2, "lvp":2, "ftime":1439563920, "ltime":1439564477, "service_type":0, "zhixin":"", "saved":1, "time":1439564477, "group":[{"groupid":1005, "groupname":"咨询客服", "user":[{"subid":823475, "islogin":0, "groupid":1005, "subname":"客服"}]}]});

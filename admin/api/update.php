@@ -7,45 +7,31 @@
 	$action = strtolower(isset($_REQUEST["action"]) ? $_REQUEST["action"] : "");
 	$result = "";
 
-	//存储Content数据
-	if($dataType == "content"){
-		$update = array();
-		$insert = array();
-
+	//存储公司数据
+	if($module == "company"){
 		try{
-			Tool::logger(__METHOD__, __LINE__, "==========request data===========", _LOG_DEBUG);
 			foreach($_REQUEST as $key=>$value){
-				Tool::logger(__METHOD__, __LINE__, sprintf("%s: %s", $key, $value), _LOG_DEBUG);
-				$content = Content::get();
+				$key = strtolower($key);
+				$nokeys = array("type", "module", "action");
+				if(!in_array($key, $nokeys)){
+					$company = new Company();
+					$company->content = empty($value) ? "" : $value;
+					$company->companyKey = $key;
 
-				if(strtolower($key) != "type" && strtolower($key) != "module"){
-					$value = empty($value) ? "" : $value;
-
-					if(isset($content[$key])){						
-						$update[$key] = $value;
+					if(Company::exist($key)){							
+						Tool::test("", "step2");
+						Company::update($company);
 					}
-					else{
-						$insert[$key] = $value;
+					else{						
+						Tool::test("", "step2 1");
+						Company::insert($company);
 					}
 				}
-			}
-			
-			Content::update($update, $_REQUEST["module"]);
-			Content::insert($insert, $_REQUEST["module"]);
-			
-			//更新Content cache
-			Content::cache();
-
-			Tool::logger(__METHOD__, __LINE__, sprintf("有%u条数据需要更新.", count($update)), _LOG_DEBUG);
-			Tool::logger(__METHOD__, __LINE__, sprintf("有%u条数据需要插入.", count($insert)), _LOG_DEBUG);	
-			
-			if(count($update) <= 0 && count($insert) <= 0){
-				$result = "没有需要存储的数据!";
 			}
 		}
 		catch(Exception $e){
 			$result = $e->getMessage();
-			Tool::logger(__METHOD__, __LINE__, sprintf("数据保存失败: %s", $e->getMessage()), _LOG_ERROR);
+			Tool::logger(__METHOD__, __LINE__, sprintf("保存公司信息失败: %s", $e->getMessage()), _LOG_ERROR);
 		}	
 	}
 	else if($dataType == "file"){

@@ -1,5 +1,5 @@
 <?php
-	require_once("include/class/DBHelp.class.php");
+	require_once("include/util/DBHelp.php");
 	require_once("include/class/SiteBuilder.class.php");
 	
 	session_unset();

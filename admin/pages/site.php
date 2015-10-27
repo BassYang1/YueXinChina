@@ -6,7 +6,7 @@
 		BS_Common.setLocation("site");
 		
 		$("#btnSave1").click(function(){
-			var data = {type: "content", module: "company", site_name: $("#txtSiteName").val(), seo_key: $("#txtSeoKey").val(), hot_search: $("#addPnl").html(), site_notice: $("#txtNotice").val()};
+			var data = {type: "content", module: "company", site_name: $("#txtSiteName").val(), seo_key: $("#txtSeoKey").val(), hot_search: $("#addPnl").html(), site_notice: $("#txtNotice").val(), site_desc: $("#txtSiteDesc").val()};
 			
 			BS_Common.update(data);
 		});
@@ -59,7 +59,15 @@
                     网站名称
                 </td>
                 <td>
-                    <input type="text" name="txtSiteName" id="txtSiteName" value="<?php echo Content::get("site_name"); ?>" size="80" class="inputText">
+                    <input type="text" name="txtSiteName" id="txtSiteName" value="<?php echo Company::content("site_name"); ?>" size="80" class="inputText">
+                </td>
+            </tr>
+            <tr>
+                <td width="90" align="right">
+                    网站描述
+                </td>
+                <td>
+                    <input type="text" name="txtSiteDesc" id="txtSiteDesc" value="<?php echo Company::content("site_desc"); ?>" size="80" class="inputText">
                 </td>
             </tr>
             <tr>
@@ -67,7 +75,7 @@
                     关键字
                 </td>
                 <td>
-                    <input type="text" name="txtSeoKey" id="txtSeoKey" value="<?php echo Content::get("seo_key"); ?>" size="80" class="inputText">
+                    <input type="text" name="txtSeoKey" id="txtSeoKey" value="<?php echo Company::content("seo_key"); ?>" size="80" class="inputText">
                 </td>
             </tr>
             <tr>
@@ -80,7 +88,7 @@
 					<input type="text" name="txtHotUrl" id="txtHotUrl" size="80" class="inputText">&nbsp;
 					<span id="addHotSearch" class="button2">增加</span>&nbsp;<span class="comment">(点击标签删除，最多增加3个)</span>
 					<div class="space5"></div>
-					<div id="addPnl"><?php echo Content::get("hot_search"); ?></div>
+					<div id="addPnl"><?php echo Company::content("hot_search"); ?></div>
                 </td>
             </tr>
             <tr>
@@ -88,7 +96,7 @@
                     站点公告
                 </td>
                 <td>
-                    <textarea id="txtNotice" class="textArea"><?php echo Content::get("site_notice"); ?></textarea>
+                    <textarea id="txtNotice" class="textArea"><?php echo Company::content("site_notice"); ?></textarea>
 					<br /><span class="button2">（请不要输入多于300个字）</span>
                 </td>
             </tr>
@@ -107,7 +115,7 @@
 	<script language="javascript" type="text/javascript">					
 		$(function(){
 			//初始化图片显示
-			BS_Upload.init("module=company&fileKey=company_banner", "#addBanner", "#frmBanner", null);
+			BS_Upload.init("module=company&fileKey=site_banner", "#addBanner", "#frmBanner", null);
 			BS_Upload.load(BS_Upload.Mode.Multi, BS_Upload.Button.Both, "company", "company_banner"); //加载图片列表
 		});
 

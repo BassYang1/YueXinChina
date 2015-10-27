@@ -29,7 +29,7 @@
                     公司名称
                 </td>
                 <td>
-                    <input type="text" id="txtCompanyName" value="<?php echo Content::get("company_name"); ?>" size="80" class="inputText">
+                    <input type="text" id="txtCompanyName" value="<?php echo Company::content("company_name"); ?>" size="80" class="inputText">
                 </td>
             </tr>
             <tr>
@@ -37,7 +37,7 @@
                     公司简介
                 </td>
                 <td>
-                    <textarea id="txtOutline" class="textArea"><?php echo Content::get("company_outline"); ?></textarea>
+                    <textarea id="txtOutline" class="textArea"><?php echo Company::content("company_outline"); ?></textarea>
 					<br /><span>（请不要输入多于300个字）</span>
                 </td>
             </tr>
@@ -46,7 +46,7 @@
                     公司介绍
                 </td>
                 <td>
-                    <textarea id="txtIntroduce" class="editArea"><?php echo Content::get("company_introduce"); ?></textarea>
+                    <textarea id="txtIntroduce" class="editArea"><?php echo Company::content("company_introduce"); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -69,7 +69,7 @@
                     联系方式
                 </td>
                 <td>
-                    <textarea id="txtContact" class="editArea" style="height:300px;"><?php echo Content::get("company_contact"); ?></textarea>
+                    <textarea id="txtContact" class="editArea" style="height:300px;"><?php echo Company::content("company_contact"); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -91,7 +91,7 @@
 								BS_Common.update({type: "content", module: "company", company_contact: BS_Common.getEDContent("#txtContact")});
 							});
 
-							BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, [{savedPath: "<?php echo docFile::first("company_barcode")->savedPath; ?>"}]);
+							BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, [{savedPath: "<?php echo DocFile::first("company_barcode")->savedPath; ?>"}]);
 						});
 
 						//判断是否上传成功后执行

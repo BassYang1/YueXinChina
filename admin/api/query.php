@@ -75,7 +75,7 @@
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询类型商品Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
-					$listJson = Sort::pcount($query);
+					$listJson = Sort::rcount($query);
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数: %s", $listJson), _LOG_ERROR);
 				}
 
@@ -143,7 +143,7 @@
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
-					$listJson = Product::pcount($query);
+					$listJson = Product::rcount($query);
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品总数: %s", $listJson), _LOG_ERROR);
 				}
 
@@ -208,7 +208,7 @@
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
-					$listJson = Content::pcount($query);
+					$listJson = Content::rcount($query);
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总数: %s", $listJson), _LOG_ERROR);
 				}
 
@@ -223,11 +223,11 @@
 			try{
 				$listJson = "";
 
-				if(isset($_REQUEST["conentId"])){
-					$conentId = $_REQUEST["conentId"];
+				if(isset($_REQUEST["contentId"])){
+					$contentId = $_REQUEST["contentId"];
 
 					$content = new Content(_NONE);
-					$content->contentId = $conentId;
+					$content->contentId = $contentId;
 					$content->contentType = $module;
 
 					$content = Content::read($content);
@@ -274,7 +274,7 @@
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询留言Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
-					$listJson = Message::pcount($query);
+					$listJson = Message::rcount($query);
 					Tool::logger(__METHOD__, __LINE__, sprintf("查询留言总数: %s", $listJson), _LOG_ERROR);
 				}
 

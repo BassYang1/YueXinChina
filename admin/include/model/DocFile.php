@@ -55,6 +55,7 @@ class DocFile{
 		$files = self::get($fileKey);
 
 		if(!empty($files)){
+			reset($files);
 			return current($files);
 		}
 

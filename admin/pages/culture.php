@@ -2,14 +2,14 @@
 <script charset="utf-8" src="scripts/kindeditor/lang/zh_CN.js"></script>
 <script>
 	$(function(){
-		BS_Common.loadContentEditor("#txtHistory");
+		BS_Common.loadContentEditor("#txtCulture");
 		BS_Common.loadContentEditor("#txtSpirit");
 		BS_Common.loadContentEditor("#txtHonor");
 		BS_Common.setMenu(".m_culture");
 		BS_Common.setLocation("culture");
 
 		$("#btnSave").click(function(){
-				var data = {type: "content", module: "company", company_history: BS_Common.getEDContent("#txtHistory"), company_spirit: BS_Common.getEDContent("#txtSpirit"), company_honor: BS_Common.getEDContent("#txtHonor")};
+				var data = {type: "content", module: "company", company_culture: BS_Common.getEDContent("#txtCulture"), company_spirit: BS_Common.getEDContent("#txtSpirit"), company_honor: BS_Common.getEDContent("#txtHonor")};
 				
 				BS_Common.update(data);
 		});
@@ -21,10 +21,10 @@
         <tbody>
             <tr>
                 <td width="90" align="right">
-                	发展历程
+                	公司文化
                 </td>
                 <td>
-					<textarea id="txtHistory" name="txtHistory" class="editArea"><?php echo Content::get("company_history"); ?></textarea>
+					<textarea id="txtCulture" name="txtCulture" class="editArea"><?php echo Company::content("company_culture"); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -32,7 +32,7 @@
                     企业风貌
                 </td>
                 <td>
-					<textarea id="txtSpirit" name="txtSpirit" class="editArea"><?php echo Content::get("company_spirit"); ?></textarea>
+					<textarea id="txtSpirit" name="txtSpirit" class="editArea"><?php echo Company::content("company_spirit"); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
                     资质证书
                 </td>
                 <td>
-					<textarea id="txtHonor" name="txtHonor" class="editArea"><?php echo Content::get("company_honor"); ?></textarea>
+					<textarea id="txtHonor" name="txtHonor" class="editArea"><?php echo Company::content("company_honor"); ?></textarea>
                 </td>
             </tr>
             <tr>

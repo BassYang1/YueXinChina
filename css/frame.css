@@ -41,7 +41,7 @@
 #content_box{ width:960px; margin:5px auto 0; overflow:hidden;}
 #content_box .content{ overflow:hidden; width:960px; }
 
-#content_box .content .ct_left{width:234px; overflow:hidden; }
+#content_box .content .ct_left{width:234px; }
 #content_box .content .ct_left .ct_l_section { width:230px; overflow:hidden; background:#fff; padding-bottom:5px;}
 #content_box .content .ct_left .ct_l_section .l_menu{width:218px; } /*列表项*/
 #content_box .content .ct_left .ct_l_section .l_menu dl{ width:218px; margin-top:5px; margin-left:2px; float:left;}
@@ -58,7 +58,7 @@
 #content_box .content .ct_left .ct_l_section .l_text{ float:left; width:220px; margin:5px 0 5px 10px; display:inline;  line-height:20px;font-size:12px; color:#555; padding-bottom:10px; }
 
 
-#content_box .content .ct_right{width:723px;overflow:hidden; background:#fff;}
+#content_box .content .ct_right{width:723px;overflow:hidden; background:#fff; padding-bottom:5px;}
 #content_box .content .ct_r_box .ct_right{ width:723px; }
 #content_box .content .ct_r_box .ct_right .ct_r_list{ width:721px;border:1px solid #ddd }
 #content_box .content .ct_r_box .ct_right .ct_r_list dl{margin:6px 0 4px 9px; display:inline; float:left;  width:230px;}
@@ -146,5 +146,12 @@
 /*返回顶部*/
 .backToTop{display:none;line-height:1.2;background:url(../images/backtop_03.jpg) no-repeat;width:25px;height:88px;color:#fff;font-size:12px;text-align:center;position:fixed;_position:absolute;right:80px;bottom:100px;_bottom:"auto";cursor:pointer;z-index:65533; }
 
+/*paging*/
+.paging {font-family: Tahoma, Verdana; margin-top: 5px; text-align:center; color:#666;}
+.paging a:hover { border:1px solid #999; color:#fff; background-color:#999;}
+.paging a:active {border:1px solid #000099; color:#000000;}
+.paging span.current { padding:2px 8px 2px 8px; margin:3px; text-decoration:none;}
+.paging span.disabled { background:#EEE; padding:1px 8px 1px 8px; margin:2px; color:#999; font-size: 16px; line-height:16px;}
+.paging input { text-align:center; border: 1px solid #DBDBDB; background-color: #FFF; padding: 2px; color: #999; font-size: 12px; line-height: 14px; width:30px;  vertical-align: bottom;}
 
 

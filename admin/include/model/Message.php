@@ -205,10 +205,10 @@ class Message{
 		return null;
 	}
 
-	public static function pcount($query){
+	public static function rcount($query){
 		try{	
-			$pcount = _NONE;
-			$sql = "select count(1) as pcount from message where 1=1";				
+			$rcount = _NONE;
+			$sql = "select count(1) as rcount from message where 1=1";				
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总数SQL: %s", $sql), _LOG_DEBUG);
 						
@@ -217,15 +217,15 @@ class Message{
 
 			if(!empty($data) && $data->num_rows > 0){
 				while($row = $data->fetch_assoc()) {
-					$pcount = $row["pcount"];
+					$rcount = $row["rcount"];
 					break;
 				}
 			}
 				
 			DBHelp::closeConn($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容 总%u.", $pcount), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容 总%u.", $rcount), _LOG_DEBUG);
 			
-			return $pcount;
+			return $rcount;
 		}		
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, "查询数据失败：" . $e->getMessage());

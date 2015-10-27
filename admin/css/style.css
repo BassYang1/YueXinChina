@@ -41,7 +41,7 @@
 .paging a:active {border:1px solid #000099; color:#000000;}
 .paging span.current { padding:2px 8px 2px 8px; margin:3px; text-decoration:none;}
 .paging span.disabled { background:#EEE; padding:1px 8px 1px 8px; margin:2px; color:#999; font-size: 16px; line-height:16px;}
-.paging input { text-align:center; border: 1px solid #DBDBDB; background-color: #FFF; padding: 2px; color: #999; font-size: 12x; line-height: 14px; width:30px;  vertical-align: bottom;}
+.paging input { text-align:center; border: 1px solid #DBDBDB; background-color: #FFF; padding: 2px; color: #999; font-size: 12px; line-height: 14px; width:30px;  vertical-align: bottom;}
 
 /*- form -*/
 .inputText { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none;}

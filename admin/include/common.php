@@ -1,10 +1,12 @@
 <?php
 	session_start();
 	error_reporting(0);
+	ini_set('display_errors', 'On'); 
 	
 	//custom error
-	function handleError($err_no, $err_msg){
-		echo "<b>Error:</b>[$err_no] $err_msg";		
+	function handleError($err_no, $err_msg, $err_file, $err_line, $err_vars){
+		echo "<b>Error:</b>[$err_file] [$err_line] [$err_no] $err_msg <br />";
+		echo wddx_serialize_value($vars, "Variables");
 		die();
 	}
 	set_error_handler("handleError");
@@ -42,7 +44,4 @@
 	$lblCurrentUser = "CURRENT_USER";
 	$user = new User("admin1");
 	$_SESSION[$lblCurrentUser] = $user;
-
-	//¼ÓÔØContentÊý¾Ý
-	//Content::cache();
 ?>

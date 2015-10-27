@@ -103,6 +103,10 @@ BS_Popup.html = function (params){
 	return html;
 }
 
+BS_Popup.shade = function(loading){
+	
+}
+
 //创建窗口
 BS_Popup.create = function(params, close, confirm){
 	//显示已经打开的Form

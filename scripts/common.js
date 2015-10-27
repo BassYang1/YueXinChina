@@ -1,41 +1,41 @@
 ﻿
 $(function() {
-    //导航菜单
-    /*var ind = 5;
-    var nav = jQuery(".nav");
-    var init = jQuery(".nav .m").eq(ind);
-    var block = jQuery(".nav .block");
-    block.css({ "left": init.position().left - 3 });
-    nav.hover(function() {}, function() { block.animate({ "left": init.position().left - 3 }, 100); });
+    var h1 = $(".ct_left").height();
+	var h2 = $(".ct_right").height();
+	var h3 = $(".ct_left").find(".ct_l_section:last").height();
 
-    //导航滑动特效
-    jQuery(".nav").slide({
-        type: "menu",
-        titCell: ".m",
-        targetCell: ".sub",
-        delayTime: 300,
-        triggerTime: 0,
-        returnDefault: true,
-        defaultIndex: ind,
-        startFun: function(i, c, s, tit) {
-            block.animate({ "left": tit.eq(i).position().left - 3 }, 100);
-        }
-    });*/
+	if (h1 > h2) {
+		$(".ct_right").height(h1);
+	}
+	else {
+		$(".ct_left").find(".ct_l_section:last").height(h3 + h2 - h1);
+	}
+
+	var h1 = $(".company").parent().height();
+	var h2 = $(".news").parent().height();
+
+	if (h1 > h2) {
+		$(".news").parent().height(h1);
+	}
+	else {
+		$(".company").parent().height(h2);
+	}
 	
-		$("#name").focus(function() {								  
-            if ($("#name").val() == "姓名") {
+	$("#name").focus(function() {								  
+        if ($("#name").val() == "姓名") {
             	$("#name").val("");
-			}
-        });
-        $("#name").blur(function() {
-            if ($("#name").val() == "") {
-                $("#name").val("姓名");
-            }
-        });
-		$("#phone").focus(function() {						  
+		}
+    });
+	
+    $("#name").blur(function() {
+        if ($("#name").val() == "") {
+            $("#name").val("姓名");
+        }
+    });
+	$("#phone").focus(function() {					  
             if ($("#phone").val() == "联系电话") {
-            	$("#phone").val("");
-			}
+            $("#phone").val("");
+		}
         });
         $("#phone").blur(function() {
             if ($("#phone").val() == "") {

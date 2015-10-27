@@ -31,8 +31,8 @@ BS_Content.init = function (module){
 	}
 }
 
-BS_Content.loadDetail = function(conentId){
-	var query = {type: "detail", module: BS_Content.Module, conentId: conentId};
+BS_Content.loadDetail = function(contentId){
+	var query = {type: "detail", module: BS_Content.Module, contentId: contentId};
 	var detail = null;
 
 	BS_Common.query(query, function(data){

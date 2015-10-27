@@ -82,6 +82,20 @@ class Tool{
 		}		
 	}
 	
+	/*
+	public static function location($page){
+		if(isset($_REQUEST("p")){
+			$page = strtolower($_REQUEST("p"));
+		}
+
+		if($page == "company"){
+
+		}
+
+
+		return "";
+	}*/
+
 	public static function test($mark, $message){
 		self::logger("===test===", $mark, $message, _LOG_DEBUG);		
 	}
@@ -91,6 +105,13 @@ class Tool{
 
 		foreach($_REQUEST as $key=>$value){
 			self::logger($method, $line, sprintf("%s: %s", $key, $value), _LOG_DEBUG);
+		}
+	}
+
+	public static function print_data($method, $line, $data){		
+		if(_IS_DEBUG){			
+			print(sprintf("=====%s [%s]======================", $method, $line));
+			print_r($data);
 		}
 	}
 }

@@ -175,10 +175,10 @@ class Sort{
 		return new Sort(_NONE);
 	}
 
-	public static function pcount($query){
+	public static function rcount($query){
 		try{	
-			$pcount = _NONE;
-			$sql = "select count(1) as pcount from p_sort where 1=1";				
+			$rcount = _NONE;
+			$sql = "select count(1) as rcount from p_sort where 1=1";				
 
 			if(is_numeric($query->sortId) && $query->sortId > 0){
 				$sql = $sql . sprintf(" and sort_id=%u", $query->sortId);
@@ -195,15 +195,15 @@ class Sort{
 
 			if(!empty($data) && $data->num_rows > 0){
 				while($row = $data->fetch_assoc()) {
-					$pcount = $row["pcount"];
+					$rcount = $row["rcount"];
 					break;
 				}
 			}
 				
 			DBHelp::closeConn($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数%u.", $pcount), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数%u.", $rcount), _LOG_DEBUG);
 			
-			return $pcount;
+			return $rcount;
 		}		
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, "查询数据失败：" . $e->getMessage());
