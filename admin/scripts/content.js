@@ -35,7 +35,7 @@ BS_Content.loadDetail = function(contentId){
 	var query = {type: "detail", module: BS_Content.Module, contentId: contentId};
 	var detail = null;
 
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, false, function(data){
 		detail = data;
 	});
 
@@ -43,6 +43,8 @@ BS_Content.loadDetail = function(contentId){
 }
 
 BS_Content.loadList = function(curPage, newSearch){
+	var shade = BS_Popup.shade(true); //加载弹出遮罩层和进度栏
+
 	if(!newSearch && curPage == BS_Content.LastPage) {
 		return;
 	}
@@ -57,7 +59,7 @@ BS_Content.loadList = function(curPage, newSearch){
 	query.size = BS_Content.PageSize;
 	query.curPage = curPage;
 			
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, false, function(data){
 		if(data instanceof Array){
 			$(".contents tr:gt(0)").remove();
 			$("#curPage").val(curPage);
@@ -66,7 +68,9 @@ BS_Content.loadList = function(curPage, newSearch){
 				var content = data[i];
 				var newItem = $(".contents").append(BS_Content.ListItem).find(".pList:last");
 
-				newItem.find(".contentCheck input:first").val(content.contentId);
+				//newItem.find(".contentCheck input:first").val(content.contentId);				
+				newItem.find(".contentCheck").html("<input type='hidden' value='" + content.contentId + "' /><span>" + (1 + parseInt(i)) + "</span>");
+
 				newItem.find(".subject").text(content.subject);
 
 				newItem.find(".edit_content").click(function(){
@@ -77,23 +81,26 @@ BS_Content.loadList = function(curPage, newSearch){
 					var row = this;
 
 					BS_Popup.create({message: "确定删除此新闻?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
-						var data = {type: "detail", module: BS_Content.Module, action: "delete", contentId: $(row).parent().parent().find(".contentCheck input:first").val()};
+						var data = {type: "detail", module: BS_Content.Module, action: "delete", contentId: $(row).parent().parent().find(".contentCheck input:first").val()};						
+						var shade1 = BS_Popup.shade(true);
+
 						BS_Common.update(data, function(){
-							BS_Popup.create({message: "删除成功"});
+							BS_Popup.close(shade1);
 							BS_Content.loadList(parseInt($("#curPage").val()), true);
 						});
 					});
-				});
-					
+				});					
 
 				newItem.show();
 			}
-		}
 
-		//设置分页
-		if(newSearch){
-			query.type = "count";
-			BS_Content.setPaging(query, BS_Content.loadList);		
+			//设置分页
+			if(newSearch){
+				query.type = "count";
+				BS_Content.setPaging(query, BS_Content.loadList);		
+			}
+
+			BS_Popup.close(shade);
 		}
 	});
 };
@@ -101,7 +108,7 @@ BS_Content.loadList = function(curPage, newSearch){
 BS_Content.setPaging = function (query, callBack){
 	var callBack = typeof callBack == "function" ? callBack : BS_Content.loadList;
 
-	BS_Common.query(query, function(count){
+	BS_Common.query(query, true, function(count){
 		BS_Content.ListCount = count;
 		BS_Content.PageCount = Math.floor(count / BS_Content.PageSize) + (count % BS_Content.PageSize == 0 ? 0 : 1);
 		$("#rcount").text(count);

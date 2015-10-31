@@ -9,7 +9,7 @@ BS_Pro.loadDetail = function(productId){
 	var query = {type: "detail", module: "product", productId: productId};
 	var detail = null;
 
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, false, function(data){
 		detail = data;
 	});
 
@@ -17,7 +17,7 @@ BS_Pro.loadDetail = function(productId){
 }
 
 BS_Pro.loadSort = function(sortNo){
-	BS_Common.query({type: "sort", module: "product"}, function(data){
+	BS_Common.query({type: "sort", module: "product"}, true, function(data){
 		var sorts = $.trim(data) == ""? null : eval("(" + data + ")");
 
 		if(sorts instanceof Array && sorts.length > 0){
@@ -51,7 +51,7 @@ BS_Pro.loadList = function(curPage, newSearch){
 	query.size = BS_Pro.PageSize;
 	query.curPage = curPage;
 			
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, true, function(data){
 		if(data instanceof Array){
 			$(".products tr:gt(0)").remove();
 			$("#curPage").val(curPage);
@@ -111,7 +111,7 @@ BS_Pro.loadList = function(curPage, newSearch){
 };
 
 BS_Pro.setPaging = function (query){
-	BS_Common.query(query, function(count){
+	BS_Common.query(query, true, function(count){
 		BS_Pro.ListCount = count;
 		BS_Pro.PageCount = Math.floor(count / BS_Pro.PageSize) + (count % BS_Pro.PageSize == 0 ? 0 : 1);
 		$("#rcount").text(count);

@@ -10,7 +10,7 @@ BS_Msg.loadDetail = function(messageId){
 	var query = {type: "detail", module: "message", messageId: messageId};
 	var detail = null;
 
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, false, function(data){
 		detail = data;
 	});
 
@@ -18,6 +18,8 @@ BS_Msg.loadDetail = function(messageId){
 }
 
 BS_Msg.loadList = function(curPage, newSearch){
+	var shade = BS_Popup.shade(true); //加载弹出遮罩层和进度栏
+
 	if(!newSearch && curPage == BS_Msg.LastPage) {
 		return;
 	}
@@ -33,7 +35,7 @@ BS_Msg.loadList = function(curPage, newSearch){
 	query.size = BS_Msg.PageSize;
 	query.curPage = curPage;
 			
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, true, function(data){
 		if(data instanceof Array){
 			$(".messages tr:gt(0)").remove();
 			$("#curPage").val(curPage);
@@ -56,9 +58,10 @@ BS_Msg.loadList = function(curPage, newSearch){
 
 					BS_Popup.create({message: "确定删除此留言?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
 						var data = {type: "detail", module: "message", action: "delete", messageId: $(row).parent().parent().find(".msgCheck input:first").val()};
+						var shade1 = BS_Popup.shade(true);
+
 						BS_Common.update(data, function(){
-							BS_Popup.create({message: "删除成功"});
-							//$(row).parent().parent().remove();
+							BS_Popup.close(shade1);
 							BS_Msg.loadList(parseInt($("#curPage").val()), true);
 						});
 					});
@@ -67,12 +70,14 @@ BS_Msg.loadList = function(curPage, newSearch){
 
 				newItem.show();
 			}
-		}
 
-		//设置分页
-		if(newSearch){
-			query.type = "count";
-			BS_Msg.setPaging(query);			
+			//设置分页
+			if(newSearch){
+				query.type = "count";
+				BS_Msg.setPaging(query);			
+			}
+
+			BS_Popup.close(shade);
 		}
 	});
 };
@@ -80,7 +85,7 @@ BS_Msg.loadList = function(curPage, newSearch){
 BS_Msg.setPaging = function (query, callBack){
 	var callBack = typeof callBack == "function" ? callBack : BS_Msg.loadList;
 
-	BS_Common.query(query, function(count){
+	BS_Common.query(query, true, function(count){
 		BS_Msg.ListCount = count;
 		BS_Msg.PageCount = Math.floor(count / BS_Msg.PageSize) + (count % BS_Msg.PageSize == 0 ? 0 : 1);
 		$("#rcount").text(count);

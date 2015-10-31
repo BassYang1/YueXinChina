@@ -11,6 +11,7 @@ create table doc_file(
 	showed_name varchar(50),
 	file_url varchar(150),
 	file_desc varchar(50),
+	file_sort int,
 	ext_name varchar(10),
 	rec_date timestamp default now()
 )engine=innodb default charset=utf8 auto_increment=1;

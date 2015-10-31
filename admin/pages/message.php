@@ -1,7 +1,6 @@
 <script>
 	$(function(){
 		BS_Common.setMenu(".m_message");
-		BS_Common.setLocation("message");
 		
 		$("#btnSearch").click(function(){
 			BS_Msg.loadList(1, true);
@@ -10,6 +9,7 @@
 		BS_Msg.loadList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong>留言管理</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
 	<h3>客户留言管理</h3>
 	<div class="filter">

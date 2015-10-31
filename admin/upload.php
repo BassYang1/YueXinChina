@@ -13,36 +13,40 @@
     <script type="text/javascript" src="scripts/upload.js"></script>
 </head>
 <script language="javascript" type="text/javascript">
-    $(function () {
-        //初始化
-        BS_Upload.init("", "#btnUpload", "#frmUpload", null);
-		
-		$("#sltModule").change(function(){
-			$(".flUploadView").html("");
-			BS_Upload.load(BS_Upload.Mode.Multi, BS_Upload.Button.Both, $("#sltModule").val(), ""); //加载图片列表
-		});
+    $(function () {        
+		cteateUpload(); //初使化
 
-		BS_Upload.load(BS_Upload.Mode.Multi, BS_Upload.Button.Both, $("#sltModule").val(), ""); //加载图片列表
+		$("#sltModule").change(cteateUpload);
     });
 
-    //判断是否上传成功并显示新增图片
-    function uploadCompleted(params) {
-        if (params.status == 1) {
-			var module = $("#sltModule").val();
-            BS_Upload.show(BS_Upload.Mode.Multi, BS_Upload.Button.Both, [{savedPath: params.data}]);
-            $("#flUpload").val("");
-        }
-        else {
-            BS_Popup.create({ message: params.data });
-        }
-    } 
+	function cteateUpload(){
+		var shade = BS_Popup.shade(true);
+
+		var module = $("#sltModule").val();
+		var data = {parent: ".imgs", module: module, view: BS_Upload.Mode.External, viewBtn: BS_Upload.Button.Both, showLink: false, showDesc: false};
+		data.size = 14;
+		data.fileKey = "";
+
+		$(".imgs, .flUploadView").html("");
+
+		if(module == "latest"){
+			data.viewBtn = BS_Upload.Button.OnlyCopy;
+			$(".imgs, .paging").hide();
+		}
+		else{
+			data.curPage = 1;
+			data.isPaging = true;
+			$(".imgs, .paging").show();
+		}
+
+		var form = BS_Upload.create(data);
+		BS_Popup.close(shade);
+
+		return form;
+	}
 </script>
 <body>
     <div class="main">
-        <h3>
-            文件上传</h3>
-        <form action="api/upload.php?module=company" name="frmUpload" id="frmUpload" method="post"
-        enctype="multipart/form-data" target="ifrmUpload">
         <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
             <tbody>
                 <tr>
@@ -51,6 +55,7 @@
                     </td>
                     <td>
                         <select id="sltModule" name="module" class="inputText">
+                            <option value="latest">最新上传</option>
                             <option value="company">公司信息</option>
                             <option value="news">站内新闻</option>
                             <option value="product">产品图片</option>
@@ -59,21 +64,30 @@
                         </select>
                     </td>
                 </tr>
+            </tbody>
+        </table>
+		<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tbody>
                 <tr>
-                    <td align="right">
-                        选择图片
-                    </td>
-                    <td>
-                        <div class="flUpload">
-                            <iframe name="ifrmUpload" class="hidden"></iframe>
-                            <iframe name="ifrmModule" class="hidden"></iframe>
-                            <input type="file" name="flUpload" id="flUpload" value="请选择图片" size="80" class="inputText" />
-							&nbsp;<input name="btnUpload" id="btnUpload" class="button" type="submit" value="上传">
-                        </div>
-                        <div class="flUploadView">
-                        </div>
+                    <td class="flUploadView">                    
                     </td>
                 </tr>
+                <tr>
+                    <td>  		
+						<div class="paging">
+							<span id="pfirst" class="disabled cursor"><b>«</b></span>
+							<span id="pprev" class="disabled cursor">‹</span>
+							<input type="text" id="curPage" value="1" class="pcur" />
+							<span id="pnext" class="disabled cursor">›</span>
+							<span id="plast" class="disabled cursor"><b>»</b></span>
+						</div>                  
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		<div class="imgs"></div>
+		<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic hidden">
+            <tbody>
                 <tr>
                     <td width="90" align="right">
                         图片地址

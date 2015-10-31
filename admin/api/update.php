@@ -5,28 +5,38 @@
 	$dataType = strtolower(isset($_REQUEST["type"]) ? $_REQUEST["type"] : "");
 	$module = strtolower(isset($_REQUEST["module"]) ? $_REQUEST["module"] : "");
 	$action = strtolower(isset($_REQUEST["action"]) ? $_REQUEST["action"] : "");
+
 	$result = "";
 
 	//存储公司数据
 	if($module == "company"){
 		try{
-			foreach($_REQUEST as $key=>$value){
-				$key = strtolower($key);
-				$nokeys = array("type", "module", "action");
-				if(!in_array($key, $nokeys)){
-					$company = new Company();
-					$company->content = empty($value) ? "" : $value;
-					$company->companyKey = $key;
+			if($action == "update"){
+				$multi = strtolower(isset($_REQUEST["multi"]) ? true : false); //是否允许重置添加
 
-					if(Company::exist($key)){							
-						Tool::test("", "step2");
-						Company::update($company);
-					}
-					else{						
-						Tool::test("", "step2 1");
-						Company::insert($company);
+				foreach($_REQUEST as $key=>$value){
+					$key = strtolower($key);
+					$nokeys = array("type", "module", "action", "multi");
+					if(!in_array($key, $nokeys)){
+						$company = new Company();
+						$company->content = empty($value) ? "" : $value;
+						$company->companyKey = $key;
+
+						if(!$multi && Company::exist($key)){
+							Company::update($company);
+						}
+						else{
+							Company::insert($company);
+						}
 					}
 				}
+			}
+			else if($action == "del"){
+				$id = isset($_REQUEST["companyId"]) ? $_REQUEST["companyId"] : 0; //是否允许重置添加
+				$company = new Company(_NONE);
+				$company->id = $id;
+				
+				Company::delete($company);
 			}
 		}
 		catch(Exception $e){
@@ -38,7 +48,12 @@
 		try{
 			$file = new DocFile(_NONE);
 			$file->savedPath = $_REQUEST["file_path"];
+
 			DocFile::delete($file);
+
+			if(is_file("../" . $file->savedPath)){
+				@unlink("../" . $file->savedPath);
+			}
 		}
 		catch(Exception $e){
 			$result = $e->getMessage();
@@ -80,7 +95,6 @@
 
 				DocFile::delete($docFile);
 			}
-
 		}
 		catch(Exception $e){
 			$result = $e->getMessage();

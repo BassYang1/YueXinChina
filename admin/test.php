@@ -24,8 +24,16 @@
 
 		echo $fileKey . " / " . count($list) . "<br />";
 	}*/
-
-	echo count(Product::query(new Product(0)));
+	$formId = "frm123";
+	$is_upload = true;
+	$result = "../upload/company/company1446065101.png";
+	
+	if(empty($formId)){
+		echo "<script language=\"javascript\" type=\"text/javascript\">parent.BS_Upload.closeAll({status:\"" . $is_upload . "\", data: \"" . $result . "\"});</script>";
+	}
+	else{
+		echo "<script language=\"javascript\" type=\"text/javascript\">parent.BS_Upload.Forms['" + $formId + "'].uploadCompleted({status:\"" . $is_upload . "\", data: \"" . $result . "\"});</script>";
+	}
 ?>
 
 <script>

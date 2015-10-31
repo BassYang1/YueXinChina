@@ -25,7 +25,8 @@ BS_Common.initEditor = function(){
 	});
 }
 
-BS_Common.nav = function (page, data) {
+BS_Common.nav = function (page, data) {	
+	var shade = BS_Popup.shade(true);
 	var queryStr = "";
 
 	for(var key in data){
@@ -36,7 +37,7 @@ BS_Common.nav = function (page, data) {
 		queryStr = "?" + queryStr.substring(1);
 	}
 
-    BS_Common.ajax("api/route.php?page=" + page, null, "GET", false, function (result, text) {
+    BS_Common.ajax("api/route.php?page=" + page, null, "GET", true, function (result, text) {
         if ("TRUE" == result.status.toUpperCase()) {
             location.href = "index.php" + queryStr;
         }
@@ -134,42 +135,32 @@ BS_Common.setLocation = function(flag){
 	}
 }*/
 
-BS_Common.update = function(data, success, error){
-    BS_Common.ajax("api/update.php", data, "POST", false, function (result, text) {
-        if ("TRUE" == result.status.toUpperCase()) {
-            if(typeof success == "function"){
-				success();
-			}
-			else{
-				BS_Popup.create({message: "操作成功"});
-			}
-        }
-		else{
-			if(typeof error == "function"){
-				error();
-			}
-			else{
-				BS_Popup.create({message: "操作失败"});
-			}
+BS_Common.update = function(data, callback){
+    BS_Common.ajax("api/update.php", data, "POST", true, function (result) {
+		if(result == undefined || result == null){
+			result = {status: false, data: "更新异常"};
 		}
+		else{
+			result.status = ("TRUE" == result.status.toUpperCase());
+		}
+
+		callback(result.status);
     });
 };
 
-BS_Common.query = function(data, success, error){
-	BS_Common.ajax("api/query.php", data, "POST", false, function (result, text) {
-        if ("TRUE" == result.status.toUpperCase()) {
-            if(typeof success == "function"){
-				success(result.data);
-			}
-        }
-		else{
-			if(typeof error == "function"){
-				error();
-			}
-			else{
-				BS_Popup.create({message: "查询失败"});
-			}
+BS_Common.query = function(data, async, callback){
+	BS_Common.ajax("api/query.php", data, "POST", async, function (result) {
+		if(result == undefined || result == null){
+			BS_Popup.create({message: "查询异常"});
+			return;
 		}
+		
+		if("TRUE" != result.status.toUpperCase()){
+			BS_Popup.create({message: (typeof result.data == "string" ? result.data : "查询异常")});
+			return;
+		}
+
+        callback(result.data);
     });
 }
 
@@ -187,6 +178,7 @@ BS_Common.ajax = function (url, data, method, isAsync, callBack, error) {
     if (!error) {
         error = function (a, b, c) {
 			alert(a.responseText);
+			BS_Popup.closeAll();
             //location.href = "error.php?err=" + a;
         }
     }

@@ -5,17 +5,35 @@
     <div class="nav">
         <ul class="l_float">
             <li><a href="#" target="_blank">查看站点</a></li>
-            <li class="dd_menu"><a href="javascript:void(0);" class="dd">图片管理</a>
+            <li class="dd_menu"><a href="javascript:void(0);" class="dd">公司信息</a>
 				<div class="dd_menu_item dd_item">
-					<a id="btnUploadImg" href="#">上传图片</a> 
-					<a href="#">图片列表</a> 
+					<a href="#" onclick="BS_Common.nav('company')">公司简介</a>
+					<a href="#" onclick="BS_Common.nav('culture')">公司文化</a>
+					<a href="#" onclick="BS_Common.nav('contact')">联系方式</a>
+					<a href="#" onclick="BS_Common.nav('spirit')">企业风貌</a>
+					<a href="#" onclick="BS_Common.nav('honor')">资质证书</a>
 				</div>
 			</li>
-            <li class="dd_menu"><a href="javascript:void(0);" class="dd">测试</a>
+            <li class="dd_menu"><a href="javascript:void(0);" class="dd">网站信息</a>
 				<div class="dd_menu_item dd_item">
-					<a id="btnUploadImg" href="#" onclick="BS_Popup.create({width: '40px', height: '20px', type: BS_Popup.PopupType.ALERT, message: '这是一个测试信息'})">显示消息</a> 
-					<a href="#">显示弹出页面</a> 
-					<a href="#" onclick="BS_Popup.test();">测试</a> 
+					<a href="#" onclick="BS_Common.nav('site')">基本信息</a>
+					<a href="#" onclick="BS_Common.nav('recommend')">产品推荐</a> 
+					<a href="#" onclick="BS_Common.nav('links')">友情连接</a> 
+					<a href="#" onclick="BS_Common.nav('siteimg')">图片管理</a> 
+				</div>
+			</li>
+            <li class="dd_menu"><a href="javascript:void(0);" class="dd">产品管理</a>
+				<div class="dd_menu_item dd_item">
+					<a href="#" onclick="BS_Common.nav('product')">产品列表</a>
+					<a href="#" onclick="BS_Common.nav('sort')">产品类别</a> 
+				</div>
+			</li>			
+            <li class="dd_menu"><a href="javascript:void(0);" class="dd">信息发布</a>
+				<div class="dd_menu_item dd_item">
+					<a href="#" onclick="BS_Common.nav('recruit')">人才招聘</a>
+					<a href="#" onclick="BS_Common.nav('case')">成功案例</a>
+					<a href="#" onclick="BS_Common.nav('news')">新闻中心</a>
+					<a href="#" onclick="BS_Common.nav('news')">下载中心</a>
 				</div>
 			</li>
         </ul>

@@ -24,17 +24,21 @@
 			file = [{savedPath: detail.mImage}];
 		}
 		
-		//初始化图片显示
-		BS_Upload.init("module=case&fileKey=case_image", "#btnSave", "#frmCase", function(){
+		//添加上传控件
+		var callback = function(file){	
 			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: caseId};
+
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#caseContent");
-						
+
+			if(file != null && file.savedPath != ""){
+				data.mImage = file.savedPath;
+			}
+
 			BS_Common.update(data, function(){
+				BS_Popup.closeAll();
 				if(caseId > 0){
-					BS_Popup.create({message: "修改成功"}, function(){
-						BS_Common.nav("case");
-					});
+					BS_Common.nav("case");
 				}
 				else{
 					BS_Popup.create({message: "保存案例成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
@@ -45,34 +49,27 @@
 					});
 				}
 			});
-		});
-
-		BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, file);
-	});	
+		}
 		
-	//判断是否上传成功后执行
-	function uploadCompleted(params){
-		if(params.status == 1){
-			BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, [{savedPath: params.data}]);
-				
-			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: caseId};
-			data.subject = $.trim($("#subject").val());
-			data.content = BS_Common.getEDContent("#caseContent");
-			data.mImage = params.data;
+		//添加上传控件
+		var form = BS_Upload.create({parent: ".caseImg", module: "case", fileKey: "case_image", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, inline: true, files: file, callback: callback});
+		
+		$("#btnSave").click(function(){
+			var shade = BS_Popup.shade(true);
 
-			BS_Common.update(data);
+			if($.trim($("#subject").val()) == ""){
+				BS_Popup.close(shade);
+				BS_Popup.create({message: "案例简介不能为空"});
+				return false;
+			}
 
-			$("#flUpload").val("");
-		}
-		else{
-			BS_Popup.create({message: params.data});
-		}
-	}
+			$(BS_Upload.Forms[form].Button).click();
+		});
+	});
 </script>
-
+<div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('case')">成功案例</strong><b>></b><strong>编辑案例</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-    <h3>添加案例</h3>	
-    <form action="api/upload.php?module=case" name="frmCase" id="frmCase" method="post" enctype="multipart/form-data" target="ifrmUpload">
+    <h3>编辑案例</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>
@@ -83,23 +80,13 @@
                     <input type="text" id="subject" name="subject" value="" maxlength="40" size="40" class="inputText">
                 </td>
             </tr>
+        <tbody>
+	</table>
+	<div class="caseImg"></div>
+	<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+        <tbody>
             <tr>
-                <td width="90" align="right" rowspan="2">
-                    缩略图
-                </td>
-                <td>
-					<iframe name="ifrmUpload" class="hidden"></iframe>
-                    <input id="flUpload" type="file" name="flUpload" class="inputFile" value="">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                	<div class="flUploadView">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
+                <td width="90" align="right">
                     安例详细
                 </td>
                 <td>
@@ -110,10 +97,9 @@
                 <td>
                 </td>
                 <td>
-                    <input id="btnSave" name="btnSave" class="button" type="submit" value="保存">
+                    <input id="btnSave" name="btnSave" class="button" type="button" value="保存">
                 </td>
             </tr>
         </tbody>
     </table>
-	</form>
 </div>

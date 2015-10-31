@@ -77,6 +77,7 @@
 #location {background-color:#F5F5F5;border-left: 1px solid #FFF;height: 35px;line-height: 37px;color: #A0A0A0;padding-left: 20px;}
 #location a {color: #A0A0A0;}
 #location b {margin: 0 13px;}
+#location strong {cursor: pointer;}
 
 /* foot */
 #foot_box { height: 45px; background-color: #EEEEEE;}
@@ -84,13 +85,18 @@
 #foot .line {border-top: 1px solid #FFFFFF; background-color: #CCCCCC; height: 1px; line-height: 1px; font-size: 0; margin-left: 180px;}
 #foot ul { text-align: center; padding: 15px 0;}
 
+/* popup layer */
 .popup {position:absolute; border:2px solid #beb185; font-size: 13px; font-weight: bold;}
-.popup .ppTitlePnl {width:100%; line-height:20px; background-color:#b7a66d; height:24px; font-size: 15px;}
+.popup .ppTitlePnl {width:100%; line-height:24px; background-color:#b7a66d; height:24px; font-size: 15px;}
 .popup .ppTitlePnl .ppTitleMsg{width:80%; overflow:hidden;}
 .popup .ppTitlePnl .ppTitleBtn{width:auto; text-align:right; margin-left:5px; margin-bottom:3px;}
 .popup .ppTitlePnl .ppTitleBtn a{color: #666666; font-weight: normal;}
 .popup .ppTitlePnl .ppTitleBtn a:hover {color:#fff;}
-.popup .ppMsgPnl {width: 100%; background:#F9F9F9; overflow:hidden;}
+.popup .ppMsgPnl {width: 100%; background:#F9F9F9; overflow:hidden;text-align:center; line-height:30px;}
 .popup .ppWinPnl {width: 100%;}
-
 .ppWin{padding: 10px 22px 50px 22px; height: auto!important; height: 550px; }
+
+/* shade layer */
+.shade {background: #000; filter: alpha(opacity=20);/* IE的透明度 */ opacity: 0.2; /* 透明度 */ position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display:none; text-align:center; vertical-align:middle;}
+.shade  iframe{filter: alpha(opacity=50);/* IE的透明度 */ opacity: 0.5; /* 透明度 */ width: 100%; height: 100%;}
+.shade  .loading{margin:auto; margin-top:250px; /*background:url("images/load.gif") center center no-repeat;*/}

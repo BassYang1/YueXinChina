@@ -271,7 +271,7 @@ class Content{
 		$contents = array();
 		
 		try{		
-			$sql = "select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1";
+			$sql = "select content_id, content_type, content_key, content, subject, m_image, rec_date from content where 1 = 1";
 					
 			if(is_numeric($query->contentId) && $query->contentId > 0){
 				$sql = $sql . sprintf(" and content_id=%u", $query->contentId);
@@ -307,6 +307,7 @@ class Content{
 					$temp->contentId = $row["content_id"];
 					$temp->contentType = $row["content_type"];
 					$temp->contentKey = $row["content_key"];
+					$temp->content = $row["content"];
 					$temp->subject = $row["subject"];
 					$temp->mImage = $row["m_image"];
 
@@ -399,7 +400,7 @@ class Content{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总数SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp::getConnection();
+			$conn = DBHelp2::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -409,7 +410,8 @@ class Content{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp2::free($data);
+			DBHelp2::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

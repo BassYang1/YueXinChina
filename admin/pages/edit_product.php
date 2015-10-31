@@ -8,12 +8,10 @@
 		BS_Common.loadContentEditor("#productDetail");
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_product");
-		BS_Common.setLocation("edit_product");
-
-
 
 		var file = null;
 		var sortNo = null;
+		var oldImg = "";
 
 		if(productId > 0){
 			var detail = BS_Pro.loadDetail(productId);
@@ -23,24 +21,33 @@
 			$("#productNo").val(detail.productNo);
 			$("#productDetail").val(detail.content);
 
+			oldImg = detail.mImage;
 			file = [{savedPath: detail.mImage}];
 			sortNo = (isNaN(detail.productType) ? 0 : parseInt(detail.productType));
 		}
 		
+		//加载排序
 		BS_Pro.loadSort(sortNo);
 
-		//初始化图片显示
-		BS_Upload.init("module=product&fileKey=product_image", "#btnSave", "#frmProduct", function(){
+		//添加上传控件
+		var callback = function(file){	
 			var data = {type: "detail", module: "product", action: action, productId: productId};
+
 			data.productName = $.trim($("#productName").val());
 			data.productNo = $.trim($("#productNo").val());
 			data.productType = $.trim($("#productType").val());
+
+			if(file != null && file.savedPath != ""){
+				data.mImage = file.savedPath;
+			}
+
 			data.productDetail = BS_Common.getEDContent("#productDetail");
+
+
 			BS_Common.update(data, function(){
+				BS_Popup.closeAll();
 				if(productId > 0){
-					BS_Popup.create({message: "修改成功"}, function(){
-						BS_Common.nav("product");
-					});
+					BS_Common.nav("product");
 				}
 				else{
 					BS_Popup.create({message: "保存商品信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
@@ -51,46 +58,32 @@
 					});
 				}
 			});
-		});
+		}
 
-		BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, file);
+		var form = BS_Upload.create({parent: ".productImg", module: "product", fileKey: "product_image", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, inline: true,  files: file, callback: callback});
+		
 
 		$("#btnSave").click(function(){
-			/*var data = {type: "content", module: "company", company_name: $("#txtCompanyName").val(), company_outline: $("#txtOutline").val(), company_introduce: BS_Common.getEDContent("#txtIntroduce")};
-			
-			if(data.company_outline.length > 300){
-				BS_Popup.create({message: "[公司简介]不能超过300个字."});
+			var shade = BS_Popup.shade(true);
+
+			var message = "";
+			if($.trim($("#productName").val()) == "") message += "|产品名称不能为空";
+			if($.trim($("#productName").val()).length > 50) message += "|产品名称不能超过50个字符";
+			if($.trim($("#productType").val()) == "0") message += "|产品类型不能为空";
+
+			if(message != ""){
+				BS_Popup.close(shade);
+				BS_Popup.create({message: message.substr(1).replace("|", "<br />")});
 				return false;
 			}
 
-			BS_Common.update(data);*/
+			$(BS_Upload.Forms[form].Button).click();
 		});
 	});
-
-	//判断是否上传成功后执行
-	function uploadCompleted(params){
-		if(params.status == 1){
-			BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, [{savedPath: params.data}]);
-			
-			var data = {type: "detail", module: "product", action: action, productId: productId};
-			data.productName = $.trim($("#productName").val());
-			data.productNo = $.trim($("#productNo").val());
-			data.productType = $.trim($("#productType").val());
-			data.mImage = params.data;
-			data.productDetail = BS_Common.getEDContent("#productDetail");
-			BS_Common.update(data);
-
-			$("#flUpload").val("");
-		}
-		else{
-			BS_Popup.create({message: params.data});
-		}
-	}
 </script>
-
+<div id="location">管理中心<b>></b><strong class="cursor" onclick="BS_Common.nav('product')">产品管理</strong><b>></b><strong>添加产品</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
     <h3>编辑商品</h3>	
-    <form action="api/upload.php?module=product" name="frmProduct" id="frmProduct" method="post" enctype="multipart/form-data" target="ifrmUpload">
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>
@@ -111,6 +104,14 @@
             </tr>
             <tr>
                 <td width="90" align="right">
+                    阿里连接
+                </td>
+                <td>
+                    <input type="text" id="aliUrl" name="aliUrl" value="" maxlength="80" size="80" class="inputText">
+                </td>
+            </tr>
+            <tr>
+                <td width="90" align="right">
                     商品分类
                 </td>
                 <td>
@@ -119,37 +120,29 @@
                     </select>
                 </td>
             </tr>
+        </tbody>
+	</table>
+	<div class="productImg"></div>
+	<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+        <tbody>         
             <tr>
-                <td width="90" align="right" rowspan="2">
-                    缩略图
-                </td>
-                <td>
-					<iframe name="ifrmUpload" class="hidden"></iframe>
-                    <input id="flUpload" type="file" name="flUpload" class="inputFile" value="">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                	<div class="flUploadView">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    商品详细
+                <td width="90" align="right">
+                    详细信息
                 </td>
                 <td>
                     <textarea id="productDetail" name="productDetail" class="editArea"><?php echo Content::get("company_introduce"); ?></textarea>
                 </td>
             </tr>
+        </tbody>
+	</table>
+	<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+		<caption></caption>   
+        <tbody>
             <tr>
-                <td>
-                </td>
                 <td>
                     <input id="btnSave" name="btnSave" class="button" type="submit" value="保存">
                 </td>
             </tr>
         </tbody>
     </table>
-    </form>
 </div>

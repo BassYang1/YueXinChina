@@ -8,7 +8,6 @@
 		BS_Common.loadContentEditor("#newsContent");
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_news");
-		BS_Common.setLocation("edit_news");
 
 		BS_Content.init("news");
 
@@ -21,15 +20,20 @@
 		}
 
 		$("#btnSave").click(function(){
+			if($.trim($("#subject").val()) == ""){
+				BS_Popup.create({message: "新闻标题不能为空"});
+				return false;
+			}
+
+			var shade1 = BS_Popup.shade(true);
 			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: newsId};
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#newsContent");
-						
+					
 			BS_Common.update(data, function(){
+				BS_Popup.close(shade1);
 				if(newsId > 0){
-					BS_Popup.create({message: "修改成功"}, function(){
-						BS_Common.nav("news");
-					});
+					BS_Common.nav("news");
 				}
 				else{
 					BS_Popup.create({message: "保存新闻成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
@@ -43,28 +47,22 @@
 		});
 	});
 </script>
-
+<div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('news')">新闻管理</strong><b>></b><strong>发布新闻</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-    <h3>添加新闻</h3>	
+    <h3>发布信息</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>
                 <td width="90" align="right">
-                    主题
+                    标题
                 </td>
                 <td>
                     <input type="text" id="subject" name="subject" value="" maxlength="40" size="40" class="inputText">
                 </td>
             </tr>
-            <tr class="hidden">
-                <td>
-                	<div class="flUploadView">
-                    </div>
-                </td>
-            </tr>
             <tr>
                 <td align="right">
-                    内容
+                    详细
                 </td>
                 <td>
                     <textarea id="newsContent" name="newsContent" class="editArea"></textarea>

@@ -8,7 +8,6 @@
 		BS_Common.loadContentEditor("#recruitContent");
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_recruit");
-		BS_Common.setLocation("edit_recruit");
 
 		BS_Content.init("recruit");
 
@@ -21,15 +20,20 @@
 		}
 
 		$("#btnSave").click(function(){
+			if($.trim($("#subject").val()) == ""){
+				BS_Popup.create({message: "职位简介不能为空"});
+				return false;
+			}
+
+			var shade1 = BS_Popup.shade(true);
 			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: recruitId};
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#recruitContent");
-						
+					
 			BS_Common.update(data, function(){
+				BS_Popup.close(shade1);
 				if(recruitId > 0){
-					BS_Popup.create({message: "修改成功"}, function(){
-						BS_Common.nav("recruit");
-					});
+					BS_Common.nav("recruit");
 				}
 				else{
 					BS_Popup.create({message: "保存招聘信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
@@ -43,9 +47,9 @@
 		});
 	});
 </script>
-
+<div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('recruit')">人才招聘</strong><b>></b><strong>发布信息</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-    <h3>添加招聘信息</h3>	
+    <h3>发布信息</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>

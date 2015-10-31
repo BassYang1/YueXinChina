@@ -5,8 +5,6 @@
 
 	$(function(){
 		BS_Common.setMenu(".m_sort");
-		BS_Common.setLocation("edit_sort");
-
 
 		var file = null;
 		var sortNo = null;
@@ -17,19 +15,21 @@
 		}
 		
 		$("#btnSave").click(function(){
+			var shade = BS_Popup.shade(true);
+
 			var data = {type: "detail", module: "sort", action: action, sortId: sortId};
 			data.sortName = $.trim($("#sortName").val());
 			
 			if(data.sortName == ""){
+				BS_Popup.close(shade);
 				BS_Common.create({message: "类型不能为空"});
 				return;
 			}
-			
+
 			BS_Common.update(data, function(){
+				BS_Popup.close(shade);
 				if(sortId > 0){
-					BS_Popup.create({message: "修改成功"}, function(){
-						BS_Common.nav("sort");
-					});
+					BS_Common.nav("sort");
 				}
 				else{
 					BS_Popup.create({message: "保存商品类型成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
@@ -43,7 +43,7 @@
 		});
 	});
 </script>
-
+<div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('product')">产品管理</strong><b>></b><strong onclick="BS_Common.nav('sort')">产品类别</strong><b>></b><strong>编辑类别</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
     <h3>编辑商品类型</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">

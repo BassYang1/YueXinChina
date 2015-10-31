@@ -1,7 +1,6 @@
 <script>
 	$(function(){
 		BS_Common.setMenu(".m_product");
-		BS_Common.setLocation("product");
 		
 		$("#btnSearch, #cbIsRecommend, #cbIsShowHome").click(function(){
 			BS_Pro.loadList(1, true);
@@ -15,6 +14,7 @@
 		BS_Pro.loadList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong>产品管理</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
 	<h3>产品列表<a href="javascript:void(0)" class="h3btn h3add add_product">添加</a></h3>
 	<div class="filter">

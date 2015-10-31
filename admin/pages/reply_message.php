@@ -1,12 +1,9 @@
-<script charset="utf-8" src="scripts/kindeditor/kindeditor.js"></script>
-<script charset="utf-8" src="scripts/kindeditor/lang/zh_CN.js"></script>
 <script>
 	var messageId = <?php echo isset($_GET["messageId"]) ? $_GET["messageId"] : 0 ?>;
 	var action = (messageId > 0 ? "update" : "insert");
 
 	$(function(){
 		BS_Common.setMenu(".m_message");
-		BS_Common.setLocation("reply_message");
 
 		if(messageId > 0){
 			var detail = BS_Msg.loadDetail(messageId);
@@ -17,23 +14,37 @@
 			$("#phone").val(detail.phone);
 			$("#content").val(detail.content);
 			$("#reply").val(detail.reply);
-		}
 		
-		$("#btnReply").click(function(){
-			var data = {type: "detail", module: "message", action: action, messageId: messageId};
-			data.reply = $.trim($("#reply").val());
-			
-			BS_Common.update(data, function(){
-				if(messageId > 0){
-					BS_Popup.create({message: "回复留言成功"}, function(){
-						BS_Common.nav("message");
-					});
+			$("#btnReply").click(function(){
+				if($.trim($("#reply").val()) == ""){
+					BS_Popup.create({message: "回复内容不能为空"});
+					return false;
 				}
+
+				var shade1 = BS_Popup.shade(true);
+
+				var data = {type: "detail", module: "message", action: action, messageId: messageId};
+				data.reply = $.trim($("#reply").val());
+				
+				BS_Common.update(data, function(){
+					if(messageId > 0){
+						BS_Popup.create({message: "回复留言成功"}, function(){
+							BS_Common.nav("message");
+						});
+					}
+				});
 			});
-		});
+		}
+		else{
+			BS_Popup.create({message: "找不到客户留言"});
+
+			$("#btnReply").click(function(){
+				BS_Popup.create({message: "回复失败，找不到客户留言"});
+			});
+		}
 	});
 </script>
-
+<div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('message')">留言管理</strong><b>></b><strong>回复留言</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
     <h3>留言回复</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
@@ -43,7 +54,7 @@
                     标题
                 </td>
                 <td>
-                    <input type="text" id="title" name="title" readonly value="" maxlength="40" size="40" class="inputText">
+                    <input type="text" id="title" name="title" readonly value="" maxlength="40" size="40" class="inputText disabled" style="background-color:#EEE;">
                 </td>
             </tr>
             <tr>
@@ -51,7 +62,7 @@
                     姓名
                 </td>
                 <td>
-                    <input type="text" id="uname" name="uname" readonly value="" maxlength="40" size="40" class="inputText">
+                    <input type="text" id="uname" name="uname" readonly value="" maxlength="40" size="40" class="inputText disabled" style="background-color:#EEE;">
                 </td>
             </tr>
             <tr>
@@ -59,7 +70,7 @@
                     电话
                 </td>
                 <td>
-                    <input type="text" id="phone" name="phone" readonly value="" maxlength="40" size="40" class="inputText">
+                    <input type="text" id="phone" name="phone" readonly value="" maxlength="40" size="40" class="inputText disabled" style="background-color:#EEE;">
                 </td>
             </tr>
             <tr>
@@ -67,7 +78,7 @@
                     留言
                 </td>
                 <td>
-                    <textarea id="content" name="content" readonly class="editArea1"></textarea>
+                    <textarea id="content" name="content" readonly class="editAreaL disabled" style="background-color:#EEE;"></textarea>
                 </td>
             </tr>
             <tr>
@@ -75,7 +86,7 @@
                     回复
                 </td>
                 <td>
-                    <textarea id="reply" name="reply" class="editArea1"></textarea>
+                    <textarea id="reply" name="reply" class="editAreaL"></textarea>
                 </td>
             </tr>
             <tr>

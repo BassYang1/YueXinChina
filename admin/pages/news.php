@@ -1,7 +1,6 @@
 <script>
 	$(function(){
-		BS_Common.setMenu(".m_news");
-		BS_Common.setLocation("news");		
+		BS_Common.setMenu(".m_news");	
 
 		$(".add_news").click(function(){
 			BS_Common.nav("edit_news");
@@ -12,9 +11,10 @@
 		BS_Content.loadList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong>新闻管理</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-	<h3>新闻中心<a href="javascript:void(0)" class="h3btn h3add add_news">添加</a></h3>
-	<div class="filter">
+	<h3>新闻管理<a href="javascript:void(0)" class="h3btn h3add add_news">添加</a></h3>
+	<div class="filter hidden">
 		<input id="keyword" name="keyword" type="text" class="inpMain" value="" size="20">
 		<input name="btnSearch" id="btnSearch" class="btnGray" type="submit" value="查找">
     </div>
@@ -22,7 +22,7 @@
          <tbody>
 			 <tr>
 				  <th width="5%" class="c_align"></th>
-				  <th width="30%">主题</th>
+				  <th width="30%">新闻标题</th>
 				  <th width="15%">操作</th>
 			 </tr>
          </tbody>

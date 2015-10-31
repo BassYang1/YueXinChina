@@ -14,7 +14,7 @@
 	$curPage = isset($_REQUEST["curPage"]) ? intval($_REQUEST["curPage"]) : _NONE;
 	$result = "";
 		
-	//存储DocFile数据
+	//读取文件
 	if($dataType == "file"){
 		$fileKey = strtolower(isset($_REQUEST["fileKey"]) ? $_REQUEST["fileKey"] : "");
 		
@@ -24,27 +24,48 @@
 			$docFile->fileKey = $fileKey;
 			$data = DocFile::query($docFile);
 
-			$fileJson = "";
+			$listJson = "[]";
 
 			if (!empty($data)){
-				foreach($data as $fileKey => $files){
-					if (!empty($data[$fileKey])){
-						foreach($files as $file){
-							$fileJson .= ",{savedPath:'" . $file->savedPath . "', fileUrl:'" . $file->fileUrl . "', showedName:'" . $file->showedName . "'}";
-						}
-					}
-				}
+				$listJson = json_encode($data,JSON_UNESCAPED_UNICODE);
 			}
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("Query: %s", $fileJson), _LOG_ERROR);
-
-			$fileJson = json_encode(empty($fileJson) ? "" : "[" . substr($fileJson, 1) . "]");
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询文件Json: %s", $listJson), _LOG_ERROR);
 			
-			echo "{\"status\":\"true\", \"data\": " . $fileJson . "}";
+			echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 		}
 		catch(Exception $e){
 			echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
 			Tool::logger(__METHOD__, __LINE__, sprintf("数据查询失败: %s", $e->getMessage()), _LOG_ERROR);
+		}
+
+		exit();
+	}
+
+	//读取公司数据
+	if($module == "company"){
+		if($dataType == "list"){
+			$companyKey = strtolower(isset($_REQUEST["companyKey"]) ? $_REQUEST["companyKey"] : "");
+			
+			try{
+				$company = new Company($querySize);
+				$company->companyKey = $companyKey;
+				$data = Company::query($company);
+
+				$listJson = "[]";
+
+				if (!empty($data)){
+					$listJson = json_encode($data,JSON_UNESCAPED_UNICODE);
+				}
+
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询文本Json: %s", $listJson), _LOG_ERROR);
+				
+				echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
+			}
+			catch(Exception $e){
+				echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
+				Tool::logger(__METHOD__, __LINE__, sprintf("数据查询失败: %s", $e->getMessage()), _LOG_ERROR);
+			}
 		}
 
 		exit();

@@ -12,6 +12,7 @@
 		$_SESSION[$lbl_current_page] = $default;
 	}
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,8 +42,7 @@
         </div><!--menu-->
         
         <div id="main_box">
-            <div id="location">管理中心</div><!--location-->
-			<?php require($_SESSION[$lbl_current_page]); ?><!--main content-->
+			<?php require_once($_SESSION[$lbl_current_page]); ?><!--main content-->
         </div>
         <div class="clear">
         </div>

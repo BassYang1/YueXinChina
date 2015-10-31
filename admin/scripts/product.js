@@ -9,10 +9,9 @@ BS_Pro.PageCount = 1;
 BS_Pro.LastPage = 1;
 
 BS_Pro.loadDetail = function(productId){
-	var query = {type: "detail", module: "product", productId: productId};
-	var detail = null;
+	var query = {type: "detail", module: "product", productId: productId};var detail = null;
 
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, false, function(data){
 		detail = data;
 	});
 
@@ -20,7 +19,7 @@ BS_Pro.loadDetail = function(productId){
 }
 
 BS_Pro.loadSort = function(sortId){
-	BS_Common.query({type: "list", module: "sort"}, function(data){
+	BS_Common.query({type: "list", module: "sort"}, true, function(data){
 		if(data instanceof Array && data.length > 0){
 			for(var i in data){
 				$("#productType").append("<option value='" + data[i].sortId + "'>" + data[i].sortName + "</option>");
@@ -34,6 +33,8 @@ BS_Pro.loadSort = function(sortId){
 };
 
 BS_Pro.loadList = function(curPage, newSearch){
+	var shade = BS_Popup.shade(true); //加载弹出遮罩层和进度栏
+	
 	if(!newSearch && curPage == BS_Pro.LastPage) {
 		return;
 	}
@@ -41,6 +42,7 @@ BS_Pro.loadList = function(curPage, newSearch){
 		BS_Pro.LastPage = curPage;
 	}
 
+	//查询参数
 	query = typeof query != "object" ? {} : query;
 	query.type = "list"; 
 	query.module = "product";
@@ -52,16 +54,20 @@ BS_Pro.loadList = function(curPage, newSearch){
 	query.size = BS_Pro.PageSize;
 	query.curPage = curPage;
 			
-	BS_Common.query(query, function(data){
+	//查询并加载查询结果
+	BS_Common.query(query, true, function(data){
 		if(data instanceof Array){
 			$(".products tr:gt(0)").remove();
 			$("#curPage").val(curPage);
 
+			//加载查询结果
 			for(var i in data){
 				var product = data[i];
+
 				var newItem = $(".products").append(BS_Pro.ListItem).find(".pList:last");
 
-				newItem.find(".proCheck input:first").val(product.productId);
+				//newItem.find(".proCheck input:first").val(product.productId);
+				newItem.find(".proCheck").html("<input type='hidden' value='" + product.productId + "' /><span>" + (1 + parseInt(i)) + "</span>");
 				newItem.find(".proName").text(product.productName);
 				newItem.find(".proType").text(product.typeName);
 
@@ -81,10 +87,11 @@ BS_Pro.loadList = function(curPage, newSearch){
 					var row = this;
 
 					BS_Popup.create({message: "确定删除此商品?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
-						var data = {type: "detail", module: "product", action: "delete", productId: $(row).parent().parent().find(".proCheck input:first").val()};
+						var data = {type: "detail", module: "product", action: "delete", productId: $(row).parent().parent().find(".proCheck input:first").val()};						
+						var shade1 = BS_Popup.shade(true);
+
 						BS_Common.update(data, function(){
-							BS_Popup.create({message: "删除成功"});
-							//$(row).parent().parent().remove();
+							BS_Popup.close(shade1);
 							BS_Pro.loadList(parseInt($("#curPage").val()), true);
 						});
 					});
@@ -101,17 +108,21 @@ BS_Pro.loadList = function(curPage, newSearch){
 					BS_Pro.setShowHome($(this).parent().parent().find(".proCheck input:first").val(), $(this).is(":checked"));
 				});
 			}
-		}
 
-		//设置分页
-		if(newSearch){
-			query.type = "count";
-			BS_Pro.setPaging(query);			
+			//设置分页
+			if(newSearch){
+				query.type = "count";
+				BS_Pro.setPaging(query);			
+			}
+
+			BS_Popup.close(shade);
 		}
 	});
 };
 
-BS_Pro.loadSortList = function(curPage, newSearch){
+BS_Pro.loadSortList = function(curPage, newSearch){		
+	var shade = BS_Popup.shade(true);
+
 	if(!newSearch && curPage == BS_Pro.LastPage) {
 		return;
 	}
@@ -119,23 +130,22 @@ BS_Pro.loadSortList = function(curPage, newSearch){
 		BS_Pro.LastPage = curPage;
 	}
 
-	query = typeof query != "object" ? {} : query;
-	query.type = "list"; 
-	query.module = "sort";
-	query.isPaging = 1;  
-	query.size = BS_Pro.PageSize;
-	query.curPage = curPage;
+	query = {module : "sort", type: "list", isPaging: 1, size: BS_Pro.PageSize, curPage: curPage};
 			
-	BS_Common.query(query, function(data){
+	BS_Common.query(query, true, function(data){		
 		if(data instanceof Array){
 			$(".sorts tr:gt(0)").remove();
 			$("#curPage").val(curPage);
 
 			for(var i in data){
 				var sort = data[i];
+
+				//附加列表行
 				var newItem = $(".sorts").append(BS_Pro.SortItem).find(".pList:last");
 
-				newItem.find(".sortCheck input:first").val(sort.sortId);
+				//事件绑定
+				//newItem.find(".sortCheck input:first").val(sort.sortId);
+				newItem.find(".sortCheck").html("<input type='hidden' value='" + sort.sortId + "' /><span>" + (1 + parseInt(i)) + "</span>");
 				newItem.find(".sortName").text(sort.sortName);
 				newItem.find(".sortCount").text(sort.count);
 
@@ -147,23 +157,27 @@ BS_Pro.loadSortList = function(curPage, newSearch){
 					var row = this;
 
 					BS_Popup.create({message: "确定删除此类型?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
-						var data = {type: "detail", module: "sort", action: "delete", sortId: $(row).parent().parent().find(".sortCheck input:first").val()};
+						var data = {type: "detail", module: "sort", action: "delete", sortId: $(row).parent().parent().find(".sortCheck input:first").val()};	
+						var shade1 = BS_Popup.shade(true);
+
 						BS_Common.update(data, function(){
-							BS_Popup.create({message: "删除成功"});
+							BS_Popup.close(shade1);
 							BS_Pro.loadSortList(parseInt($("#curPage").val()), true);
 						});
 					});
 				});
 					
-
-				newItem.show();
+				//显示列表信息
+				newItem.show();			
 			}
-		}
+			
+			//设置分页
+			if(newSearch){
+				query.type = "count";
+				BS_Pro.setPaging(query, BS_Pro.loadSortList);		
+			}
 
-		//设置分页
-		if(newSearch){
-			query.type = "count";
-			BS_Pro.setPaging(query, BS_Pro.loadSortList);		
+			BS_Popup.close(shade);
 		}
 	});
 };
@@ -171,7 +185,7 @@ BS_Pro.loadSortList = function(curPage, newSearch){
 BS_Pro.setPaging = function (query, callBack){
 	var callBack = typeof callBack == "function" ? callBack : BS_Pro.loadList;
 
-	BS_Common.query(query, function(count){
+	BS_Common.query(query, true, function(count){
 		BS_Pro.ListCount = count;
 		BS_Pro.PageCount = Math.floor(count / BS_Pro.PageSize) + (count % BS_Pro.PageSize == 0 ? 0 : 1);
 		$("#rcount").text(count);

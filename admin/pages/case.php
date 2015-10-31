@@ -12,9 +12,10 @@
 		BS_Content.loadList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong>成功案例</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-	<h3>新闻中心<a href="javascript:void(0)" class="h3btn h3add add_case">添加</a></h3>
-	<div class="filter">
+	<h3>成功案例<a href="javascript:void(0)" class="h3btn h3add add_case">添加</a></h3>
+	<div class="filter hidden">
 		<input id="keyword" name="keyword" type="text" class="inpMain" value="" size="20">
 		<input name="btnSearch" id="btnSearch" class="btnGray" type="submit" value="查找">
     </div>

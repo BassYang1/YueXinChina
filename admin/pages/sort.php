@@ -1,7 +1,6 @@
 <script>
 	$(function(){
 		BS_Common.setMenu(".m_sort");
-		BS_Common.setLocation("sort");
 		
 		$(".add_sort").click(function(){
 			BS_Common.nav("edit_sort");
@@ -10,6 +9,7 @@
 		BS_Pro.loadSortList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong class="cursor" onclick="BS_Common.nav('product')">产品管理</strong><b>></b><strong>产品类别</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
 	<h3>产品类型列表<a href="javascript:void(0)" class="h3btn h3add add_sort">添加</a></h3>
 	<div class="filter hidden">

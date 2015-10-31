@@ -75,7 +75,7 @@ class Company{
 
 		try{
 			$content = new Content(_QUERY_ALL);
-			$content->contentKey = $company->id;
+			$content->contentId = $company->id;
 			$content->contentKey = $company->companyKey;
 			$content->contentType = "company";
 
@@ -113,7 +113,6 @@ class Company{
 					$temp->companyKey = $content->contentKey;
 					$temp->subject = $content->subject;
 					$temp->content = $content->content;
-					Tool::test("", "aaa ". $content->content);
 					$temp->mFile = $content->mImage;
 					$temp->contentType = $content->contentType;
 					

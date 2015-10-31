@@ -1,4 +1,4 @@
-																																																																																																																																																																																																																																																																								/*(C) 2012-2013 Douco Inc.*/
+/*(C) 2012-2013 Douco Inc.*/
 /* 主体框架
 ----------------------------------------------- */
 .l_float{float:left;}
@@ -13,6 +13,8 @@
 .l_align {text-align:left;}
 .r_align {text-align:right;}
 .c_align {text-align:center;}
+.wastermask{color: red;}
+.disabled{background-color:#EEE; }
 
 .main { border-left: 1px solid #FFF; padding: 10px 22px 50px 22px;}
 .main h3 { border-bottom: 1px solid #D7D7D7; color: #666666; font-size: 28px; padding-bottom: 5px; margin-bottom: 15px;}
@@ -34,6 +36,7 @@
 .tableBasic td, .tableBasic th { border-right: 1px dotted #CCCCCC; border-bottom: 1px dotted #CCCCCC;}
 .tableBasic th { background-color: #EEEEEE; height: 16px;}
 .tableBasic .child { background-color: #FFFFFF;}
+.tableBasic caption { font-size: 20px; line-height:40px; text-align: left; padding-left:50px; padding-top:10px; text-decoration: underline;}
 
 /*paging*/
 .paging {font-family: Tahoma, Verdana; margin-top: 5px; text-align:center; color:#666;}
@@ -47,7 +50,8 @@
 .inputText { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none;}
 .textArea { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none; height:120px; width:75%;}
 .editArea { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none; height:350px; width:75%;}
-.editArea1 { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none; height:120px; width:65%;}
+.editAreaL { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none; height:120px; width:65%;}
+.editAreaH { border: 1px solid #DBDBDB; background-color: #FFF; padding: 4px 5px; color: #000; font-size: 12x; line-height: 20px; -webkit-appearance: none; height:500px; width:75%;}
 .inputFile {border: 1px solid #DBDBDB; background-color: #FFF; padding: 5px 5px; color: #000; -webkit-appearance: none;}
 .button { display: inline-block; background-color: #0072C6; -moz-border-radius: 2px; -webkit-border-radius: 2px; border: 0; color: #FFF; padding: 6px 15px; font-weight: bold; text-transform: capitalize; cursor: pointer; -webkit-appearance: none;}
 .button1 {color: #fff; background-color: #3280fc;  border-color: #3280fc; display: inline-block; padding: 5px 12px; border: 1px solid transparent;border-radius: 3px;}
@@ -58,7 +62,8 @@
 #addPnl a:hover{margin-right:5px; color:#666666; font-size:14px;}
 
 .button2 {display: inline; vertical-align: bottom; text-decoration: underline; cursor: pointer; font-size:12px;}
-.comment {display: inline; vertical-align: bottom; font-size:12px;}
+.comment {display: inline; vertical-align: bottom; font-size:12px; text-decoration: underline;}
+.comment span{color: red; }
 
 .flUpload{}
 .flUploadView{}
