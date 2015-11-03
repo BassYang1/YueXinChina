@@ -111,7 +111,6 @@ BS_Pro.loadList = function(curPage, newSearch){
 
 			//设置分页
 			if(newSearch){
-				query.type = "count";
 				BS_Pro.setPaging(query);			
 			}
 
@@ -184,6 +183,7 @@ BS_Pro.loadSortList = function(curPage, newSearch){
 
 BS_Pro.setPaging = function (query, callBack){
 	var callBack = typeof callBack == "function" ? callBack : BS_Pro.loadList;
+	query.type = "count"; //查询记录总数
 
 	BS_Common.query(query, true, function(count){
 		BS_Pro.ListCount = count;

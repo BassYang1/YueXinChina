@@ -10,12 +10,11 @@
 					var htmlStr = "";
 
 					for(var i in data){
-						var item = data[i].content.split("$$");
+						var desc = data[i].subject;
+						var url = data[i].content;
 						var id = data[i].id;
 
-						if(item.length != 2) continue;
-
-						htmlStr += "<a id='" + id + "' href='" + item[0] + "' target='_blank'>" + item[1] + "</a>";
+						htmlStr += "<a id='" + id + "' href='" + url + "' target='_blank'>" + desc + "</a>";
 					}
 					
 					callback(htmlStr);
@@ -28,23 +27,21 @@
 
 		//添加推荐品牌
 		$("#btnAddBrand").click(function(){
-			if($("#brandPnl a").size() >= 3){
-				BS_Popup.create({message: "最多只能添加3个"});
-				return;
-			}
-
-			if($.trim($("#txtBrand").val()) == "" || $.trim($("#txtBrandUrl").val()) == ""){
-				BS_Popup.create({message: "产品名称和连接不能为空"});
-				return;
-			}
-
-			if($("#brandPnl").html().indexOf($.trim($("#txtBrand").val())) >= 0){
-				BS_Popup.create({message: "推荐产品已经添加"});
-				return;
-			}
-
 			var shade = BS_Popup.shade(true);
-			var data = {type: "content", module: "company", action: "update", multi: 1, brand_recommend: $.trim($("#txtBrand").val()) + "$$" + $.trim($("#txtBrandUrl").val())};
+			
+			var message = "";
+			if($("#brandPnl a").size() >= 4) message += "|最多只能添加4个";
+			if($.trim($("#txtBrand").val()) == "") message += "|产品名称不能为空";
+			if($.trim($("#txtBrandUrl").val()) == "") message += "|产品连接不能为空";
+			if($.trim($("#txtBrand").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtBrand").val())) >= 0) message += "|推荐产品已经添加";
+
+			if(message != ""){
+				BS_Popup.close(shade);
+				BS_Popup.create({message: message.substr(1).replace(/\|/g, "<br />")});
+				return false;
+			}
+
+			var data = {type: "content", module: "company", action: "insert", companyKey: "brand_recommend", subject: $.trim($("#txtBrand").val()), content: $.trim($("#txtBrandUrl").val())};
 			
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	
@@ -53,28 +50,29 @@
 				if(result){
 					$("#brandPnl").append("<a href='" + $.trim($("#txtBrandUrl").val()) + "' target='_blank'>" + $.trim($("#txtBrand").val()) + "</a>");
 				}
+				
+				$("#txtBrand").val("");
+				$("#txtBrandUrl").val("");
 			});	
 		});
 
 		//添加热门搜索
-		$("#btnAddHot").click(function(){
-			if($("#hotPnl a").size() >= 3){
-				BS_Popup.create({message: "最多只能添加3个"});
-				return;
-			}
-
-			if($.trim($("#txtHot").val()) == "" || $.trim($("#txtHotUrl").val()) == ""){
-				BS_Popup.create({message: "产品名称和连接不能为空"});
-				return;
-			}
-
-			if($("#hotPnl").html().indexOf($.trim($("#txtHot").val())) >= 0){
-				BS_Popup.create({message: "热门产品已经添加"});
-				return;
-			}
-
+		$("#btnAddHot").click(function(){	
 			var shade = BS_Popup.shade(true);
-			var data = {type: "content", module: "company", action: "update", multi: 1, hot_search: $.trim($("#txtHot").val()) + "$$" + $.trim($("#txtHotUrl").val())};
+			
+			var message = "";
+			if($("#hotPnl a").size() >= 3) message += "|最多只能添加3个";
+			if($.trim($("#txtHot").val()) == "") message += "|产品名称不能为空";
+			if($.trim($("#txtHotUrl").val()) == "") message += "|产品连接不能为空";
+			if($.trim($("#txtHot").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtHot").val())) >= 0) message += "|热门产品已经添加";
+
+			if(message != ""){
+				BS_Popup.close(shade);
+				BS_Popup.create({message: message.substr(1).replace(/\|/g, "<br />")});
+				return false;
+			}
+			
+			var data = {type: "content", module: "company", action: "insert", companyKey: "hot_search", subject: $.trim($("#txtHot").val()), content: $.trim($("#txtHotUrl").val())};
 			
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	
@@ -83,6 +81,9 @@
 				if(result){
 					$("#hotPnl").append("<a href='" + $.trim($("#txtHotUrl").val()) + "' target='_blank'>" + $.trim($("#txtHot").val()) + "</a>");
 				}
+				
+				$("#txtHot").val("");
+				$("#txtHotUrl").val("");
 			});	
 		});
 
@@ -104,7 +105,7 @@
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
     <h3>产品推荐</h3>
 	<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
-		<caption>品牌推荐<span class="comment h_space">(点击标签删除，最多增加<span>3</span>个)</span></caption>
+		<caption>品牌推荐<span class="comment h_space">(点击标签删除，最多增加<span>4</span>个)</span></caption>
 		<tbody>
 			<tr>
 				<td width="90" align="right">

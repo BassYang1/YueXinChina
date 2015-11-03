@@ -15,22 +15,37 @@
 	$result = "";
 		
 	//读取文件
-	if($dataType == "file"){
+	if($dataType == "file" || $dataType == "file_count"){
 		$fileKey = strtolower(isset($_REQUEST["fileKey"]) ? $_REQUEST["fileKey"] : "");
+		$savedPath = strtolower(isset($_REQUEST["savedPath"]) ? $_REQUEST["savedPath"] : "");
 		
 		try{
-			$docFile = new DocFile($querySize);
-			$docFile->inModule = $module;
-			$docFile->fileKey = $fileKey;
-			$data = DocFile::query($docFile);
+			$query = new DocFile($querySize);
+			$query->inModule = $module;
+			$query->fileKey = $fileKey;
+
+			if(!empty($savedPath)){
+				$query->savedPath = $savedPath;
+			}
+			
+			$query->isPaging = $isPaging;
+			$query->curPage = $curPage;
 
 			$listJson = "[]";
 
-			if (!empty($data)){
-				$listJson = json_encode($data,JSON_UNESCAPED_UNICODE);
-			}
+			if($dataType == "file"){
+				$data = DocFile::query($query);
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询文件Json: %s", $listJson), _LOG_ERROR);
+				if (!empty($data)){
+					$listJson = json_encode($data,JSON_UNESCAPED_UNICODE);
+				}
+
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询文件Json: %s", $listJson), _LOG_INFOR);
+			}
+			else if($dataType == "file_count"){
+				$listJson = DocFile::rcount($query);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询文件总数: %s", $listJson), _LOG_INFOR);
+			}
 			
 			echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 		}

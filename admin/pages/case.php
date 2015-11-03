@@ -1,7 +1,6 @@
 <script>
 	$(function(){
-		BS_Common.setMenu(".m_case");
-		BS_Common.setLocation("case");		
+		BS_Common.setMenu(".m_case");	
 
 		$(".add_case").click(function(){
 			BS_Common.nav("edit_case");

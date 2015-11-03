@@ -1,14 +1,16 @@
 ﻿<?php 
 	require_once("admin/include/common.php"); 
-
+	
+	//设置模块权限
 	$sections = array("sort" => 1, "company" => 0, "recommend" => 0, "contact" => 1);
-
+	
+	//当前位置
+	$location = "当前位置 > <span>首页</span>";
+?>
+<?php 
+	//加载首页显示商器
 	$query = new Product(15);
 	$query->isShowHome = 1;
-	
-	$location = "当前位置 > <span>首页</span>";
-
-
 	$products = Product::query($query); 
 	$productHtml = "";
 
@@ -17,10 +19,32 @@
 	}
 	else{
 		foreach($products as $product){
-			$productHtml .= sprintf("<dl><dd><a href=\"pdetail.php?id=%u\" title=\"%s\"><img src=\"%s\" width=\"220\" height=\"160\" alt=\"%s\" title=\"%s\" class=\"mm\"></a></dd><dt class=\"a_text\"><a href=\"pdetail.php?id=%u\" title=\"%s\">%s</a></dt></dl>", $product->productId, $product->productName, str_replace("../", "", $product->mImage), $product->productName, $product->productName, $product->productId, $product->productName, $product->productName);
+			$productHtml .= sprintf("
+				<dl>
+					<dd>
+						<a href='product.php?id=%u' title='%s'>
+							<img src='%s' width='220' height='160' alt='%s' title='%s' class='mm' />
+						</a>
+					</dd>
+					<dt class='a_text'>
+						<a href='product.php?id=%u' title='%s'>%s</a><a href ='%s'><span>进入商城</span></a>				
+					</dt>
+				</dl>",
+				$product->productId, 
+				$product->productName, 
+				str_replace("../", "", $product->mImage), 
+				$product->productName, 
+				$product->productName, 
+				$product->productId, 
+				$product->productName, 
+				$product->productName, 
+				$product->aliUrl
+			);
 		}
 	}
-
+?>
+<!--加载公司新闻-->
+<?php 
 	$newsHtml = "";
 	$query = new Content(10);
 	$query->contentType = "news";
@@ -31,7 +55,16 @@
 	}
 	else{
 		foreach($contents as $news){
-			$newsHtml .= sprintf("<li><a href=\"news.php?id=%u\" title=\"%s\">%s</a>&nbsp;&nbsp;<span>2015-10-12</span></li>", $news->contentId, $news->subject, $news->subject);
+			$newsHtml .= sprintf("
+				<li>
+					<a href='ndetail.php?id=%u' title='%s'>%s</a>
+					<span>%s</span>
+				</li>", 
+				$news->contentId, 
+				$news->subject, 
+				$news->subject, 
+				$news->recDate
+			);
 		}
 	}	
 	
@@ -52,7 +85,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo Company::content("site_name", false); ?></title>
+		<title>首页-<?php echo Company::content("site_name", false); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
 		<meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
@@ -60,6 +93,7 @@
 		<link href="css/frame.css" rel="stylesheet" type="text/css" />
 		<!--flash jq-->
 		<script src="scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
+		<script src="scripts/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
 		<!-- customized js-->
 		<script src="scripts/common.js" type="text/javascript"></script>
 		<script src="scripts/rollpic.js" type="text/javascript"></script>

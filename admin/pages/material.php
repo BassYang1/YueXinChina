@@ -1,7 +1,6 @@
 <script>
 	$(function(){
-		BS_Common.setMenu(".m_material");
-		BS_Common.setLocation("material");		
+		BS_Common.setMenu(".m_material");	
 
 		$(".add_material").click(function(){
 			BS_Common.nav("edit_material");
@@ -12,9 +11,10 @@
 		BS_Content.loadList(1, true);
 	});
 </script>
+<div id="location">管理中心<b>></b><strong>资料管理</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-	<h3>资料中心<a href="javascript:void(0)" class="h3btn h3add add_material">添加</a></h3>
-	<div class="filter">
+	<h3>资料管理<a href="javascript:void(0)" class="h3btn h3add add_material">上传</a></h3>
+	<div class="filter hidden">
 		<input id="keyword" name="keyword" type="text" class="inpMain" value="" size="20">
 		<input name="btnSearch" id="btnSearch" class="btnGray" type="submit" value="查找">
     </div>

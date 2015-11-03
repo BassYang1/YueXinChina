@@ -10,7 +10,9 @@
 	$fileSort = isset($_REQUEST["fileSort"]) && is_numeric($_REQUEST["fileSort"])? intval($_REQUEST["fileSort"]) : 0; //文件排序
 	$formId = isset($_REQUEST["formId"])? $_REQUEST["formId"] : ""; //上传文档表单
 	
-	$fileKey = isset($_REQUEST["fileKey"]) && $_REQUEST["fileKey"] != "" ? $_REQUEST["fileKey"] : $module . time(); //文件标识
+	$guid = time(); //文件key唯一标识
+	$fileKey = isset($_REQUEST["fileKey"]) && $_REQUEST["fileKey"] != "" ? $_REQUEST["fileKey"] : $module . $guid; //文件标识
+	Tool::logger(__METHOD__, __LINE__, sprintf("文件Key: [%s]", $fileKey), _LOG_INFOR);
 	
 	$upload_root = "../upload/"; //文件存储根目录
 	$upload_dir = $upload_root . ($module ? $module . "/" : ""); //文件存储目录
@@ -57,6 +59,7 @@
 			Tool::logger(__METHOD__, __LINE__, "已经存在同名文件", _LOG_ERROR);
 		}
 
+		
 		//文档上传
 		if($is_upload == true){
 			$error = $flUpload["error"];
@@ -77,6 +80,7 @@
 						$docFile = new DocFile(_QUERY_ALL);
 						
 						$docFile->fileKey = $fileKey;
+;
 						$docFile->inModule = $module;
 
 						if(!in_array($fileKey, $notDel)){

@@ -3,7 +3,7 @@
 
 	$sections = array("sort" => 1, "company" => 0, "recommend" => 1, "contact" => 0);
 
-	$productId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 5;
+	$productId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0;
 	$product = new Product(_QUERY_ALL);
 	$product->productId = $productId;
 

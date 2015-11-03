@@ -1,7 +1,8 @@
-drop database yuexinchina;
+ï»¿drop database yuexinchina;
 create database yuexinchina;
 use yuexinchina;
 
+--æ–‡ä»¶è¡¨
 drop table doc_file;
 create table doc_file(
 	file_id int primary key auto_increment,
@@ -15,7 +16,9 @@ create table doc_file(
 	ext_name varchar(10),
 	rec_date timestamp default now()
 )engine=innodb default charset=utf8 auto_increment=1;
+select * from doc_file;
 
+--ç•™è¨€è¡¨
 drop table message;
 create table message(
 	message_id int primary key auto_increment,
@@ -28,16 +31,7 @@ create table message(
 	rec_date timestamp default now()
 ) engine=innodb default charset=utf8 auto_increment=1;
 
-set names GBK;
-insert into message(title, phone, uname, content) 
-values('ÁôÑÔ1', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ2', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ3', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ4', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ1', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ6', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ'),
-('ÁôÑÔ1', '12345212', 'abc', '¹ş¹şàÛºÙºÙºÇºÇ');
-
+--æ–‡æœ¬è¡¨
 drop table content;
 create table content(
 	content_id int primary key auto_increment,
@@ -49,10 +43,7 @@ create table content(
 	rec_date timestamp default now()
 ) engine=innodb default charset=utf8 auto_increment=1;
 
-insert into content(content_type, content_key, content)
-
-values('company', 'company_contact', '<p>µç»°£º020-34722228</p><p>´«Õæ£º020-34722227</p><p>ÊÖ»ú£º18122303373</p><p>ÁªÏµÈË£º³ÂÏÈÉú£¨¾­Àí£©</p><p>Q Q£º37559462</p><p>ÍúÍú£ºÔÀĞÅÊÔÑéÉè±¸</p><p>ÓÊÏä£ºyuexin@yuexin80.com</p><p>¹ÙÍø£ºwww.yuexinchina.com</p><p>ÍúÆÌ£ºhttp://pyyuexin.1688.com</p><p>ÓªÏúĞÍÍøÕ¾£ºwww.yuexin80.com</p><p>µØÖ·£º¹ãÖİÊ¡¹ãÖİÊĞ·¬Ø®ÇøĞÂÔìÕòÄÏÔ¼ÉÌÒµ½Ö34ºÅ</p>');
-
+--äº§å“ç±»åˆ«è¡¨
 drop table p_sort;
 create table p_sort(
 	sort_id int primary key auto_increment,
@@ -60,10 +51,7 @@ create table p_sort(
 	rec_date timestamp default now()
 )engine=innodb default charset=utf8 auto_increment=1;
 
-set names GBK;
-insert into p_sort(sort_name)
-values('Æû³µÁÜÓê¼ì²âÏß'),('´¹Ö±µÎÓêÊÔÑé×°ÖÃ'),('°Ú¹ÜÁÜÓêÊÔÑé×°ÖÃ'),('Ç¿ÅçË®ÊÔÑé×°ÖÃ'),('½şË®ÊÔÑé×°ÖÃ'),('Ñ¹Á¦½şË®ÊÔÑé×°ÖÃ'),('¸ßÎÂ¸ßÑ¹ÅçÁÜÊÔÑé×°ÖÃ'),('»¨È÷ÁÜÓêÊÔÑé×°ÖÃ'),('ÅçË®ÊÔÑé×°ÖÃ'),('·ÀË®ÊÔÑé·¿'),('×ÛºÏÁÜÓêÏä');
-
+--äº§å“è¡¨
 drop table product;
 create table product(
 	product_id int primary key auto_increment,
@@ -72,160 +60,14 @@ create table product(
 	sort_id int not null,
 	order_no int default 0,
 	m_image varchar(100),
+	ali_url varchar(80),
 	is_recommend tinyint default 0,
 	is_showhome tinyint default 0,
 	rec_date timestamp default now()
 )engine=innodb default charset=utf8 auto_increment=1;
 
-
-drop table template;
-create table template(
-	temp_id int primary key auto_increment,
-	temp_type varchar(30),
-	temp_key varchar(50),
-	temp_value text,
-	rec_date timestamp default now()
-) engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-
-insert into template(temp_type, temp_key, temp_value)
-values('LABEL', '##site_name##', 'ÔÀĞÅ.ÖĞ¹úIP·ÀË®ÊÔÑé»úµÚÒ»Æ·ÅÆ,¸øÄúÌá¹©×î×¨ÒµµÄIP·ÀË®¼ì²âÉè±¸ÏµÍ³½â¾ö·½°¸'),
-('LABEL', '##company_name##', '¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ¹«Ë¾'),
-('LABEL', '##site_desc##', 'IP·ÀË®ÊÔÑé»ú, IPX12µÎÓêÊÔÑé»ú, IPX34°Ú¹ÜÁÜÓêÊÔÑé»ú, IPX56Ç¿ÅçË®ÊÔÑé»ú, IPX78½şË®ÊÔÑé»ú, ULÅçË®ÊÔÑé×°ÖÃ, ÈÕ±êÁÜÓêÊÔÑéÏä, ÊÖ³ÖÊ½ÁÜÓêÊÔÑé×°ÖÃ, IPX9K¸ßÑ¹ÅçÁÜÊÔÑéÏä, IPX8Ñ¹Á¦½şË®ÊÔÑé»ú·À³¾Ïä, IP56·À³¾ÊÔÑéÏä'),
-('LABEL', '##key_words##', 'IP·ÀË®ÊÔÑé»ú, IPX12µÎÓêÊÔÑé»ú, IPX34°Ú¹ÜÁÜÓêÊÔÑé»ú, IPX56Ç¿ÅçË®ÊÔÑé»ú, IPX78½şË®ÊÔÑé»ú, ULÅçË®ÊÔÑé×°ÖÃ, ÈÕ±êÁÜÓêÊÔÑéÏä, ÊÖ³ÖÊ½ÁÜÓêÊÔÑé×°ÖÃ, IPX9K¸ßÑ¹ÅçÁÜÊÔÑéÏä, IPX8Ñ¹Á¦½şË®ÊÔÑé»ú·À³¾Ïä, IP56·À³¾ÊÔÑéÏä'),
-('LABLE', '##notice##', 'ÄúºÃ,»¶Ó­À´µ½±¾ÍøÕ¾£¡×¨ÒµÉú²ú£ºIP·ÀË®ÊÔÑé»ú,°Ú¹ÜÁÜÓêÊÔÑé»úºÍÑ¹Á¦½şË®ÊÔÑé»úµÈ²úÆ·.'),
-('HTML', '##banner1##', '<a href="index.html" target="_blank"><img class="banner_img" src="##root_url##/images/banner.jpg" alt=""></a>'),
-('HTML', '##banner2##', '<a href="index.html" target="_blank"><img class="banner_img" src="##root_url##/images/banner.jpg" alt=""></a>'),
-('HTML', '##banner3##', '<a href="index.html" target="_blank"><img class="banner_img" src="##root_url##/images/banner.jpg" alt=""></a>'),
-('HTML', '##banner4##', '<a href="index.html" target="_blank"><img class="banner_img" src="##root_url##/images/banner.jpg" alt=""></a>'),
-('HTML', '##hot_sort##', '<a href="#">Ò¡°ÚÁÜÓêÊÔÑé»ú</a><a href="#">Ò¡°ÚÁÜÓêÊÔÑé»ú</a><a href="#">Ç¿ÅçË®ÊÔÑé»ú</a>'),
-('HTML', '##company_outline##', '<p><img src="##root_url##/images/company.jpg" width="200" height="150" alt="" class="com_img"><b>¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ</b>¹«Ë¾ÊÇÒ»¼Ò¼¯ÑĞ·¢¡¢Éú²ú¡¢ÏúÊÛÎªÒ»ÌåµÄ¿Æ¼¼ĞÍÆóÒµ£¬¹«Ë¾×¨ÒµÉú²úIPX·ÀË®ÊÔÑéÉè±¸¡¢Æû³µÁÜÓêÊÔÑé·¿¡¢Õæ¿ÕË®Ñ¹·ÀË®ÊÔÂ©»úµÈÊÔÑéÀà»úĞµÉè±¸¡£×Ô´´Á¢ÒÔÀ´£¬¹«Ë¾¼á³Ö¡°ÒÔĞÂÆ·ÍØÕ¹ÊĞ³¡£¬ÒÔÖÊÁ¿±£Ö¤ÊĞ³¡£¬ÒÔ·şÎñÓ®µÃÊĞ³¡¡±£¬Æ¾½èĞÛºñµÄ¼¼ÊõÁ¦Á¿£¬ÀûÓÃÏÈ½øµÄÉú²úÉè±¸ºÍ¼ì²âÉè±¸£¬Ê¹¡°YUEXIN¡±ºÍ¡°ÔÀĞÅ¡±Æ·ÅÆµÄ²úÆ·¹ã·ºÓ¦ÓÃÓÚº½¿Õº½Ìì¡¢Æû³µÖÆÔì¡¢Ôì´¬¡¢ËÜÁÏ¡¢µç×Óµç¹¤¡¢Í¨ĞÅ¼¼Êõ¡¢Îå½ğ»úĞµ¡¢ÒÇÆ÷ÒÇ±í¡¢Ê¯ÓÍÒÇ±í¡¢Ê¯ÓÍ»¯¹¤¡¢Ò½...<a href="##root_url##/companyInfo.html">¸ü¶à&gt;&gt;</a></p>'),
-('HTML', '##contact##', '<p>µç»°£º020-34722228</p><p>´«Õæ£º020-34722227</p><p>ÊÖ»ú£º18122303373</p><p>ÁªÏµÈË£º³ÂÏÈÉú£¨¾­Àí£©</p><p>Q Q£º37559462</p><p>ÍúÍú£ºÔÀĞÅÊÔÑéÉè±¸</p><p>ÓÊÏä£ºyuexin@yuexin80.com</p><p>¹ÙÍø£ºwww.yuexinchina.com</p><p>ÍúÆÌ£ºhttp://pyyuexin.1688.com</p><p>ÓªÏúĞÍÍøÕ¾£ºwww.yuexin80.com</p><p>µØÖ·£º¹ãÖİÊ¡¹ãÖİÊĞ·¬Ø®ÇøĞÂÔìÕòÄÏÔ¼ÉÌÒµ½Ö34ºÅ</p>'),
-('HTML', '##company_infor##', '<p><img src="##root_url##/images/company.jpg" width="200" height="150" alt="" class="com_img"><b>¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ</b>¹«Ë¾ÊÇÒ»¼Ò¼¯ÑĞ·¢¡¢Éú²ú¡¢ÏúÊÛÎªÒ»ÌåµÄ¿Æ¼¼ĞÍÆóÒµ£¬¹«Ë¾×¨ÒµÉú²úIPX·ÀË®ÊÔÑéÉè±¸¡¢Æû³µÁÜÓêÊÔÑé·¿¡¢Õæ¿ÕË®Ñ¹·ÀË®ÊÔÂ©»úµÈÊÔÑéÀà»úĞµÉè±¸¡£×Ô´´Á¢ÒÔÀ´£¬¹«Ë¾¼á³Ö¡°ÒÔĞÂÆ·ÍØÕ¹ÊĞ³¡£¬ÒÔÖÊÁ¿±£Ö¤ÊĞ³¡£¬ÒÔ·şÎñÓ®µÃÊĞ³¡¡±£¬Æ¾½èĞÛºñµÄ¼¼ÊõÁ¦Á¿£¬ÀûÓÃÏÈ½øµÄÉú²úÉè±¸ºÍ¼ì²âÉè±¸£¬Ê¹¡°YUEXIN¡±ºÍ¡°ÔÀĞÅ¡±Æ·ÅÆµÄ²úÆ·¹ã·ºÓ¦ÓÃÓÚº½¿Õº½Ìì¡¢Æû³µÖÆÔì¡¢Ôì´¬¡¢ËÜÁÏ¡¢µç×Óµç¹¤¡¢Í¨ĞÅ¼¼Êõ¡¢Îå½ğ»úĞµ¡¢ÒÇÆ÷ÒÇ±í¡¢Ê¯ÓÍÒÇ±í¡¢Ê¯ÓÍ»¯¹¤¡¢Ò½...<a href="##root_url##/companyInfo.html">¸ü¶à&gt;&gt;</a></p>'),
-('HTML', '##company_history##', '<p><img src="##root_url##/images/company.jpg" width="200" height="150" alt="" class="com_img"><b>¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ</b>¹«Ë¾ÊÇÒ»¼Ò¼¯ÑĞ·¢¡¢Éú²ú¡¢ÏúÊÛÎªÒ»ÌåµÄ¿Æ¼¼ĞÍÆóÒµ£¬¹«Ë¾×¨ÒµÉú²úIPX·ÀË®ÊÔÑéÉè±¸¡¢Æû³µÁÜÓêÊÔÑé·¿¡¢Õæ¿ÕË®Ñ¹·ÀË®ÊÔÂ©»úµÈÊÔÑéÀà»úĞµÉè±¸¡£×Ô´´Á¢ÒÔÀ´£¬¹«Ë¾¼á³Ö¡°ÒÔĞÂÆ·ÍØÕ¹ÊĞ³¡£¬ÒÔÖÊÁ¿±£Ö¤ÊĞ³¡£¬ÒÔ·şÎñÓ®µÃÊĞ³¡¡±£¬Æ¾½èĞÛºñµÄ¼¼ÊõÁ¦Á¿£¬ÀûÓÃÏÈ½øµÄÉú²úÉè±¸ºÍ¼ì²âÉè±¸£¬Ê¹¡°YUEXIN¡±ºÍ¡°ÔÀĞÅ¡±Æ·ÅÆµÄ²úÆ·¹ã·ºÓ¦ÓÃÓÚº½¿Õº½Ìì¡¢Æû³µÖÆÔì¡¢Ôì´¬¡¢ËÜÁÏ¡¢µç×Óµç¹¤¡¢Í¨ĞÅ¼¼Êõ¡¢Îå½ğ»úĞµ¡¢ÒÇÆ÷ÒÇ±í¡¢Ê¯ÓÍÒÇ±í¡¢Ê¯ÓÍ»¯¹¤¡¢Ò½...<a href="##root_url##/companyInfo.html">¸ü¶à&gt;&gt;</a></p>'),
-('HTML', '##company_cert##', '<p><img src="##root_url##/images/company.jpg" width="200" height="150" alt="" class="com_img"><b>¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ</b>¹«Ë¾ÊÇÒ»¼Ò¼¯ÑĞ·¢¡¢Éú²ú¡¢ÏúÊÛÎªÒ»ÌåµÄ¿Æ¼¼ĞÍÆóÒµ£¬¹«Ë¾×¨ÒµÉú²úIPX·ÀË®ÊÔÑéÉè±¸¡¢Æû³µÁÜÓêÊÔÑé·¿¡¢Õæ¿ÕË®Ñ¹·ÀË®ÊÔÂ©»úµÈÊÔÑéÀà»úĞµÉè±¸¡£×Ô´´Á¢ÒÔÀ´£¬¹«Ë¾¼á³Ö¡°ÒÔĞÂÆ·ÍØÕ¹ÊĞ³¡£¬ÒÔÖÊÁ¿±£Ö¤ÊĞ³¡£¬ÒÔ·şÎñÓ®µÃÊĞ³¡¡±£¬Æ¾½èĞÛºñµÄ¼¼ÊõÁ¦Á¿£¬ÀûÓÃÏÈ½øµÄÉú²úÉè±¸ºÍ¼ì²âÉè±¸£¬Ê¹¡°YUEXIN¡±ºÍ¡°ÔÀĞÅ¡±Æ·ÅÆµÄ²úÆ·¹ã·ºÓ¦ÓÃÓÚº½¿Õº½Ìì¡¢Æû³µÖÆÔì¡¢Ôì´¬¡¢ËÜÁÏ¡¢µç×Óµç¹¤¡¢Í¨ĞÅ¼¼Êõ¡¢Îå½ğ»úĞµ¡¢ÒÇÆ÷ÒÇ±í¡¢Ê¯ÓÍÒÇ±í¡¢Ê¯ÓÍ»¯¹¤¡¢Ò½...<a href="##root_url##/companyInfo.html">¸ü¶à&gt;&gt;</a></p>'),
-('HTML', '##company_style##', '<p><img src="##root_url##/images/company.jpg" width="200" height="150" alt="" class="com_img"><b>¹ãÖİÔÀĞÅÊÔÑéÉè±¸ÓĞÏŞ</b>¹«Ë¾ÊÇÒ»¼Ò¼¯ÑĞ·¢¡¢Éú²ú¡¢ÏúÊÛÎªÒ»ÌåµÄ¿Æ¼¼ĞÍÆóÒµ£¬¹«Ë¾×¨ÒµÉú²úIPX·ÀË®ÊÔÑéÉè±¸¡¢Æû³µÁÜÓêÊÔÑé·¿¡¢Õæ¿ÕË®Ñ¹·ÀË®ÊÔÂ©»úµÈÊÔÑéÀà»úĞµÉè±¸¡£×Ô´´Á¢ÒÔÀ´£¬¹«Ë¾¼á³Ö¡°ÒÔĞÂÆ·ÍØÕ¹ÊĞ³¡£¬ÒÔÖÊÁ¿±£Ö¤ÊĞ³¡£¬ÒÔ·şÎñÓ®µÃÊĞ³¡¡±£¬Æ¾½èĞÛºñµÄ¼¼ÊõÁ¦Á¿£¬ÀûÓÃÏÈ½øµÄÉú²úÉè±¸ºÍ¼ì²âÉè±¸£¬Ê¹¡°YUEXIN¡±ºÍ¡°ÔÀĞÅ¡±Æ·ÅÆµÄ²úÆ·¹ã·ºÓ¦ÓÃÓÚº½¿Õº½Ìì¡¢Æû³µÖÆÔì¡¢Ôì´¬¡¢ËÜÁÏ¡¢µç×Óµç¹¤¡¢Í¨ĞÅ¼¼Êõ¡¢Îå½ğ»úĞµ¡¢ÒÇÆ÷ÒÇ±í¡¢Ê¯ÓÍÒÇ±í¡¢Ê¯ÓÍ»¯¹¤¡¢Ò½...<a href="##root_url##/companyInfo.html">¸ü¶à&gt;&gt;</a></p>'),
-('IMAGE', '##barcode##', 'barcode.png');
-
-drop table product;
-create table product(
-	product_id int primary key auto_increment,
-	product_no varchar(30),
-	product_name varchar(30),
-	sort_id int not null,
-	order_no int default 0,
-	images varchar(100),
-	is_recommend tinyint default 0,
-	rec_date timestamp default now()
-)engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-insert into product(product_name, product_no, sort_id, order_no, images, is_recommend)
-values('YX-ZC400S×ÛºÏ','',1, 1, '20150901031909.jpg', 1),
-('YX-ZC400×ÛºÏÁÜ','',1, 2, '20150901031749.jpg', 1),
-('ÓĞÁ÷Á¿¼Æ»¨È÷ÁÜÓêÊÔÑé×°','',2, 3, '20150901031432.jpg', 1),
-('ÎŞÁ÷Á¿¼Æ»¨È÷ÁÜÓêÊÔÑé×°','',3, 4, '20150901031251.jpg', 1),
-('IPX800F600-','',1, 5, '20150901031045.jpg', 1),
-('IPX800E600-','',1, 6, '20150901030919.jpg', 1),
-('IPX800D 500','',1, 7, '20150901030716.jpg', 1),
-('IPX800C500-','',1, 8, '20150901030449.jpg', 1),
-('IPX800B500-','',1, 9, '20150901030220.jpg', 1),
-('IPX800A500-','',1, 10, '20150901025902.jpg', 1),
-('700F½şË®ÊÔÑé×°ÖÃ','',1, 11, '20150901025446.jpg', 1);
-
-insert into product(product_name, product_no, sort_id, order_no, images)
-values('700D½şË®ÊÔÑé×°ÖÃ','',1, 12, '20150901025259.jpg'),
-('700C½şË®ÊÔÑé×°ÖÃ','',1, 13, '20150901025023.jpg'),
-('700B½şË®ÊÔÑé×°ÖÃ','',1, 14, '20150901022745.jpg'),
-('700A½şË®ÊÔÑé×°ÖÃ','',1, 15, '20150901022554.jpg'),
-('ÏäÊ½IPX56BSÇ¿Åç','',1, 16, '20150901022341.jpg'),
-('ÏäÊ½IPX56BÇ¿ÅçË®','',1, 17, '20150901022218.jpg'),
-('ÏäÊ½IPX5BSÇ¿ÅçË®','',1, 18, '20150901022110.jpg'),
-('ÏäÊ½IPX5BÇ¿ÅçË®ÊÔ','',1, 19, '20150901021959.jpg'),
-('·ÖÌåÊ½IPX56ASÇ¿','',1, 20, '20150901021838.jpg');
-
-drop table product_sort;
-create table product_sort(
-	sort_id int primary key auto_increment,
-	sort_name varchar(30),
-	rec_date timestamp default now()
-)engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-insert into product_sort(sort_name)
-values('Æû³µÁÜÓê¼ì²âÏß'),
-('´¹Ö±µÎÓêÊÔÑé×°ÖÃ'),
-('°Ú¹ÜÁÜÓêÊÔÑé×°ÖÃ'),
-('Ç¿ÅçË®ÊÔÑé×°ÖÃ'),
-('½şË®ÊÔÑé×°ÖÃ'),
-('Ñ¹Á¦½şË®ÊÔÑé×°ÖÃ'),
-('¸ßÎÂ¸ßÑ¹ÅçÁÜÊÔÑé×°ÖÃ'),
-('»¨È÷ÁÜÓêÊÔÑé×°ÖÃ'),
-('ÅçË®ÊÔÑé×°ÖÃ'),
-('·ÀË®ÊÔÑé·¿'),
-('×ÛºÏÁÜÓêÏä');
-
-drop table news;
-create table news(
-	news_id int primary key auto_increment,
-	news_title varchar(30),
-	news_content text,
-	rec_date timestamp default now()
-)engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-insert into news(news_title, news_content)
-values('¹ãÖİÔÀĞÅ×£È«¹úÈËÃñÖĞÇï½Ú¿ìÀÖ', ''),
-('¹ØÓÚÖĞÇï½Ú¡¢¹úÇì½Ú¹«Ë¾·Å¼ÙÍ¨Öª', ''),
-('×£ºØÔÀĞÅ³ÉÎª½ÜÖ®ÑóµÄ·ÀË®ÊÔÑéÉè±¸¹©Ó¦ÉÌ', ''),
-('IPX8½şË®ÊÔÑé»ú ĞÂ¿îÉÏ¼Ü! ¿â´æ³ä×ã£¡', ''),
-('ÉãÏñÍ··ÀË®²âÊÔ ÁªÍşÏàĞÅ¹ãÖİÔÀĞÅ', ''),
-('¿´70ÖÜÄêÔÄ±ø£¡¿´ÔÀĞÅ·¢Õ¹£¡', ''),
-('¶¨ÆÚÎ¬»¤¡ª²»±äµÄÎÒÃÇÊÇ¶Ô¿Í»§µÄ³ĞÅµ', ''),
-('´´ĞÂµÄÁ¦Á¿ ĞÂ»úĞÍ£¡IPX8Õı¸ºÑ¹½şË®ÊÔÑé»ú', ''),
-('»¶Ó­¹úÍâ¿Í»§µ½ÎÒ³§ÊµµØ¿¼²ì£¡', ''),
-('¹ãÖİÔÀĞÅ²Î¼Ó°Ù¶ÈÒÆ¶¯ÍÆ¹ãÓªÏú·å»á', ''),
-('·ÀË®ÊÔÑéÏä ¼ì²âÍâ¿Ç·À»¤µÄºÃ°ïÊÖ', ''),
-('ÔÀĞÅÓëÀÊÌØÇ£ÊÖ ¿ªÍØ¹âÑ§ÒÇÆ÷·ÀË®ÊÔÑéÊĞ³¡', '');
-
-drop table cases;
-create table cases(
-	cases_id int primary key auto_increment,
-	cases_title varchar(50),
-	company varchar(50),
-	cases_detail text,
-	cases_image varchar(50), 
-	rec_date timestamp default now()
-)engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-insert into cases(cases_title, company, cases_detail, cases_image)
-values('Î÷°²Á¢Ã÷µç×ÓÓëÔÀĞÅÇ©Ô¼³É¹¦', 'Î÷°²Á¢Ã÷µç×Ó', '', '20150622150115_7812.gif'),
-('¡¾ÉîÛÚÎ÷Î÷°¬Éè¼Æ¡¿¿É¿¿ÊµÑé-ÔÀĞÅ³É¾Í', 'ÉîÛÚÎ÷Î÷°¬Éè¼Æ', '', '20150615154959_8650.jpg'),
-('£¨ÉîÛÚ£©Å·ËÜµÆ¾ßÓëÔÀĞÅ¹²Í¬³ö¿Ú', 'ÉîÛÚÅ·ËÜµÆ¾ß', '', '20150601155025_0188.png'),
-('Beide (UK) Product Service LimitedÊÔÑéÉè±¸ÔÀĞÅ³ö¿Ú', 'Beide (UK) Product Service Limited', '', '20150525160026_1102.png'),
-('ÔÀĞÅÖú¹¥-¿­¶û´ï¼¯ÍÅ´òÔì¿Æ¼¼´´ĞÂ', '¿­¶û´ï¼¯ÍÅ', '', '20150518161724_0429.jpg'),
-('¡¾¼ÃÄşÖØÆû¼¯ÍÅ¡¿³ÉÎªÔÀĞÅ»ï°éÓ­À´Õ¸ĞÂÆªÕÂ', '¼ÃÄşÖØÆû¼¯ÍÅ', '', '20150511161526_9621.png'),
-('ÖĞ½¨¿Æ¼¼¼¯ÍÅÑ¡Ôñ- ÔÀĞÅ', 'ÖĞ½¨¿Æ¼¼¼¯ÍÅ', '', '20150504161056_8940.png'),
-('ºşÄÏ¹è·å-µç¶¯»·ÎÀÇåÉ¨³µ ÔÀĞÅ»¤º½', 'ºşÄÏ¹è·å', '', '20150427160445_8708.png'),
-('ÈÈÁÒÇì×£Ïã¸ÛÖĞ½¨µçÑ¶¼¯ÍÅÓëÔÀĞÅºÏ×÷', 'Ïã¸ÛÖĞ½¨µçÑ¶¼¯ÍÅ', '', '20150413165149_2344.png'),
-('ÔÀĞÅÎª¹ğÁÖ¿Í³µ±£¼İ»¤º½', '¹ğÁÖ¿Í³µ', '', '20150407154200_8888.png'),
-('¹ãÖİ¹ãµç¼ÆÁ¿¼ì²âºÏ×÷³É¹¦', '¹ãÖİ¹ãµç¼ÆÁ¿¼ì²â', '', '20150330141230_3148.png'),
-('ÌÆÉ½²Üåúµé¹¤´óº£Óî¹âµç¿Æ¼¼¹É·İÓĞÏŞ¹«Ë¾', '¹¤´óº£Óî¹âµç¿Æ¼¼¹É·İÓĞÏŞ¹«Ë¾', '', '20150328115145_5174.png');
-
-drop table links;
-create table links(
-	links_id int primary key auto_increment,
-	links varchar(100),
-	links_title varchar(50),
-	company varchar(50),
-	links_image varchar(50), 
-	rec_date timestamp default now()
-)engine=innodb default charset=utf8 auto_increment=1;
-
-set names GBK;
-insert into links(links_title, links, company, links_image)
-values('È¤ÂóÍø', 'http://www.yuexinchina.com/', 'È¤ÂóÍø', '7mai.gif'),
-('¾«Æ·Éú»î', 'http://www.yuexinchina.com/', '¾«Æ·Éú»î', 'styleweekly.gif'),
-('ÓÎ¾ÅÍø', 'http://www.yuexinchina.com/', 'ÓÎ¾ÅÍø', 'uuu9.gif');
+select * from doc_file;
+select * from message;
+select * from content;
+select * from p_sort;
+select * from product;

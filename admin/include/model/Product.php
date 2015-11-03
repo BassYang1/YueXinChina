@@ -7,6 +7,7 @@ class Product{
 	public $productType;
 	public $typeName;
 	public $mImage;
+	public $aliUrl;
 	public $isRecommend;
 	public $isShowHome;
 	public $orderNo;
@@ -21,6 +22,9 @@ class Product{
 	
 	function __construct($size){
 		$this->querySize = $size;
+		$this->isRecommend = 0;
+		$this->isShowHome = 0;
+		$this->orderNo = 0;
 	}
 
 	function __set($name, $value){
@@ -38,11 +42,11 @@ class Product{
 			return $newId;
 		}
 		try{
-			$conn = DBHelp::getConnection();
-
-			$sql = sprintf("insert into product(product_no, product_name, sort_id, order_no, m_image, is_recommend, is_showhome) values('%s', '%s', '%s', '%s', '%s', '%s', '%s');", $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->isRecommend, $product->isShowHome);	
+			$sql = sprintf("insert into product(product_no, product_name, sort_id, order_no, m_image, ali_url, is_recommend, is_showhome) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->aliUrl, $product->isRecommend, $product->isShowHome);	
 			Tool::logger(__METHOD__, __LINE__, sprintf("插入商品SQL:%s", $sql), _LOG_DEBUG);
 			
+			
+			$conn = DBHelp2::getConnection();
 			$conn->query($sql);	
 
 			$sql = "select max(product_id) as product_id from product;";
@@ -55,7 +59,8 @@ class Product{
 				}
 			}
 			
-			DBHelp::closeConn($conn);
+			DBHelp2::free($data);
+			DBHelp2::close($conn);
 			
 			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
 		}
@@ -74,15 +79,15 @@ class Product{
 				return false;
 			}
 
-			$sql = "update product set product_no='%s', product_name='%s', sort_id=%s, order_no='%s', m_image='%s', is_recommend=%u, is_showhome=%u, rec_date=now() where product_id=%u";
+			$sql = "update product set product_no='%s', product_name='%s', sort_id=%s, order_no='%s', m_image='%s', ali_url='%s', is_recommend=%u, is_showhome=%u, rec_date=now() where product_id=%u";
 			
-			$sql = sprintf($sql, $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->isRecommend, $product->isShowHome, $product->productId);
+			$sql = sprintf($sql, $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->aliUrl, $product->isRecommend, $product->isShowHome, $product->productId);
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("更新商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp::getConnection();
+			$conn = DBHelp2::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp2::close($conn);
 			
 			return true;
 		}		
@@ -105,9 +110,9 @@ class Product{
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("删除商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp::getConnection();
+			$conn = DBHelp2::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp2::close($conn);
 			
 			return true;
 		}		
@@ -123,7 +128,7 @@ class Product{
 		$products = array();
 		
 		try{		
-			$sql = "select p.product_id, p.product_no, p.product_name, p.sort_id, p.order_no, p.m_image, p.is_recommend, p.is_showhome, p.rec_date, s.sort_name from product p";
+			$sql = "select p.product_id, p.product_no, p.product_name, p.sort_id, p.order_no, p.m_image, p.ali_url,p.is_recommend, p.is_showhome, p.rec_date, s.sort_name from product p";
 			$sql .= " left join p_sort s on p.sort_id = s.sort_id";
 			$sql .= " where 1=1";
 						
@@ -160,7 +165,7 @@ class Product{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp::getConnection();
+			$conn = DBHelp2::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -171,6 +176,7 @@ class Product{
 					$temp->productNo = $row["product_no"];
 					$temp->productNo = $row["order_no"];
 					$temp->mImage = $row["m_image"];
+					$temp->aliUrl = $row["ali_url"];
 					$temp->orderNo = $row["order_no"];
 					$temp->productType = $row["sort_id"];
 					$temp->typeName = (empty($row["sort_name"]) ? "" : $row["sort_name"]);
@@ -181,8 +187,8 @@ class Product{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品%u条.", $data->num_rows), _LOG_DEBUG);
+			DBHelp2::close($conn);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品%u条.", count($products)), _LOG_DEBUG);
 			
 			return $products;
 		}		
@@ -202,6 +208,20 @@ class Product{
 		}
 
 		return new Prdduct(_NONE);
+	}
+
+	public static function content($productId){
+		$content = new Content(_QUERY_ALL);
+		$content->contentKey = "product" . $productId;
+		$content->contentType = "product";
+
+		$content = Content::read($content);
+
+		if(empty($content)){
+			return "";
+		}
+
+		return $content->content;
 	}
 
 	public static function rcount($query){

@@ -1,0 +1,32 @@
+2015-10-26 09:39:08 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:09 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:09 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:10 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:11 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:12 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:12 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:13 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:13 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:14 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:14 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:15 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:20 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:21 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 09:39:24 [DEBUG] [299] [Content::query2] 查询文本内容SQL: select content_id, content_type, content_key, subject, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 09:39:25 [DEBUG] [319] [Content::query2] 查询文本内容1条.
+2015-10-26 01:17:36 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 01:17:37 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:24:49 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='company_name' and content_type='company' order by rec_date desc
+2015-10-26 01:24:50 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:12 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='site_name' and content_type='company' order by rec_date desc
+2015-10-26 01:26:13 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:13 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='seo_key' and content_type='company' order by rec_date desc
+2015-10-26 01:26:14 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:14 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='site_desc' and content_type='company' order by rec_date desc
+2015-10-26 01:26:15 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:19 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='site_name' and content_type='company' order by rec_date desc
+2015-10-26 01:26:20 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:20 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='seo_key' and content_type='company' order by rec_date desc
+2015-10-26 01:26:21 [DEBUG] [371] [Content::read] 查询文本内容1条.
+2015-10-26 01:26:21 [DEBUG] [349] [Content::read] 读取文本内容SQL: select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1 and content_key='site_desc' and content_type='company' order by rec_date desc
+2015-10-26 01:26:22 [DEBUG] [371] [Content::read] 查询文本内容1条.

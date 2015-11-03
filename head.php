@@ -1,4 +1,28 @@
-﻿    <!--header start-->
+﻿<?php
+	$navHtml = "";
+	$query = new Company(_QUERY_ALL);
+	$query->companyKey = "brand_recommend";
+	$brands = Company::query($query);
+	
+	if(!empty($brands)){
+		foreach($brands as $brand){
+			$navHtml .= sprintf("
+				<li class='sep f_left hidden'>|</li>
+                <li class='n_menu f_left'>
+                    <h3>
+                        <a title='%s' style='width: 105px;' href='%s'>%s</a>
+                    </h3>
+                </li>
+				",
+				$brand->subject,
+				$brand->content,
+				$brand->subject			
+			);
+		}
+	}
+	
+?>
+	<!--header start-->
     <div id="header_box">
         <!--欢迎_分享连接 开始-->
         <div class="header_top">
@@ -52,67 +76,44 @@
         <!--导航 开始-->
         <div class="nav_box">
             <ul class="nav">
-                <li class="n_menu f_right">
+                <li class="n_menu f_left">
                     <h3>
-                        <a title="联系我们" href="contact.php">联系我们</a>
+                        <a title="首页" style="width: 60px;" href="index.php">
+                            首页</a>
                     </h3>
                 </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="资料下载" style="width: 80px;" href="material.php">资料下载</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="成功案例" style="width: 80px;" href="case.php">
-                            成功案例</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="公司新闻" style="width: 80px;" href="news.php">
-                            公司新闻</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="浸水试验机" style="width: 105px;" href="#">浸水试验机</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="强喷水试验机" style="width: 120px;" href="#">强喷水试验机</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="摇摆淋雨试验机" style="width: 120px;" href="#">摇摆淋雨试验机</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
-                    <h3>
-                        <a title="垂直滴雨试验机" style="width: 120px;" href="#">垂直滴雨试验机</a>
-                    </h3>
-                </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
                     <h3>
                         <a title="走进岳信" style="width: 80px;" href="company.php">
                             走进岳信</a>
                     </h3>
                 </li>
-                <li class="sep f_right hidden">|</li>
-                <li class="n_menu f_right">
+				<?php echo $navHtml; ?>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
                     <h3>
-                        <a title="首页" style="width: 60px;" href="index.php">
-                            首页</a>
+                        <a title="公司新闻" style="width: 80px;" href="news.php">
+                            公司新闻</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="成功案例" style="width: 80px;" href="case.php">
+                            成功案例</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="资料下载" style="width: 80px;" href="material.php">资料下载</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="联系我们" href="contact.php">联系我们</a>
                     </h3>
                 </li>
                 <li class="clear hidden"></li>

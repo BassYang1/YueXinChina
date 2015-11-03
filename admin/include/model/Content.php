@@ -269,56 +269,89 @@ class Content{
 
 	public static function query2($query){
 		$contents = array();
-		
-		try{		
-			$sql = "select content_id, content_type, content_key, content, subject, m_image, rec_date from content where 1 = 1";
-					
-			if(is_numeric($query->contentId) && $query->contentId > 0){
-				$sql = $sql . sprintf(" and content_id=%u", $query->contentId);
-			}			
-				
-			if(strlen($query->contentKey) > 0){
-				$sql = $sql . sprintf(" and content_key='%s'", $query->contentKey);
-			}
-				
-			if(strlen($query->contentType) > 0){
-				$sql = $sql . sprintf(" and content_type='%s'", $query->contentType);
-			}
-			
-			$sql .= " order by rec_date desc";
+		Tool::logger(__METHOD__, __LINE__, sprintf("=============Content 查询==============\n\rcontentId:%s\n\rcontentType:%s\n\rcontentKey:%s\n\rquerySize:%s\n\risPaging:%s\n\rcurPage:%s",
+			$query->contentId, $query->contentType, $query->contentKey, $query->querySize, $query->isPaging, $query->curPage
+		), _LOG_INFOR);
 
-			if(is_numeric($query->querySize) && $query->querySize != _QUERY_ALL){			
-				if($query->isPaging == 1){
-					$sql .= sprintf(" limit %u,%u", ($query->curPage - 1) * $query->querySize, $query->querySize);
-				}
-				else{
-					$sql .= sprintf(" limit %u", $query->querySize);
-				}
-			}
-			
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容SQL: %s", $sql), _LOG_DEBUG);
+		try{
+			if($query->isPaging == 1){ //分页查询
+				$sql = "select content_id, content_type, content_key, content, subject, m_image, rec_date from content where 1 = 1";
 						
-			$conn = DBHelp2::getConnection();
-			$data = $conn->query($sql);
+				if(is_numeric($query->contentId) && $query->contentId > 0){
+					$sql = $sql . sprintf(" and content_id=%u", $query->contentId);
+				}			
+					
+				if(strlen($query->contentKey) > 0){
+					$sql = $sql . sprintf(" and content_key='%s'", $query->contentKey);
+				}
+					
+				if(strlen($query->contentType) > 0){
+					$sql = $sql . sprintf(" and content_type='%s'", $query->contentType);
+				}
+				
+				$sql .= " order by rec_date desc";
 
-			if(!empty($data) && $data->num_rows > 0){
-				while($row = $data->fetch_assoc()) {
-					$temp = new Content(_NONE);
-					$temp->contentId = $row["content_id"];
-					$temp->contentType = $row["content_type"];
-					$temp->contentKey = $row["content_key"];
-					$temp->content = $row["content"];
-					$temp->subject = $row["subject"];
-					$temp->mImage = $row["m_image"];
+				if(is_numeric($query->querySize) && $query->querySize != _QUERY_ALL){			
+					if($query->isPaging == 1){
+						$sql .= sprintf(" limit %u,%u", ($query->curPage - 1) * $query->querySize, $query->querySize);
+					}
+					else{
+						$sql .= sprintf(" limit %u", $query->querySize);
+					}
+				}
+				
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容SQL: %s", $sql), _LOG_DEBUG);
+							
+				$conn = DBHelp2::getConnection();
+				$data = $conn->query($sql);
 
-					array_push($contents, $temp); 
+				if(!empty($data) && $data->num_rows > 0){
+					while($row = $data->fetch_assoc()) {
+						$temp = new Content(_NONE);
+						$temp->contentId = $row["content_id"];
+						$temp->contentType = $row["content_type"];
+						$temp->contentKey = $row["content_key"];
+						$temp->content = $row["content"];
+						$temp->subject = $row["subject"];
+						$temp->mImage = $row["m_image"];
+
+						array_push($contents, $temp); 
+					}
+				}
+				
+				DBHelp2::free($data);
+				DBHelp2::close($conn);
+			}
+			else{
+				$all = self::queryAll();
+
+				foreach($all as $key => $one){
+					$got = true;
+
+					if($got && is_numeric($query->contentId) && $query->contentId > 0 && $query->contentId !== $one->contentId){
+						$got = false;
+					}
+
+					if($got && strlen($query->contentKey) > 0 && $query->contentKey !== $one->contentKey){
+						$got = false;
+					}
+					
+					if($got && strlen($query->contentType) > 0 && $query->contentType !== $one->contentType){
+						$got = false;
+					}
+
+					if($got){
+						array_push($contents, $one); 
+					}
+
+					if($query->querySize > 0 && $query->querySize >= ($key + 1)){
+						break;
+					}
 				}
 			}
 			
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容%u条.", count($contents)), _LOG_DEBUG);
-			
+
 			return $contents;
 		}		
 		catch(Exception $e){
@@ -329,56 +362,72 @@ class Content{
 		return null;
 	}
 
+	
+	public static function queryAll(){
+		$contents = array();
+		
+		try{
+			if(empty(self::$cache)){
+				$sql = "select content_id, content_type, content_key, content, subject, m_image, rec_date from content where 1 = 1";
+				
+				$sql .= " order by rec_date desc";
+				
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询所有Content数据: %s", $sql), _LOG_DEBUG);
+							
+				$conn = DBHelp2::getConnection();
+				$data = $conn->query($sql);
+
+				if(!empty($data) && $data->num_rows > 0){
+					while($row = $data->fetch_assoc()) {
+						$temp = new Content(_NONE);
+						$temp->contentId = $row["content_id"];
+						$temp->contentType = $row["content_type"];
+						$temp->contentKey = $row["content_key"];
+						$temp->content = $row["content"];
+						$temp->subject = $row["subject"];
+						$temp->mImage = $row["m_image"];
+
+						array_push($contents, $temp); 
+					}
+				}
+				
+				DBHelp2::free($data);
+				DBHelp2::close($conn);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询所有Content数据%u条.", count($contents)), _LOG_DEBUG);
+				
+				self::$cache = $contents;
+			}
+			else{				
+				$contents = self::$cache;
+			}
+
+			return $contents;
+		}		
+		catch(Exception $e){
+			Tool::logger(__METHOD__, __LINE__, "查询数据失败：" . $e->getMessage());
+			throw $e;
+		}
+		
+		return null;
+	}
+
+
 	public static function read($query){
 		try{		
-			$sql = "select content_id, content_type, content_key, subject, content, m_image, rec_date from content where 1 = 1";
-					
-			if(is_numeric($query->contentId) && $query->contentId > 0){
-				$sql = $sql . sprintf(" and content_id=%u", $query->contentId);
-			}			
-				
-			if(strlen($query->contentKey) > 0){
-				$sql = $sql . sprintf(" and content_key='%s'", $query->contentKey);
+			$contents = self::query2($query);
+
+			if(empty($contents)){
+				return new Content(_NONE);
 			}
-				
-			if(strlen($query->contentType) > 0){
-				$sql = $sql . sprintf(" and content_type='%s'", $query->contentType);
-			}
-			
-			$sql .= " order by rec_date desc";
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("读取文本内容SQL: %s", $sql), _LOG_DEBUG);
-						
-			$conn = DBHelp2::getConnection();
-			$data = $conn->query($sql);
-			$content = new Content(_NONE);
-
-			if(!empty($data) && $data->num_rows > 0){
-				while($row = $data->fetch_assoc()) {
-					$content->contentId = $row["content_id"];
-					$content->contentType = $row["content_type"];
-					$content->contentKey = $row["content_key"];
-					$content->subject = $row["subject"];
-					$content->content = $row["content"];
-					$content->mImage = $row["m_image"];
-
-					break;
-				}
-			}
-						
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
-
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容%u条.", $data->num_rows), _LOG_DEBUG);	
-
-			return $content;
+			return $contents[0];
 		}		
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, "查询数据失败：" . $e->getMessage());
 			throw new Exception("查询数据失败：" . $e->getMessage());
 		}
 		
-		return null;
+		return new Content(_NONE);
 	}
 
 	public static function rcount($query){

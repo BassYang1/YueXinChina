@@ -1,9 +1,41 @@
+<?php
+	$bannerHtml = "";
+	$bannerBtn = "";
+	$query = new DocFile(_QUERY_ALL);
+	$query->fileKey = "company_banner";
+	$query->inModule = "company";
+	$banners = DocFile::query($query);
+	
+	if(empty($banners)){
+		$banner = new DocFile(_NONE);
+		$banner->savedPath = "images/banner.jpg";
+		$banners = array($banner);
+	}
+	
+	foreach($banners as $i => $banner){
+		$bannerHtml .= sprintf("<li><a href='%s'><img src='%s' alt='%s' class='banner_img'></a></li>",
+			(empty($banner->fileUrl) ? "index.php" : $banner->fileUrl),
+			str_replace("../", "", $banner->savedPath), 
+			(empty($banner->fileDesc) ? Company::content("site_desc", false) : $banner->fileDesc)
+		);
+			
+		$bannerBtn .= sprintf("<li %s>%u</li>", ($i == 0 ? "class='on'" : ""), ($i + 1));
+	}
+	
+	$bannerHtml = sprintf("<ul>%s</ul>", $bannerHtml);
+	$bannerBtn = sprintf("<ul>%s</ul>", $bannerBtn);
+?>
+<?php 
 
-	<?php $banner = DocFile::first("site_banner"); ?>
+$banner = DocFile::first("site_banner"); 
+?>
     <!--banner start-->
     <div id="banner_box">
-        <div id="banner">
-            <a href="<?php echo $banner->fileUrl; ?>" target="_blank"><img class="banner_img" src="<?php echo str_replace("../", "", $banner->savedPath); ?>" alt="<?php echo $banner->fileDesc; ?>"></a>
+        <div class="banner">
+			<?php echo $bannerHtml; ?>
+        </div>
+        <div class="banner_btn">
+			<?php echo $bannerBtn; ?>
         </div>
     </div>
     <!--banner end-->

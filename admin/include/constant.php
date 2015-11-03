@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 define("_TEMP_ROOT", str_replace("include\class", "", __dir__) . "template\\");
 define("_WEB_ROOT", str_replace("include\class", "", __dir__) . "web\\");
 define("_ROOT_URL", (strtoupper($_SERVER["HTTPS"]) == "ON" ? "https://" : "http://") . $_SERVER["HTTP_HOST"] . "/web_admin/admin/web");
@@ -12,6 +12,8 @@ define("_LOG_INFOR", "INFO");
 define("_LOG_WARN", "WARN");
 define("_IS_DEBUG", TRUE);
 
+//是否启用cache
+define("_ENABLE_CACHE", TRUE);
 
 
 

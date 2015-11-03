@@ -6,7 +6,7 @@
 
 		$("#btnSave").click(function(){
 			var shade = BS_Popup.shade(true);
-			var data = {type: "content", module: "company", company_honor: BS_Common.getEDContent("#txtHonor")};
+			var data = {type: "content", module: "company", action: "update", company_honor: BS_Common.getEDContent("#txtHonor")};
 				
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	

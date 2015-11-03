@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>后台管理</title>
+    <title>站点管理--广州岳信试验设备有限公司</title>
     <meta name="Copyright" content="" />
     <link href="css/base.css" rel="stylesheet" type="text/css" />
     <link href="css/frame.css" rel="stylesheet" type="text/css" />

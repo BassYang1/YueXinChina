@@ -1,8 +1,6 @@
 ﻿	
     <!-- bottom start -->
-	<?php 
-		//二维码
-		$barcode = DocFile::first("company_barcode"); 
+	<?phpT
 
 		//读取友情连接
 		$links = DocFile::get("company_links");

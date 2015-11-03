@@ -21,9 +21,13 @@
 #header_box .nav_box .nav .sub li a:hover {	color: rgb(30, 149, 251);	}
 #header_box .nav_box .nav .block {	background: #0179c1; left: 0px; top: 39px; width: 107px; height: 3px; overflow: hidden; position: absolute;}
 
-#banner_box{ overflow:hidden; height:300px; width:100%; z-index: 0;}
-#banner_box #banner{ overflow:hidden; height:300px; width:100%;}
-#banner_box #banner .banner_img{width: 100%; height: 320px;}
+#banner_box{ overflow:hidden; height:320px; width:100%; z-index: 0;}
+#banner_box .banner{ overflow:hidden; height:320px; width:100%;}
+#banner_box .banner .banner_img{width: 100%; height: 320px;}
+#banner_box .banner_btn{width:100%; position:absolute; z-index:100; bottom:0; left:0; height:30px; line-height:30px; text-align:center;}
+#banner_box .banner_btn ul {text-align:center; padding-top:5px;}
+#banner_box .banner_btn ul li{cursor:pointer; display:inline-block; *display:inline; zoom:1; width:8px; height:8px; margin:5px; background:url("../images/banner_btn") -18px 0; overflow:hidden; line-height:9999px; }
+#banner_box .banner_btn ul .on{background-position:0px 0px;}
 /*--header end--*/
 
 /*location start*/

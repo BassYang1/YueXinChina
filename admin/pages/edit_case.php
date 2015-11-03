@@ -8,11 +8,10 @@
 		BS_Common.loadContentEditor("#caseContent");
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_case");
-		BS_Common.setLocation("edit_case");
 
 		BS_Content.init("case");
 
-		var file = null;
+		var files = [{savedPath: BS_Upload.NoImg}]; //初使时显示无图片
 
 		if(caseId > 0){
 			var detail = BS_Content.loadDetail(caseId);
@@ -21,18 +20,18 @@
 			$("#subject").val(detail.subject);
 			$("#caseContent").val(detail.content);
 
-			file = [{savedPath: detail.mImage}];
+			files = [{savedPath: detail.mImage}];
 		}
 		
 		//添加上传控件
-		var callback = function(file){	
+		var callback = function(files){	
 			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: caseId};
 
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#caseContent");
 
-			if(file != null && file.savedPath != ""){
-				data.mImage = file.savedPath;
+			if(files != null && files.savedPath != ""){
+				data.mImage = files.savedPath;
 			}
 
 			BS_Common.update(data, function(){
@@ -52,7 +51,7 @@
 		}
 		
 		//添加上传控件
-		var form = BS_Upload.create({parent: ".caseImg", module: "case", fileKey: "case_image", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, inline: true, files: file, callback: callback});
+		var form = BS_Upload.create({parent: ".caseImg", module: "case", fileKey: "case_image", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, outclick: true, files: files, callback: callback});
 		
 		$("#btnSave").click(function(){
 			var shade = BS_Popup.shade(true);

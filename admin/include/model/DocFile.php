@@ -18,8 +18,7 @@ class DocFile{
 	private static $cache = null;
 	
 	function __construct($size){
-		$this->querySize = $size;
-	}
+		$this->querySize = $size;}
 	
 	function __set($name, $value){
 		$this->$name = $value;
@@ -159,11 +158,13 @@ class DocFile{
 			}
 			
 			if(strlen($query->savedPath) > 0){
-				$sql = $sql . sprintf(" and saved_path='%s'", $query->fileKey);
+				$sql = $sql . sprintf(" and saved_path='%s'", $query->savedPath);
 			}
 			
 			$sql .= " order by rec_date desc";						
 			
+			Tool::logger(__METHOD__, __LINE__, $query->isPaging, _LOG_DEBUG);
+
 			if(is_numeric($query->querySize) && $query->querySize != _QUERY_ALL){			
 				if($query->isPaging == 1){
 					$sql .= sprintf(" limit %u,%u", ($query->curPage - 1) * $query->querySize, $query->querySize);
@@ -212,8 +213,7 @@ class DocFile{
 	public static function rcount($query){
 		try{
 			$rcount = _NONE;
-
-			$sql = "select count(1) from doc_file where 1=1";
+			$sql = "select count(1) as rcount from doc_file where 1=1";
 						
 			if(is_numeric($query->fileId) && $query->fileId > 0){
 				$sql = $sql . sprintf(" and file_id=%u", $query->fileId);
@@ -255,6 +255,14 @@ class DocFile{
 		}
 		
 		return _NONE;
+	}
+
+	public static function noimg(){
+		$noimg = new DocFile(_NONE);
+		$noimg->savedPath = "../images/noimg.jpg";
+		$noimg->showedName = "no image";
+
+		return $noimg;
 	}
 }
 ?>

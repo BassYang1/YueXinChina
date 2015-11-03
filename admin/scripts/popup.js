@@ -106,6 +106,12 @@ BS_Popup.html = function (params){
 
 //遮罩层
 BS_Popup.shade = function(loading){
+	for(var key in BS_Popup.Wins){ //防止同时显示多个进度条
+		if(key.indexOf("shade")){
+			return "";
+		}
+	}
+
 	var id = "shade" + (BS_Popup.MaxID + 1);
 	var html = "<div class=\"shade\" id=\"" + id + "\"></div>";
 	var shade = $(document.body).append(html).find("#" + id);
@@ -161,6 +167,7 @@ BS_Popup.create = function(params, close, confirm){
 	popup.Close = close;
 	popup.Shade = shadeId;
 	BS_Popup.Wins[params.ppId] = popup;
+	BS_Popup.Wins[params.ppId].Type = params.type;
 
 	popup.css({opacity:params.opacity, width: params.width, height: params.height, top: params.top, left: params.left}).show();
 	
@@ -180,8 +187,8 @@ BS_Popup.adapt = function(popup){
 		var left = Math.abs($(window).width() / 2 - parseInt(popup.width()) / 2) + "px";	
 		var top = ($(window).scrollTop() + parseInt(popup.height()) / 2 + 50) + "px";
 
-		if(params.type == BS_Popup.PopupType.WINDOW){
-			top = ($(window).scrollTop() + parseInt(params.height.replace("px", "")) / 2 - 100) + "px";
+		if(popup.Type == BS_Popup.PopupType.WINDOW){
+			top = ($(window).scrollTop() + parseInt(popup.height()) / 2 - 100) + "px";
 		}		
 
 		popup.css({left: left, top: top});
@@ -221,6 +228,10 @@ BS_Popup.destroy = function(popupId, callback){
 
 //取消并关闭窗口
 BS_Popup.close = function(popupId){
+	if(popupId == ""){
+		return;
+	}
+
 	var popup = BS_Popup.Wins[popupId];
 	
 	if(typeof popup == "object"){

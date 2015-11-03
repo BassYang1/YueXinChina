@@ -4,7 +4,7 @@
             <img src="images/yuexin.png" width="70%" height="70%" alt="logo" /></a></div>
     <div class="nav">
         <ul class="l_float">
-            <li><a href="#" target="_blank">查看站点</a></li>
+            <li><a href="../index.php" target="_blank">查看站点</a></li>
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">公司信息</a>
 				<div class="dd_menu_item dd_item">
 					<a href="#" onclick="BS_Common.nav('company')">公司简介</a>
@@ -17,9 +17,9 @@
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">网站信息</a>
 				<div class="dd_menu_item dd_item">
 					<a href="#" onclick="BS_Common.nav('site')">基本信息</a>
+					<a href="#" onclick="BS_Common.nav('siteimg')">首页图片</a> 
 					<a href="#" onclick="BS_Common.nav('recommend')">产品推荐</a> 
 					<a href="#" onclick="BS_Common.nav('links')">友情连接</a> 
-					<a href="#" onclick="BS_Common.nav('siteimg')">图片管理</a> 
 				</div>
 			</li>
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">产品管理</a>
@@ -30,10 +30,10 @@
 			</li>			
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">信息发布</a>
 				<div class="dd_menu_item dd_item">
-					<a href="#" onclick="BS_Common.nav('recruit')">人才招聘</a>
 					<a href="#" onclick="BS_Common.nav('case')">成功案例</a>
 					<a href="#" onclick="BS_Common.nav('news')">新闻中心</a>
-					<a href="#" onclick="BS_Common.nav('news')">下载中心</a>
+					<a href="#" onclick="BS_Common.nav('recruit')">人才招聘</a>
+					<a href="#" onclick="BS_Common.nav('material')">下载中心</a>
 				</div>
 			</li>
         </ul>

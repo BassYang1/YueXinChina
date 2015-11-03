@@ -138,6 +138,25 @@ class Company{
 
 		return self::get($companyKey)->content;
 	}
+	
+	//获取content
+	public static function files($fileKey){
+		try{
+			if(empty($fileKey)){
+				throw new Exception("fileKey为空");
+			}
+
+			
+			$query = new DocFile(_QUERY_ALL);
+			$query->fileKey = $fileKey;
+			$query->inModule = "company";
+
+			return DocFile::query($query);
+		}
+		catch(Exception $e){
+			throw $e;
+		}
+	}
 
 	//是否存在
 	public static function exist($companyKey){

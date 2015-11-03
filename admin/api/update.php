@@ -11,22 +11,41 @@
 	//存储公司数据
 	if($module == "company"){
 		try{
-			if($action == "update"){
-				$multi = strtolower(isset($_REQUEST["multi"]) ? true : false); //是否允许重置添加
-
-				foreach($_REQUEST as $key=>$value){
-					$key = strtolower($key);
-					$nokeys = array("type", "module", "action", "multi");
-					if(!in_array($key, $nokeys)){
-						$company = new Company();
-						$company->content = empty($value) ? "" : $value;
-						$company->companyKey = $key;
-
-						if(!$multi && Company::exist($key)){
-							Company::update($company);
-						}
-						else{
-							Company::insert($company);
+			if($action == "update" || $action == "insert"){				
+				$companyKey = strtolower(isset($_REQUEST["companyKey"]) ? $_REQUEST["companyKey"] : "");
+				$subject = strtolower(isset($_REQUEST["subject"]) ? $_REQUEST["subject"] : "");
+				$content = strtolower(isset($_REQUEST["content"]) ? $_REQUEST["content"] : "");
+				$contentId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0; //是否允许重置添加
+				
+				if(!empty($companyKey) && $companyKey == "brand_recommend"){
+					$company = new Company();
+					$company->companyKey = $companyKey;
+					$company->subject = $subject;
+					$company->content = $content;
+					$company->id = $contentId;
+					
+					if($action == "update" && Company::exist($companyKey )){ //存在，并且需要更新
+						Company::update($company);
+					}
+					else{
+						Company::insert($company);
+					}
+				}
+				else{ //将会被移出			
+					foreach($_REQUEST as $key=>$value){
+						$key = strtolower($key);
+						$nokeys = array("type", "module", "action");
+						if(!in_array($key, $nokeys)){
+							$company = new Company();
+							$company->content = empty($value) ? "" : $value;
+							$company->companyKey = $key;							
+					
+							if($action == "update" && Company::exist($companyKey )){ //存在，并且需要更新
+								Company::update($company);
+							}
+							else{
+								Company::insert($company);
+							}
 						}
 					}
 				}
@@ -73,7 +92,8 @@
 			$product->productName = (isset($_REQUEST["productName"]) ? $_REQUEST["productName"] : $product->productName);
 			$product->productNo = (isset($_REQUEST["productNo"]) ? $_REQUEST["productNo"] : $product->productNo);
 			$product->productType = (isset($_REQUEST["productType"]) ? $_REQUEST["productType"] : $product->productType);
-			$product->mImage = (isset($_REQUEST["mImage"]) ? $_REQUEST["mImage"] : $product->mImage );
+			$product->mImage = (isset($_REQUEST["mImage"]) ? $_REQUEST["mImage"] : $product->mImage);
+			$product->aliUrl = (isset($_REQUEST["aliUrl"]) ? $_REQUEST["aliUrl"] : $product->aliUrl);
 
 			if($action == "insert"){
 				$newId = Product::insert($product);
@@ -144,8 +164,10 @@
 				Content::delete2($content);
 
 				$docFile = new DocFile(_NONE);
-				$docFile->fileUrl = $content->mImage;
-				DocFile::delete($docFile);
+				if(!empty($content->mImage)){
+					$docFile->fileUrl = $content->mImage;
+					DocFile::delete($docFile);
+				}
 			}
 		}
 		catch(Exception $e){

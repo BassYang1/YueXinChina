@@ -1,6 +1,6 @@
 <div id="menu">
     <ul class="top">
-        <li><a href="#" onclick="BS_Common.nav('home')"><i class="home"></i><em>管理首页</em></a></li>
+        <li><a href="#" onclick="BS_Common.nav('home')"><i class="home"></i><em>管理中心</em></a></li>
     </ul>
     <ul>
         <li><a href="#" onclick="BS_Common.nav('site')"><i class="m_site"></i><em>网站信息</em></a></li>

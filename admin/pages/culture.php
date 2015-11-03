@@ -6,7 +6,7 @@
 
 		$("#btnSave").click(function(){
 			var shade = BS_Popup.shade(true);
-			var data = {type: "content", module: "company", company_culture: BS_Common.getEDContent("#txtCulture")};	
+			var data = {type: "content", module: "company", action: "update", company_culture: BS_Common.getEDContent("#txtCulture")};	
 			
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	

@@ -1,7 +1,11 @@
 <script charset="utf-8" src="scripts/kindeditor/kindeditor.js"></script>
 <script charset="utf-8" src="scripts/kindeditor/lang/zh_CN.js"></script>
+<?php
+	$productId = isset($_GET["productId"]) ? $_GET["productId"] : 0;
+	$content = Product::content($productId);
+?>
 <script>
-	var productId = <?php echo isset($_GET["productId"]) ? $_GET["productId"] : 0 ?>;
+	var productId = <?php echo $productId; ?>;
 	var action = (productId > 0 ? "update" : "insert");
 
 	$(function(){
@@ -9,7 +13,7 @@
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_product");
 
-		var file = null;
+		var files = [{savedPath: BS_Upload.NoImg}]; //初使时显示无图片
 		var sortNo = null;
 		var oldImg = "";
 
@@ -20,9 +24,10 @@
 			$("#productName").val(detail.productName);
 			$("#productNo").val(detail.productNo);
 			$("#productDetail").val(detail.content);
+			$("#aliUrl").val(detail.aliUrl);
 
 			oldImg = detail.mImage;
-			file = [{savedPath: detail.mImage}];
+			files = [{savedPath: detail.mImage}];
 			sortNo = (isNaN(detail.productType) ? 0 : parseInt(detail.productType));
 		}
 		
@@ -36,6 +41,7 @@
 			data.productName = $.trim($("#productName").val());
 			data.productNo = $.trim($("#productNo").val());
 			data.productType = $.trim($("#productType").val());
+			data.aliUrl = $.trim($("#aliUrl").val());
 
 			if(file != null && file.savedPath != ""){
 				data.mImage = file.savedPath;
@@ -60,7 +66,7 @@
 			});
 		}
 
-		var form = BS_Upload.create({parent: ".productImg", module: "product", fileKey: "product_image", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, inline: true,  files: file, callback: callback});
+		var form = BS_Upload.create({parent: ".productImg", module: "product", fileKey: "", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false, outclick: true,  files: files, callback: callback});
 		
 
 		$("#btnSave").click(function(){
@@ -130,7 +136,7 @@
                     详细信息
                 </td>
                 <td>
-                    <textarea id="productDetail" name="productDetail" class="editArea"><?php echo Content::get("company_introduce"); ?></textarea>
+                    <textarea id="productDetail" name="productDetail" class="editArea"><?php echo $content; ?></textarea>
                 </td>
             </tr>
         </tbody>

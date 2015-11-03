@@ -65,12 +65,16 @@
 .comment {display: inline; vertical-align: bottom; font-size:12px; text-decoration: underline;}
 .comment span{color: red; }
 
+/* image view */
 .flUpload{}
-.flUploadView{}
-.flUploadView .viewItem{margin:5px 5px  5px auto; text-align:center; vertical-align:middle; float:left;}
+.flUploadView{text-align:center;}
+.flUploadView .viewItem{margin:5px 5px  5px auto; text-align:center; vertical-align:middle; float:left; border: 1px dotted #CCCCCC; padding:2px;}
 .flUploadView .viewItem img{height:90px; width:90px;}
 .flUploadView .viewItem a{color:#CCCC66;}
 .flUploadView .viewItem a:hover{color:#666666;}
+
+
+#brandPnl a, #hotPnl a{margin:auto 5px;}
 
 .btnPayment {
  display: inline-block;
