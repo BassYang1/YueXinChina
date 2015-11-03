@@ -15,7 +15,7 @@ abbr,acronym{border:0;font-variant:normal;}
 input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
 input,button,textarea,select{*font-size:100%;}
 input,select{vertical-align:middle;}
-body{font:12px/1.231 arial,helvetica,clean,sans-serif;}
+/*body{font:12px/1.231 arial,helvetica,clean,sans-serif;}*/
 select,input,button,textarea,button{font:99% arial,helvetica,clean,sans-serif;}
 table{font-size:inherit;font:100%; border-collapse:collapse;}
 pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
@@ -28,4 +28,6 @@ pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
 .hidden{display:none;}
 .mt5{ margin-top:5px;}
 .center {text-align:center;}
+.l_align {text-align:left;}
+.f_width{width:100%;}
 /*common end*/

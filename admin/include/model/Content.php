@@ -269,7 +269,7 @@ class Content{
 
 	public static function query2($query){
 		$contents = array();
-		Tool::logger(__METHOD__, __LINE__, sprintf("=============Content 查询==============\n\rcontentId:%s\n\rcontentType:%s\n\rcontentKey:%s\n\rquerySize:%s\n\risPaging:%s\n\rcurPage:%s",
+		Tool::logger(__METHOD__, __LINE__, sprintf("\r\n=============Content 查询==============\r\ncontentId:%s\r\ncontentType:%s\r\ncontentKey:%s\r\nquerySize:%s\r\nisPaging:%s\r\ncurPage:%s",
 			$query->contentId, $query->contentType, $query->contentKey, $query->querySize, $query->isPaging, $query->curPage
 		), _LOG_INFOR);
 
@@ -324,11 +324,12 @@ class Content{
 			}
 			else{
 				$all = self::queryAll();
-
-				foreach($all as $key => $one){
+				$count = 0;
+				foreach($all as $one){
 					$got = true;
 
 					if($got && is_numeric($query->contentId) && $query->contentId > 0 && $query->contentId !== $one->contentId){
+						Tool::test("", $one->contentType );
 						$got = false;
 					}
 
@@ -341,10 +342,11 @@ class Content{
 					}
 
 					if($got){
-						array_push($contents, $one); 
+						array_push($contents, $one);
+						$count++;
 					}
 
-					if($query->querySize > 0 && $query->querySize >= ($key + 1)){
+					if($query->querySize > 0 && $query->querySize <= $count){
 						break;
 					}
 				}
@@ -386,6 +388,7 @@ class Content{
 						$temp->content = $row["content"];
 						$temp->subject = $row["subject"];
 						$temp->mImage = $row["m_image"];
+						$temp->recDate = $row["rec_date"];
 
 						array_push($contents, $temp); 
 					}

@@ -27,7 +27,7 @@
 						</a>
 					</dd>
 					<dt class='a_text'>
-						<a href='product.php?id=%u' title='%s'>%s</a><a href ='%s'><span>进入商城</span></a>				
+						<div style='margin: auto 5px;'><a class='f_left' href='product.php?id=%u' title='%s'>%s</a><a class='f_right' href ='%s'><span class='in_mall'>进入商城</span></a></div>			
 					</dt>
 				</dl>",
 				$product->productId, 
@@ -37,7 +37,7 @@
 				$product->productName, 
 				$product->productId, 
 				$product->productName, 
-				$product->productName, 
+				substr($product->productName, 0, 20), 
 				$product->aliUrl
 			);
 		}
@@ -58,7 +58,7 @@
 			$newsHtml .= sprintf("
 				<li>
 					<a href='ndetail.php?id=%u' title='%s'>%s</a>
-					<span>%s</span>
+					<span class='f_right'>%s</span>
 				</li>", 
 				$news->contentId, 
 				$news->subject, 
@@ -66,9 +66,10 @@
 				$news->recDate
 			);
 		}
-	}	
+	}
 	
 	$caseHtml = "";
+	$query = new Content(10);
 	$query->contentType = "case";
 	$contents = Content::query2($query);
 
@@ -77,7 +78,15 @@
 	}
 	else{
 		foreach($contents as $case){
-			$caseHtml .= sprintf("<li><div class=\"pic\"><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\"><img src=\"%s\" width=\"157\" height=\"132\" alt=\"%s\"></a></div><div class=\"p1\"><p><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\">%s</a></p><b class=\"red\"><a href=\"case.php?id=%u\" target=\"_blank\">【案例详情介绍】</a></b></div></li>", $case->contentId, $case->subject, str_replace("../", "", $case->mImage), $case->subject, $case->contentId, $case->subject, $case->subject, $case->contentId);
+			$caseHtml .= sprintf("<li><div class=\"pic\"><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\"><img src=\"%s\" width=\"157\" height=\"132\" alt=\"%s\"></a></div><div class=\"p1\"><p><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\">%s</a></p><b class=\"red\"><a href=\"case.php?id=%u\" target=\"_blank\">【案例详情介绍】</a></b></div></li>", 
+			$case->contentId, 
+			$case->subject, 
+			str_replace("../", "", $case->mImage), 
+			$case->subject, 
+			$case->contentId, 
+			$case->subject, 
+			substr($case->subject, 0, 20), 
+			$case->contentId);
 		}
 	}
 

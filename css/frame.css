@@ -69,7 +69,7 @@
 #content_box .content .ct_r_box .ct_right dd{ width:223px; height:170px; float:left; border:1px solid #ccc;}
 #content_box .content .ct_r_box .ct_right dd:hover{border:1px solid #206AB3;}
 #content_box .content .ct_r_box .ct_right dd img{ width:220px; height:160px; margin:1px; display:inline;} 
-#content_box .content .ct_r_box .ct_right .a_text{ height:31px; line-height:41px; float:left; width:220px; overflow:hidden; text-align:center; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+#content_box .content .ct_r_box .ct_right .a_text{ height:25px; line-height:25px; float:left; width:220px; overflow:hidden; text-align:center; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 #content_box .content .ct_r_box .ct_right .a_text a{ color:#333;}
 #content_box .content .ct_r_box .ct_right .a_text a:hover{ color:#007ADF; text-decoration:underline;}
 
@@ -80,8 +80,8 @@
 #content_box .content .dh_c h2 strong{ font-size:12px; font-weight:100; color:#999;}
 
 /*moduel title start*/
-.m_title {background:url(../images/m_title_bg.jpg) repeat-x bottom; width:100%; height:40px;}
-.m_title .m_title_name{ color:#006eb9; width:100px; font-family: "Microsoft YaHei",SimSun,SimHei; font-size: 16px; position: relative; padding:7px 5px 5px 28px; font-weight:bold; float:left; background:url(../images/m_title_tag.png) no-repeat; background-position:3px;}
+.m_title {background:url(../images/m_title_bg.jpg) repeat-x bottom; width:100%; height:35px;}
+.m_title .m_title_name{ color:#006eb9; width:100px; font-family: "Microsoft YaHei",SimSun,SimHei; font-size: 16px; position: relative; padding:5px 5px 5px 28px; font-weight:bold; float:left; background:url(../images/m_title_tag.png) no-repeat; background-position:3px;}
 .m_title .m_title_more_link{padding-top:10px; float:right;width:60px; text-align:left;}
 /*moduel title end*/
 
@@ -158,4 +158,5 @@
 .paging span.disabled { background:#EEE; padding:1px 8px 1px 8px; margin:2px; color:#999; font-size: 16px; line-height:16px;}
 .paging input { text-align:center; border: 1px solid #DBDBDB; background-color: #FFF; padding: 2px; color: #999; font-size: 12px; line-height: 14px; width:30px;  vertical-align: bottom;}
 
+.in_mall{padding-left:3px; display:inline-block; height:25px; color:#006EB9;}
 

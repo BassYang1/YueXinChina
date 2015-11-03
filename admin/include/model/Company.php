@@ -132,11 +132,13 @@ class Company{
 	
 	//获取content
 	public static function content($companyKey, $admin=true){
+		$content = self::get($companyKey);
+
 		if(!$admin){
-			return str_replace("../", "", self::get($companyKey)->content);
+			return str_replace("../", "", $content->content);
 		}
 
-		return self::get($companyKey)->content;
+		return $content->content;
 	}
 	
 	//获取content
@@ -210,7 +212,7 @@ class Company{
 				$company->mFile = $content->mImage;
 				$company->contentType = $content->contentType;
 			}
-
+			
 			return $company;
 		}
 		catch(Exception $e){
