@@ -89,6 +89,13 @@
                             走进岳信</a>
                     </h3>
                 </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="产品中心" style="width: 80px;" href="product.php">
+                            产品中心</a>
+                    </h3>
+                </li>
 				<?php echo $navHtml; ?>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
@@ -113,7 +120,7 @@
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="联系我们" href="contact.php">联系我们</a>
+                        <a title="联系我们" href="#contacts">联系我们</a>
                     </h3>
                 </li>
                 <li class="clear hidden"></li>

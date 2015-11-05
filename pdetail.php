@@ -1,39 +1,28 @@
 ﻿<?php 
+	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 
-	$sections = array("sort" => 1, "company" => 0, "recommend" => 1, "contact" => 0);
+	//设置模块权限
+	$sections = array("contact" => 0, "company" => 0, "sort" => 1, "recommend" => 1, "case" => 1, "news" => 0);
+?>
 
+<?php //商品信息
 	$productId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0;
-	$product = new Product(_QUERY_ALL);
-	$product->productId = $productId;
+	$productDetail = new Product(_QUERY_ALL);
+	$productDetail->productId = $productId;
 
-	$product = Product::first($product);
+	$productDetail = Product::first($productDetail);
+	$content = Product::content($productDetail->productId);
+	if(empty($content)) $content = "<b>暂无详细</b>";
 
-	$location = sprintf("当前位置 > <span>%s</span> > <span>%s</span>", $product->typeName, $product->productName);
+	//当前位置
+	$location = sprintf("当前位置 > <span><a href='product.php?sort=%u'>%s</a></span> > <span>%s</span>", $productDetail->productType, $productDetail->typeName, $productDetail->productName);
+	$page_title = $productDetail->productName;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo Company::content("site_name", false); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
-		<meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
-		<link href="css/base.css" rel="stylesheet" type="text/css" />
-		<link href="css/frame.css" rel="stylesheet" type="text/css" />
-		<!--flash jq-->
-		<script src="scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-		<!-- customized js-->
-		<script src="scripts/common.js" type="text/javascript"></script>
-		<script src="scripts/rollpic.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript">
-			function show(i) {
-				if (i.style.display == "none") {
-					i.style.display = "";
-				} else {
-					i.style.display = "none";
-				}
-			}
-		</script>
+	<?php include_once("include.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
@@ -56,21 +45,27 @@
                 <div class="ct_right">
                     <div class="clear">
                     </div>
-                    <div class="m_title hidden">
-                        <div class="m_title_name"></div>
-                        <div class="m_title_more_link">
+                    <div class="m_title">
+                        <div class="m_title_name">产品详细</div>
+                        <div class="m_title_more_link hidden">
                             <a href="">
                                 <img src="images/small_24.jpg" width="44"
                                     height="13" /></a></div>
-                        <div class="clear">
-                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="ct_r_panel">
-                        <div>
-							<div class="f_left"><img src="<?php echo empty($product->mImage) ? "images/noimg.jpg" : str_replace("../", "", $product->mImage); ?>" alt="<?php echo $product->productName; ?>" width="300" height= "200" /></div>
-							<div class="f_right"><?php echo $product->productName; ?></div>
+                    <div class="ct_r_content">
+						<div class="d_title_pnl">
+							<div class="f_left d_m_img">
+								<img class="d_m_img" src='<?php echo empty($productDetail->mImage) ? "images/noimg.jpg" : str_replace("../", "", $productDetail->mImage); ?>' alt='<?php echo $productDetail->productName; ?>' title='<?php echo $productDetail->productName; ?>' class='mm' />
+							</div>
+							<div class='d_title f_left'>
+								<div class="d_t_name"><a href='pdetail.php?id=<?php echo $productDetail->productId; ?>' title='<?php echo $productDetail->productName; ?>'><?php echo $productDetail->productName; ?></a></div>		
+								<div><a href='<?php echo $productDetail->aliUrl; ?>' target='_blank'><span class='in_mall'>进入商城</span></a><a class="ml5" onclick='addFavorite();' href="javascript:void(0);"><span class='in_mall'>加入收藏夹</span></a></div>		
+							</div>
+							<div class="clear"></div>
 						</div>
-						<div><?php echo $product->content; ?></div>
+						<div class="p_detail"><?php echo $content; ?></div>
+						<div class="p_d_links"><?php echo Util::linkOtherProduct($productDetail->productId); ?></div>
                     </div>
                 </div>
             </div>

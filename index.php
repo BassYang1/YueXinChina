@@ -1,48 +1,23 @@
 ﻿<?php 
+	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 	
 	//设置模块权限
-	$sections = array("sort" => 1, "company" => 0, "recommend" => 0, "contact" => 1);
+	$sections = array("contact" => 1, "company" => 0, "sort" => 1, "recommend" => 1, "case" => 0, "news" => 0);
 	
 	//当前位置
 	$location = "当前位置 > <span>首页</span>";
+	$page_title = "首页";
 ?>
 <?php 
 	//加载首页显示商器
 	$query = new Product(15);
 	$query->isShowHome = 1;
-	$products = Product::query($query); 
-	$productHtml = "";
-
-	if(empty($products)){
-		$productHtml = "<b>暂无商品</b>";
-	}
-	else{
-		foreach($products as $product){
-			$productHtml .= sprintf("
-				<dl>
-					<dd>
-						<a href='product.php?id=%u' title='%s'>
-							<img src='%s' width='220' height='160' alt='%s' title='%s' class='mm' />
-						</a>
-					</dd>
-					<dt class='a_text'>
-						<div style='margin: auto 5px;'><a class='f_left' href='product.php?id=%u' title='%s'>%s</a><a class='f_right' href ='%s'><span class='in_mall'>进入商城</span></a></div>			
-					</dt>
-				</dl>",
-				$product->productId, 
-				$product->productName, 
-				str_replace("../", "", $product->mImage), 
-				$product->productName, 
-				$product->productName, 
-				$product->productId, 
-				$product->productName, 
-				substr($product->productName, 0, 20), 
-				$product->aliUrl
-			);
-		}
-	}
+	$products = Product::query($query); 	
+	$productHtml = Util::generateProcuctHtml($products);
+	
 ?>
+
 <!--加载公司新闻-->
 <?php 
 	$newsHtml = "";
@@ -63,11 +38,14 @@
 				$news->contentId, 
 				$news->subject, 
 				$news->subject, 
-				$news->recDate
+				date("Y-m-d", strtotime($news->recDate))
 			);
 		}
-	}
-	
+	}	
+?>
+
+<!--加载公司案例-->
+<?php 
 	$caseHtml = "";
 	$query = new Content(10);
 	$query->contentType = "case";
@@ -85,36 +63,15 @@
 			$case->subject, 
 			$case->contentId, 
 			$case->subject, 
-			substr($case->subject, 0, 20), 
+			$case->subject, 
 			$case->contentId);
 		}
 	}
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>首页-<?php echo Company::content("site_name", false); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
-		<meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
-		<link href="css/base.css" rel="stylesheet" type="text/css" />
-		<link href="css/frame.css" rel="stylesheet" type="text/css" />
-		<!--flash jq-->
-		<script src="scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-		<script src="scripts/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
-		<!-- customized js-->
-		<script src="scripts/common.js" type="text/javascript"></script>
-		<script src="scripts/rollpic.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript">
-			function show(i) {
-				if (i.style.display == "none") {
-					i.style.display = "";
-				} else {
-					i.style.display = "none";
-				}
-			}
-		</script>
+	<?php include_once("include.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
@@ -141,13 +98,13 @@
                         <div class="m_title_name">
                             产品列表</div>
                         <div class="m_title_more_link">
-                            <a href="">
+                            <a href="product.php">
                                 <img src="images/small_24.jpg" width="44"
                                     height="13" /></a></div>
                         <div class="clear">
                         </div>
                     </div>
-                    <div class="ct_r_list">
+                    <div class="ct_r_content">
 					<?php echo $productHtml; ?>	
                     </div>
                 </div>
@@ -155,8 +112,9 @@
 			<!-- content end -->
 		</div>
 		
-        <!--cpbox-->
+        <!--cpbox & news & company_infor-->
         <div id="content_box2">
+			<!-- company_infor-- -->
             <div class="content2 f_left">
                 <div class="clear">
                 </div>
@@ -174,6 +132,7 @@
                             height="150" alt="<?php echo Company::content("company_outline", false); ?>" class="com_img"><?php echo Company::content("company_outline", false); ?></p>
                 </div>
             </div>
+			<!-- news -->
             <div class="content2 f_right">
                 <div class="clear">
                 </div>

@@ -34,18 +34,25 @@ class DocFile{
 		if(empty(self::$cache)){
 			self::cache();
 		}
-
 		//读取所有数据
 		if(empty($fileKey)){
 			return self::$cache;
 		}
 
 		//读取单个数据
-		if(isset(self::$cache[$fileKey])){
-			return self::$cache[$fileKey];
+		$files = array();
+
+		Tool::test("", $fileKey);
+		if(!empty(self::$cache)){
+			foreach(self::$cache as $one){
+		Tool::test("", $one->fileKey);
+				if($one->fileKey === $fileKey){
+					array_push($files, $one); 
+				}
+			}
 		}
 
-		return null;
+		return $files;
 	}
 
 	//读取DocFile数据

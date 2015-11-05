@@ -3,8 +3,8 @@
     <system.webServer>
         <handlers>
             <clear />
-			<add name="php-5.5.30" path="*.php" verb="GET,HEAD,POST" modules="FastCgiModule" scriptProcessor="D:\php5.5.3\php-cgi.exe" resourceType="Either" requireAccess="Script" />
-            <!--<add name="php-5.6.13" path="*.php" verb="GET,HEAD,POST" modules="FastCgiModule" scriptProcessor="D:\php5.6.13\php-cgi.exe" resourceType="Either" requireAccess="Script" </>-->
+			<!--<add name="php-5.5.30" path="*.php" verb="GET,HEAD,POST" modules="FastCgiModule" scriptProcessor="D:\php5.5.3\php-cgi.exe" resourceType="Either" requireAccess="Script" />-->
+            <add name="php-5.6.13" path="*.php" verb="GET,HEAD,POST" modules="FastCgiModule" scriptProcessor="D:\php5.6.13\php-cgi.exe" resourceType="Either" requireAccess="Script" />
             <add name="ASPClassic" path="*.asp" verb="GET,HEAD,POST" modules="IsapiModule" scriptProcessor="%windir%\system32\inetsrv\asp.dll" resourceType="File" />
             <add name="SecurityCertificate" path="*.cer" verb="GET,HEAD,POST" modules="IsapiModule" scriptProcessor="%windir%\system32\inetsrv\asp.dll" resourceType="File" />
             <add name="ISAPI-dll" path="*.dll" verb="*" modules="IsapiModule" resourceType="File" requireAccess="Execute" allowPathInfo="true" />

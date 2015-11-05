@@ -1,0 +1,219 @@
+2015-11-03 06:24:28 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 06:24:28 [DEBUG] [4] [/] page: site
+2015-11-03 06:24:28 [DEBUG] [5] [/] page=site
+2015-11-03 06:24:31 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 06:24:31 [DEBUG] [4] [/] page: product
+2015-11-03 06:24:31 [DEBUG] [5] [/] page=product
+2015-11-03 06:24:32 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 06:24:32 [DEBUG] [3] [/] type: list
+2015-11-03 06:24:32 [DEBUG] [3] [/] module: sort
+2015-11-03 06:24:32 [DEBUG] [140] [Sort::query] 查询商品类型SQL: select sort_id, sort_name from p_sort where 1=1 order by rec_date desc
+2015-11-03 06:24:33 [DEBUG] [156] [Sort::query] 查询商品类型11条.
+2015-11-03 06:24:33 [ERROR] [111] [/] 查询类型商品Json: [{"sortId":"12","sortName":"防水试验房","recDate":null},{"sortId":"11","sortName":"综合淋雨箱","recDate":null},{"sortId":"9","sortName":"喷水试验装置","recDate":null},{"sortId":"8","sortName":"花洒淋雨试验装置","recDate":null},{"sortId":"7","sortName":"高温高压喷淋试验装置","recDate":null},{"sortId":"6","sortName":"压力浸水试验装置","recDate":null},{"sortId":"5","sortName":"浸水试验装置","recDate":null},{"sortId":"4","sortName":"强喷水试验装置","recDate":null},{"sortId":"3","sortName":"摆管淋雨试验装置","recDate":null},{"sortId":"2","sortName":"垂直滴雨试验装置","recDate":null},{"sortId":"1","sortName":"汽车淋雨检测线","recDate":null}]
+2015-11-03 06:24:33 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 06:24:33 [DEBUG] [3] [/] type: list
+2015-11-03 06:24:33 [DEBUG] [3] [/] module: product
+2015-11-03 06:24:33 [DEBUG] [3] [/] productType: 0
+2015-11-03 06:24:33 [DEBUG] [3] [/] keyword: 
+2015-11-03 06:24:33 [DEBUG] [3] [/] isRecommend: 0
+2015-11-03 06:24:33 [DEBUG] [3] [/] isShowHome: 0
+2015-11-03 06:24:33 [DEBUG] [3] [/] isPaging: 1
+2015-11-03 06:24:33 [DEBUG] [3] [/] size: 15
+2015-11-03 06:24:33 [DEBUG] [3] [/] curPage: 1
+2015-11-03 06:24:33 [DEBUG] [166] [Product::query] 查询商品SQL: select p.product_id, p.product_no, p.product_name, p.sort_id, p.order_no, p.m_image, p.ali_url,p.is_recommend, p.is_showhome, p.rec_date, s.sort_name from product p left join p_sort s on p.sort_id = s.sort_id where 1=1 order by p.rec_date desc limit 0,15
+2015-11-03 06:24:34 [DEBUG] [191] [Product::query] 查询商品15条.
+2015-11-03 06:24:34 [ERROR] [179] [/] 查询商品Json: [{"productId":"6","productName":"YX-ZC400S综合淋雨箱","productNo":"0","productType":"11","typeName":"综合淋雨箱","mImage":"..\/upload\/product\/product1446367863.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/113.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"5","productName":"摆管淋雨试验机_广州摆管淋雨试验","productNo":"0","productType":"3","typeName":"摆管淋雨试验装置","mImage":"..\/upload\/product\/product1446367780.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/114.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"3","productName":"汽车淋雨检测线_广州汽车淋雨检测","productNo":"0","productType":"3","typeName":"摆管淋雨试验装置","mImage":"..\/upload\/product\/product1446367687.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/116.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"1","productName":"IP防水试验机_广州IP防水试验机厂家","productNo":"0","productType":"11","typeName":"综合淋雨箱","mImage":"..\/upload\/product\/product1446367542.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/118.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"19","productName":"IPX800E600-1200 30米压力","productNo":"0","productType":"8","typeName":"花洒淋雨试验装置","mImage":"..\/upload\/product\/product1446371279.jpg","aliUrl":"","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"16","productName":"IPX800A500-500压力浸水","productNo":"0","productType":"6","typeName":"压力浸水试验装置","mImage":"..\/upload\/product\/product1446371122.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/101.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"18","productName":"700C浸水试验装置","productNo":"0","productType":"5","typeName":"浸水试验装置","mImage":"..\/upload\/product\/product1446368590.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/95.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"17","productName":"700F浸水试验装置","productNo":"0","productType":"4","typeName":"强喷水试验装置","mImage":"..\/upload\/product\/product1446368540.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/97.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"15","productName":"IPX800B500-500 50m","productNo":"0","productType":"12","typeName":"防水试验房","mImage":"..\/upload\/product\/product1446368431.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/102.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"14","productName":"IPX800C500-1200压力浸水","productNo":"0","productType":"5","typeName":"浸水试验装置","mImage":"..\/upload\/product\/product1446368387.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/106.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"13","productName":"IPX800D 500-1200 50米压力","productNo":"0","productType":"5","typeName":"浸水试验装置","mImage":"..\/upload\/product\/product1446368314.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/107.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"11","productName":"IPX800F600-1200 50米压力浸","productNo":"0","productType":"6","typeName":"压力浸水试验装置","mImage":"..\/upload\/product\/product1446368179.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/109.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"10","productName":"无流量计花洒淋雨试验装置","productNo":"0","productType":"11","typeName":"综合淋雨箱","mImage":"..\/upload\/product\/product1446368082.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/110.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"7","productName":"YX-ZC400综合淋雨箱","productNo":"0","productType":"11","typeName":"综合淋雨箱","mImage":"..\/upload\/product\/product1446367917.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/112.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null},{"productId":"2","productName":"摆管淋雨试验机_广州摆管淋雨","productNo":"0","productType":"11","typeName":"综合淋雨箱","mImage":"..\/upload\/product\/product1446367647.jpg","aliUrl":"http:\/\/www.yuexin80.com\/supply\/117.html","isRecommend":"1","isShowHome":"1","orderNo":"0","recDate":null,"content":null}]
+2015-11-03 06:24:34 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 06:24:34 [DEBUG] [3] [/] type: count
+2015-11-03 06:24:34 [DEBUG] [3] [/] module: product
+2015-11-03 06:24:34 [DEBUG] [3] [/] productType: 0
+2015-11-03 06:24:34 [DEBUG] [3] [/] keyword: 
+2015-11-03 06:24:34 [DEBUG] [3] [/] isRecommend: 0
+2015-11-03 06:24:34 [DEBUG] [3] [/] isShowHome: 0
+2015-11-03 06:24:34 [DEBUG] [3] [/] isPaging: 1
+2015-11-03 06:24:34 [DEBUG] [3] [/] size: 15
+2015-11-03 06:24:34 [DEBUG] [3] [/] curPage: 1
+2015-11-03 06:24:34 [DEBUG] [252] [Product::rcount] 查询商品总数SQL: select count(1) as rcount from product where 1=1
+2015-11-03 06:24:35 [DEBUG] [265] [Product::rcount] 查询商品总数19.
+2015-11-03 06:24:35 [ERROR] [183] [/] 查询商品总数: 19
+2015-11-03 07:01:39 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 07:01:39 [DEBUG] [4] [/] page: company
+2015-11-03 07:01:39 [DEBUG] [5] [/] page=company
+2015-11-03 07:01:46 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 07:01:46 [DEBUG] [3] [/] type: content
+2015-11-03 07:01:46 [DEBUG] [3] [/] module: company
+2015-11-03 07:01:46 [DEBUG] [3] [/] action: update
+2015-11-03 07:01:46 [DEBUG] [3] [/] company_name: 广州岳信试验设备有限公司
+2015-11-03 07:01:46 [DEBUG] [3] [/] company_outline: 广州岳信试验设备有限公司是一家集研发、生产、销售为一体的科技型企业，公司专业生产IPX防水试验设备、汽车淋雨试验房、真空水压防水试漏机等试验类机械设备。自创立以来，公司坚持“以新品拓展市场，以质量保证市场，以服务赢得市场”，凭借雄厚的技术力量，利用先进的生产设备和检测设备，使“YUEXIN”和“岳信”品牌的产品广泛应用于航空航天、汽车制造、造船、塑料、电子电工、通信技术、五金机械、仪器仪表、石油仪表、石油化工等领域。实干赢取未来，创新成就梦想。展望未来，广州岳信将坚持专业化的发展道路，求真务实，开拓创新，以“专业缔造非凡品质，成就中国民族品牌”为目标，为“中国梦”贡献更多的力量。热忱欢迎各界朋友前来参观、考察、洽谈业务。aaaa
+2015-11-03 07:01:46 [DEBUG] [3] [/] company_introduce: <p align="center" style="font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span> <img border="0" alt="" src="http://www.yuexinchina.com/page/pics/20141113/201411131415849406156.jpg" width="348" height="570" style="width:348px;height:269px;" /></span> 
+</p>
+<p align="left" style="font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"> <span style="font-size:12pt;font-family:新宋体;"><span>广州岳信试验设备有限公司从<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">2003</span>年开始至今，从事试验机械设备的研发及生产，是各大经销商幕后的生产企业（前身是广州岳信机械厂），<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">2013</span>年公司对市场进行战略调整，以“专业缔造非凡品质、成就中国民族品牌”为指导方针，重新组建广州岳信试验设备有限公司于<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">2013</span>年成立。</span></span></span></span></span></span></span></span></span></span> 
+</p>
+<p align="left" style="font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"><span style="font-size:12pt;font-family:新宋体;"></span></span></span></span></span></span></span></span></span><span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-family:宋体;color:#333333;"><span><span style="font-size:12pt;font-family:新宋体;"> <span>广州岳信公司以<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">11</span>年的试验机行业生产及品质控制实战经验，定位为专注于<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">IP</span>防水试验机的生产、销售及服务。公司主要生产：<strong>IP探棒/手指/探针、IPX1/IPX2垂直滴雨试验装置、IPX3/IPX4摆管淋雨试验机、IPX5/IPX6强喷水试验机、IPX7浸水试验箱、IPX8潜水试验机、IP防水试验装置、IPX9K高压高温喷淋试验箱、UL喷淋试验装置、手持式花洒淋雨试验装置、日标防水试验箱、汽车淋雨检测线、防尘试验箱、及灯具老化架，灯具温升防风罩、灯具温升测试角、灯具温升试验镍图</strong>等试验机。<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"></span></span></span></span></span></span></span></span></span> 
+</p>
+<p align="left" style="font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span><span style="font-family:宋体;color:#333333;"><span><span><span style="font-family:宋体;color:#333333;"><span style="font-family:Verdana, Arial, Helvetica, sans-serif;"><span><span><span style="font-size:12pt;font-family:新宋体;"> <span>公司坚持“以新品拓展市场，以质量保证市场，以服务赢得市场”，凭借雄厚的技术力量，利用先进的生产设备和检测设备，使“岳信<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;">YUE XIN</span>”品牌的产品广泛应运于户外电器，灯具，各检测计量单位等领域。为中国制造的品质检测提供最优质的试验机，助力中国制造的品质提升<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"></span></span></span></span></span></span></span></span></span></span></span> 
+</p>
+<span><span><span><span><span> 
+<p class="MsoNormal" style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span><span style="font-size:12pt;line-height:22px;font-family:新宋体;"><span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"> </span></span><span style="font-size:12pt;line-height:22px;font-family:新宋体;">实干赢取未来，创新成就梦想。展望未来，广州岳信将坚持专业化的发展道路，求真务实，开拓创新，以“成就中国民族品牌”为目标，为“中国梦”贡献更多的力量<span style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;"></span></span></span> 
+</p>
+<p class="MsoNormal" style="font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span style="font-size:12pt;line-height:22px;font-family:新宋体;"><span></span></span> 
+</p>
+<p class="MsoNormal" style="text-align:center;font-size:12px;font-family:Verdana, Arial, Helvetica, sans-serif;color:#333333;">
+	<span style="font-size:12pt;line-height:22px;font-family:新宋体;"><span><span style="color:#E53333;font-size:24px;"><u>热忱欢迎各界朋友前来参观、考察、洽谈业务</u></span></span></span> 
+</p>
+</span></span></span></span></span>
+2015-11-03 07:01:46 [DEBUG] [166] [Company::exist] 参数为空
+2015-11-03 07:01:46 [ERROR] [63] [/] 保存公司信息失败: 参数为空
+2015-11-03 07:01:46 [DEBUG] [237] [/] 0
+2015-11-03 12:25:55 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:25:55 [DEBUG] [4] [/] page: siteimg
+2015-11-03 12:25:55 [DEBUG] [5] [/] page=siteimg
+2015-11-03 12:25:55 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:25:55 [DEBUG] [3] [/] module: company
+2015-11-03 12:25:55 [DEBUG] [3] [/] type: file
+2015-11-03 12:25:55 [DEBUG] [3] [/] fileKey: company_barcode
+2015-11-03 12:25:55 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:25:55 [DEBUG] [3] [/] size: 0
+2015-11-03 12:25:55 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:25:55 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:25:55 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_barcode' order by rec_date desc
+2015-11-03 12:25:56 [DEBUG] [208] [DocFile::query] 查询文件1条记录.
+2015-11-03 12:25:56 [INFO] [43] [/] 查询文件Json: [{"fileId":"6","fileKey":"company_barcode","savedPath":"..\/upload\/company\/company1446416996.png","showedName":"barcode","extName":".png","recDate":null,"inModule":"company","fileUrl":"","fileDesc":"","fileSort":"0"}]
+2015-11-03 12:25:56 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:25:56 [DEBUG] [3] [/] module: company
+2015-11-03 12:25:56 [DEBUG] [3] [/] type: file
+2015-11-03 12:25:56 [DEBUG] [3] [/] fileKey: company_banner
+2015-11-03 12:25:56 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:25:56 [DEBUG] [3] [/] size: 0
+2015-11-03 12:25:56 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:25:56 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:25:56 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_banner' order by rec_date desc
+2015-11-03 12:25:57 [DEBUG] [208] [DocFile::query] 查询文件3条记录.
+2015-11-03 12:25:57 [INFO] [43] [/] 查询文件Json: [{"fileId":"5","fileKey":"company_banner","savedPath":"..\/upload\/company\/company1446412456.jpg","showedName":"banner","extName":".jpg","recDate":null,"inModule":"company","fileUrl":"","fileDesc":"","fileSort":"0"},{"fileId":"4","fileKey":"company_banner","savedPath":"..\/upload\/company\/company1446412451.jpg","showedName":"banner","extName":".jpg","recDate":null,"inModule":"company","fileUrl":"","fileDesc":"","fileSort":"0"},{"fileId":"3","fileKey":"company_banner","savedPath":"..\/upload\/company\/company1446412446.jpg","showedName":"banner","extName":".jpg","recDate":null,"inModule":"company","fileUrl":"","fileDesc":"","fileSort":"0"}]
+2015-11-03 12:26:10 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:26:10 [DEBUG] [4] [/] page: links
+2015-11-03 12:26:10 [DEBUG] [5] [/] page=links
+2015-11-03 12:26:11 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:26:11 [DEBUG] [3] [/] module: company
+2015-11-03 12:26:11 [DEBUG] [3] [/] type: file
+2015-11-03 12:26:11 [DEBUG] [3] [/] fileKey: company_links
+2015-11-03 12:26:11 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:26:11 [DEBUG] [3] [/] size: 0
+2015-11-03 12:26:11 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:26:11 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:26:11 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_links' order by rec_date desc
+2015-11-03 12:26:12 [DEBUG] [208] [DocFile::query] 查询文件0条记录.
+2015-11-03 12:26:12 [INFO] [43] [/] 查询文件Json: []
+2015-11-03 12:26:36 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:26:36 [DEBUG] [4] [/] module: company
+2015-11-03 12:26:36 [DEBUG] [4] [/] fileKey: company_links
+2015-11-03 12:26:36 [DEBUG] [4] [/] fileDesc: 精品生活
+2015-11-03 12:26:36 [DEBUG] [4] [/] fileUrl: http://www.yuexinchina.com
+2015-11-03 12:26:36 [DEBUG] [4] [/] btnSave: 上传
+2015-11-03 12:26:36 [DEBUG] [4] [/] formId: frmUpload1
+2015-11-03 12:26:36 [INFO] [5] [/] 上传文档[styleweekly.gif]
+2015-11-03 12:26:36 [INFO] [15] [/] 文件Key: [company_links]
+2015-11-03 12:26:36 [INFO] [69] [/] 上传文件[../upload/company/company1446524796.gif]
+2015-11-03 12:26:36 [INFO] [77] [/] 删除可能的历史记录
+2015-11-03 12:26:38 [DEBUG] [97] [DocFile::insert] 插入文件记录SQL: insert into doc_file(in_module, file_key, saved_path, showed_name, ext_name, file_url, file_desc, file_sort) values('company', 'company_links', '../upload/company/company1446524796.gif', 'styleweekly', '.gif', 'http://www.yuexinchina.com', '精品生活', '0');
+2015-11-03 12:26:38 [DEBUG] [99] [DocFile::insert] 数据插入成功
+2015-11-03 12:26:38 [INFO] [110] [/] 上传文档[../upload/company/company1446524796.gif]成功
+2015-11-03 12:26:38 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:26:38 [DEBUG] [3] [/] module: company
+2015-11-03 12:26:38 [DEBUG] [3] [/] type: file
+2015-11-03 12:26:38 [DEBUG] [3] [/] fileKey: company_links
+2015-11-03 12:26:38 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:26:38 [DEBUG] [3] [/] size: 0
+2015-11-03 12:26:38 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:26:38 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:26:38 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_links' order by rec_date desc
+2015-11-03 12:26:39 [DEBUG] [208] [DocFile::query] 查询文件1条记录.
+2015-11-03 12:26:39 [INFO] [43] [/] 查询文件Json: [{"fileId":"7","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524796.gif","showedName":"styleweekly","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"精品生活","fileSort":"0"}]
+2015-11-03 12:26:51 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:26:51 [DEBUG] [4] [/] module: company
+2015-11-03 12:26:51 [DEBUG] [4] [/] fileKey: company_links
+2015-11-03 12:26:51 [DEBUG] [4] [/] fileDesc: 趣麦网
+2015-11-03 12:26:51 [DEBUG] [4] [/] fileUrl: http://www.yuexinchina.com
+2015-11-03 12:26:51 [DEBUG] [4] [/] btnSave: 上传
+2015-11-03 12:26:51 [DEBUG] [4] [/] formId: frmUpload1
+2015-11-03 12:26:51 [INFO] [5] [/] 上传文档[uuu9.gif]
+2015-11-03 12:26:51 [INFO] [15] [/] 文件Key: [company_links]
+2015-11-03 12:26:51 [INFO] [69] [/] 上传文件[../upload/company/company1446524811.gif]
+2015-11-03 12:26:51 [INFO] [77] [/] 删除可能的历史记录
+2015-11-03 12:26:52 [DEBUG] [97] [DocFile::insert] 插入文件记录SQL: insert into doc_file(in_module, file_key, saved_path, showed_name, ext_name, file_url, file_desc, file_sort) values('company', 'company_links', '../upload/company/company1446524811.gif', 'uuu9', '.gif', 'http://www.yuexinchina.com', '趣麦网', '0');
+2015-11-03 12:26:52 [DEBUG] [99] [DocFile::insert] 数据插入成功
+2015-11-03 12:26:52 [INFO] [110] [/] 上传文档[../upload/company/company1446524811.gif]成功
+2015-11-03 12:26:53 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:26:53 [DEBUG] [3] [/] module: company
+2015-11-03 12:26:53 [DEBUG] [3] [/] type: file
+2015-11-03 12:26:53 [DEBUG] [3] [/] fileKey: company_links
+2015-11-03 12:26:53 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:26:53 [DEBUG] [3] [/] size: 0
+2015-11-03 12:26:53 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:26:53 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:26:53 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_links' order by rec_date desc
+2015-11-03 12:26:54 [DEBUG] [208] [DocFile::query] 查询文件2条记录.
+2015-11-03 12:26:54 [INFO] [43] [/] 查询文件Json: [{"fileId":"8","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524811.gif","showedName":"uuu9","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"趣麦网","fileSort":"0"},{"fileId":"7","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524796.gif","showedName":"styleweekly","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"精品生活","fileSort":"0"}]
+2015-11-03 12:27:01 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:27:01 [DEBUG] [3] [/] type: file
+2015-11-03 12:27:01 [DEBUG] [3] [/] action: del
+2015-11-03 12:27:01 [DEBUG] [3] [/] file_path: ../upload/company/company1446524811.gif
+2015-11-03 12:27:01 [INFO] [131] [DocFile::delete] SQL: delete from doc_file where 1=1 and saved_path='../upload/company/company1446524811.gif'
+2015-11-03 12:27:02 [INFO] [137] [DocFile::delete] 删除数据[0, , ]]
+2015-11-03 12:27:02 [DEBUG] [241] [/] {"status":"true", "data": "数据保存成功"}
+2015-11-03 12:27:09 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:27:09 [DEBUG] [4] [/] module: company
+2015-11-03 12:27:09 [DEBUG] [4] [/] fileKey: company_links
+2015-11-03 12:27:09 [DEBUG] [4] [/] fileDesc: 趣麦网
+2015-11-03 12:27:09 [DEBUG] [4] [/] fileUrl: http://www.yuexinchina.com
+2015-11-03 12:27:09 [DEBUG] [4] [/] btnSave: 上传
+2015-11-03 12:27:09 [DEBUG] [4] [/] formId: frmUpload1
+2015-11-03 12:27:09 [INFO] [5] [/] 上传文档[7mai.gif]
+2015-11-03 12:27:09 [INFO] [15] [/] 文件Key: [company_links]
+2015-11-03 12:27:09 [INFO] [69] [/] 上传文件[../upload/company/company1446524829.gif]
+2015-11-03 12:27:09 [INFO] [77] [/] 删除可能的历史记录
+2015-11-03 12:27:10 [DEBUG] [97] [DocFile::insert] 插入文件记录SQL: insert into doc_file(in_module, file_key, saved_path, showed_name, ext_name, file_url, file_desc, file_sort) values('company', 'company_links', '../upload/company/company1446524829.gif', '7mai', '.gif', 'http://www.yuexinchina.com', '趣麦网', '0');
+2015-11-03 12:27:10 [DEBUG] [99] [DocFile::insert] 数据插入成功
+2015-11-03 12:27:10 [INFO] [110] [/] 上传文档[../upload/company/company1446524829.gif]成功
+2015-11-03 12:27:10 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:27:10 [DEBUG] [3] [/] module: company
+2015-11-03 12:27:10 [DEBUG] [3] [/] type: file
+2015-11-03 12:27:10 [DEBUG] [3] [/] fileKey: company_links
+2015-11-03 12:27:10 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:27:10 [DEBUG] [3] [/] size: 0
+2015-11-03 12:27:10 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:27:10 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:27:10 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_links' order by rec_date desc
+2015-11-03 12:27:11 [DEBUG] [208] [DocFile::query] 查询文件2条记录.
+2015-11-03 12:27:11 [INFO] [43] [/] 查询文件Json: [{"fileId":"9","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524829.gif","showedName":"7mai","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"趣麦网","fileSort":"0"},{"fileId":"7","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524796.gif","showedName":"styleweekly","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"精品生活","fileSort":"0"}]
+2015-11-03 12:27:30 [DEBUG] [4] [/] ====================request data===========================
+2015-11-03 12:27:30 [DEBUG] [4] [/] module: company
+2015-11-03 12:27:30 [DEBUG] [4] [/] fileKey: company_links
+2015-11-03 12:27:30 [DEBUG] [4] [/] fileDesc: 游久网
+2015-11-03 12:27:30 [DEBUG] [4] [/] fileUrl: http://www.yuexinchina.com
+2015-11-03 12:27:30 [DEBUG] [4] [/] btnSave: 上传
+2015-11-03 12:27:30 [DEBUG] [4] [/] formId: frmUpload1
+2015-11-03 12:27:30 [INFO] [5] [/] 上传文档[uuu9.gif]
+2015-11-03 12:27:30 [INFO] [15] [/] 文件Key: [company_links]
+2015-11-03 12:27:30 [INFO] [69] [/] 上传文件[../upload/company/company1446524850.gif]
+2015-11-03 12:27:30 [INFO] [77] [/] 删除可能的历史记录
+2015-11-03 12:27:31 [DEBUG] [97] [DocFile::insert] 插入文件记录SQL: insert into doc_file(in_module, file_key, saved_path, showed_name, ext_name, file_url, file_desc, file_sort) values('company', 'company_links', '../upload/company/company1446524850.gif', 'uuu9', '.gif', 'http://www.yuexinchina.com', '游久网', '0');
+2015-11-03 12:27:31 [DEBUG] [99] [DocFile::insert] 数据插入成功
+2015-11-03 12:27:31 [INFO] [110] [/] 上传文档[../upload/company/company1446524850.gif]成功
+2015-11-03 12:27:31 [DEBUG] [3] [/] ====================request data===========================
+2015-11-03 12:27:31 [DEBUG] [3] [/] module: company
+2015-11-03 12:27:31 [DEBUG] [3] [/] type: file
+2015-11-03 12:27:31 [DEBUG] [3] [/] fileKey: company_links
+2015-11-03 12:27:31 [DEBUG] [3] [/] isPaging: 0
+2015-11-03 12:27:31 [DEBUG] [3] [/] size: 0
+2015-11-03 12:27:31 [DEBUG] [3] [/] curPage: 1
+2015-11-03 12:27:31 [DEBUG] [173] [DocFile::query] 0
+2015-11-03 12:27:31 [DEBUG] [184] [DocFile::query] 查询文件SQL: select file_id, file_key, in_module, saved_path, showed_name, ext_name, file_url, file_desc, rec_date, file_sort from doc_file where 1=1 and in_module='company' and file_key='company_links' order by rec_date desc
+2015-11-03 12:27:32 [DEBUG] [208] [DocFile::query] 查询文件3条记录.
+2015-11-03 12:27:32 [INFO] [43] [/] 查询文件Json: [{"fileId":"10","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524850.gif","showedName":"uuu9","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"游久网","fileSort":"0"},{"fileId":"9","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524829.gif","showedName":"7mai","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"趣麦网","fileSort":"0"},{"fileId":"7","fileKey":"company_links","savedPath":"..\/upload\/company\/company1446524796.gif","showedName":"styleweekly","extName":".gif","recDate":null,"inModule":"company","fileUrl":"http:\/\/www.yuexinchina.com","fileDesc":"精品生活","fileSort":"0"}]

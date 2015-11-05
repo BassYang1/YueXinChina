@@ -11,6 +11,16 @@ $(function() {
 		 interTime:8000
 	});	
 	
+	//联系我们滚动特效
+    $('#asid_share').hhShare({
+        cenBox: 'asid_share_box',  //里边的小层
+        icon: 'adid_icon',
+        addClass: 'red_bag',
+        titleClass: 'asid_title',
+        triangle: 'asid_share_triangle', //鼠标划过显示图层，边上的小三角
+        showBox: 'asid_sha_layer' //鼠标划过显示图层
+    });
+	
 	//左侧上下间距
 	$(".ct_l_section :first").removeClass("mt5");
 
@@ -26,6 +36,7 @@ $(function() {
 		$(".ct_left").find(".ct_l_section:last").height(h3 + h2 - h1);
 	}
 
+	/*
 	var h1 = $(".company").parent().height();
 	var h2 = $(".news").parent().height();
 
@@ -35,6 +46,7 @@ $(function() {
 	else {
 		$(".company").parent().height(h2);
 	}
+	*/
 	
 	
 	//留言处理
@@ -96,6 +108,23 @@ function showTopAd() {
     window.setTimeout("showTopAd()", 50);
 }
 
+//加入收藏夹
+function addFavorite() {
+	var url = window.location;
+	var title = document.title;
+	
+    try {
+        window.external.addFavorite(url, title);
+    }
+    catch (e) {
+        try {
+            window.sidebar.addPanel(title, url, "");
+        }
+        catch (e) {
+            alert("加入收藏失败，请使用Ctrl+D进行添加");
+        }
+    }
+}
 
 //替换空格
 String.prototype.trim = function () {

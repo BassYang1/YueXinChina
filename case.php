@@ -87,7 +87,7 @@
                         <div class="clear">
                         </div>
                     </div>
-                    <div class="ct_r_list">
+                    <div class="ct_r_content">
 					<?php echo $caseHtml; ?>					
 					<div class="paging">
 						总计<span id="rcount"><?php echo $rcount; ?></span>个产品，每页<span id="psize"><?php echo $psize; ?></span>个产品，共<span id="pcount"><?php echo $pcount; ?></span>页
