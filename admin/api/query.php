@@ -56,6 +56,46 @@
 
 		exit();
 	}
+	
+	//用户
+	if($module == "user"){
+		$user = new User(_NONE);
+		
+		if($dataType == "login"){
+			$loginName = isset($_REQUEST["loginName"]) ? $_REQUEST["loginName"] : "";
+			$password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : "";
+			
+			try{
+				$result = "";
+				
+				$query = new User(1);
+				$query->loginName = $loginName;
+				$user = User::first($query);
+
+				if (empty($user->loginName)){
+					$result = "用户不存在";					
+				}
+				else if ($user->password != $password){
+					$result = "密码错误";					
+				}				
+			}
+			catch(Exception $e){
+				$result = $e->getMessage();	
+				Tool::logger(__METHOD__, __LINE__, sprintf("数据查询失败: %s", $e->getMessage()), _LOG_ERROR);
+			}
+			
+			if(empty($result)){
+				$_SESSION["CURRENT_USER"] = $user;
+				echo "{\"status\":\"true\", \"data\": \"登录成功\"}";
+			}
+			else{
+				echo "{\"status\":\"false\", \"data\": \"" . $result . "\"}";
+			}
+			
+		}
+
+		exit();
+	}
 
 	//读取公司数据
 	if($module == "company"){

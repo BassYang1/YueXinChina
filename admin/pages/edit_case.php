@@ -34,18 +34,24 @@
 				data.mImage = files.savedPath;
 			}
 
-			BS_Common.update(data, function(){
-				BS_Popup.closeAll();
-				if(caseId > 0){
-					BS_Common.nav("case");
+			BS_Common.update(data, function(result){
+				BS_Popup.closeAll();					
+				
+				if(result.status == true){						
+					if(caseId > 0){
+						BS_Common.nav("case");
+					}
+					else{
+						BS_Popup.create({message: "保存案例成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+							BS_Common.nav("case");
+						}, 
+						function(){
+							location.reload();
+						});
+					}
 				}
 				else{
-					BS_Popup.create({message: "保存案例成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
-						BS_Common.nav("case");
-					}, 
-					function(){
-						location.reload();
-					});
+					BS_Popup.create({message: result.data});
 				}
 			});
 		}
@@ -62,7 +68,8 @@
 				return false;
 			}
 
-			$(BS_Upload.Forms[form].Button).click();
+			setTimeout(function(){$(BS_Upload.Forms[form].Button).click();}, 1000);
+			//$(BS_Upload.Forms[form].Button).click();
 		});
 	});
 </script>

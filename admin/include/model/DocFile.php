@@ -41,11 +41,8 @@ class DocFile{
 
 		//读取单个数据
 		$files = array();
-
-		Tool::test("", $fileKey);
 		if(!empty(self::$cache)){
 			foreach(self::$cache as $one){
-		Tool::test("", $one->fileKey);
 				if($one->fileKey === $fileKey){
 					array_push($files, $one); 
 				}
@@ -88,11 +85,11 @@ class DocFile{
 		
 		try{
 			$sql = "";
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			
 			$sql = sprintf("insert into doc_file(in_module, file_key, saved_path, showed_name, ext_name, file_url, file_desc, file_sort) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", $docFile->inModule, $docFile->fileKey, $docFile->savedPath, $docFile->showedName, $docFile->extName, $docFile->fileUrl, $docFile->fileDesc, $docFile->fileSort);	
 			$conn->query($sql);	
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("插入文件记录SQL: %s", $sql), _LOG_DEBUG);
 			
@@ -130,9 +127,9 @@ class DocFile{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("SQL: %s", $sql), _LOG_INFOR);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$conn->query($sql);
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 				
 			Tool::logger(__METHOD__, __LINE__, sprintf("删除数据[%u, %s, %s]]", $docFile->fileId, $docFile->fileKey, $docFile->inModule), _LOG_INFOR);		
 
@@ -183,7 +180,7 @@ class DocFile{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文件SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -203,8 +200,8 @@ class DocFile{
 				}
 			}				
 			
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
+			DBHelp::free($data);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文件%u条记录.", count($docFiles)), _LOG_DEBUG);
 			
 			return $docFiles;
@@ -240,7 +237,7 @@ class DocFile{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询图片总数SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -250,8 +247,8 @@ class DocFile{
 				}
 			}			
 			
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
+			DBHelp::free($data);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("文件共%u条记录.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

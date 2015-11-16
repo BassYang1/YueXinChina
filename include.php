@@ -1,5 +1,5 @@
-﻿<title><?php echo $page_title; ?>-<?php echo Company::content("site_name", false); ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><?php echo $page_title; ?>-<?php echo Company::content("site_name", false); ?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="<?php echo Company::content(" seo_key", false); ?>" />
 <meta name="description" content="<?php echo Company::content(" site_desc", false); ?>" />
 <link href="css/base.css" rel="stylesheet" type="text/css" />

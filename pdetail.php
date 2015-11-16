@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 
@@ -12,8 +12,8 @@
 	$productDetail->productId = $productId;
 
 	$productDetail = Product::first($productDetail);
-	$content = Product::content($productDetail->productId);
-	if(empty($content)) $content = "<b>暂无详细</b>";
+	$detailContent = Product::content($productDetail->productId);
+	if(empty($detailContent)) $detailContent = "<b>暂无详细</b>";
 
 	//当前位置
 	$location = sprintf("当前位置 > <span><a href='product.php?sort=%u'>%s</a></span> > <span>%s</span>", $productDetail->productType, $productDetail->typeName, $productDetail->productName);
@@ -55,17 +55,17 @@
                     </div>
                     <div class="ct_r_content">
 						<div class="d_title_pnl">
-							<div class="f_left d_m_img">
+							<div class="f_left">
 								<img class="d_m_img" src='<?php echo empty($productDetail->mImage) ? "images/noimg.jpg" : str_replace("../", "", $productDetail->mImage); ?>' alt='<?php echo $productDetail->productName; ?>' title='<?php echo $productDetail->productName; ?>' class='mm' />
 							</div>
 							<div class='d_title f_left'>
-								<div class="d_t_name"><a href='pdetail.php?id=<?php echo $productDetail->productId; ?>' title='<?php echo $productDetail->productName; ?>'><?php echo $productDetail->productName; ?></a></div>		
-								<div><a href='<?php echo $productDetail->aliUrl; ?>' target='_blank'><span class='in_mall'>进入商城</span></a><a class="ml5" onclick='addFavorite();' href="javascript:void(0);"><span class='in_mall'>加入收藏夹</span></a></div>		
+								<div class="d_t_name"><a href='<?php echo $productDetail->aliUrl; ?>' title='<?php echo $productDetail->productName; ?>'><?php echo $productDetail->productName; ?></a></div>		
+								<div><a href='<?php echo $productDetail->aliUrl; ?>' target='_blank'><img src='images/buy_b.png' style='width: 180px; height: 50px; margin-top: 10px;' alt='<?php echo $productDetail->productName; ?>' /></a></div>		
 							</div>
 							<div class="clear"></div>
 						</div>
-						<div class="p_detail"><?php echo $content; ?></div>
-						<div class="p_d_links"><?php echo Util::linkOtherProduct($productDetail->productId); ?></div>
+						<div class="d_detail"><?php echo $detailContent; ?></div>
+						<div class="d_d_links"><?php echo Util::linkOtherProduct($productDetail->productId); ?></div>
                     </div>
                 </div>
             </div>

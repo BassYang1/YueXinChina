@@ -9,8 +9,14 @@
 			var data = {type: "content", module: "company", action: "update", company_spirit: BS_Common.getEDContent("#txtSpirit")};
 				
 			BS_Common.update(data, function(result){
-				BS_Popup.close(shade);	
-				BS_Popup.create({message: result? "[企业风貌]保存成功" : "[企业风貌]保存失败", title: "公司信息"});
+				BS_Popup.close(shade);
+				
+				if(result.status == true){
+					BS_Popup.create({message: result? "[企业风貌]保存成功" : "[企业风貌]保存失败", title: "公司信息"});
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}				
 			});
 		});
 	});

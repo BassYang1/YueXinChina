@@ -1,15 +1,16 @@
 ﻿<?php 
-	include("include/common.php");
-	
-	if(isset($_SESSION[$lblCurrentUser])){
-		$user = $_SESSION[$lblCurrentUser];
+	require_once("include/common.php");
+
+	if(isset($_SESSION["CURRENT_USER"])){
+		$user = $_SESSION["CURRENT_USER"];
 	}
 	else{
-		die("session expired");
+		header("Location: login.php");
+		exit; 
 	}
-	
-	if(!isset($_SESSION[$lbl_current_page])){
-		$_SESSION[$lbl_current_page] = $default;
+		
+	if(!isset($_SESSION["CURRENT_PAGE"])){
+		$_SESSION["CURRENT_PAGE"] = $default;
 	}
 ?>
 
@@ -42,7 +43,7 @@
         </div><!--menu-->
         
         <div id="main_box">
-			<?php require_once($_SESSION[$lbl_current_page]); ?><!--main content-->
+			<?php require_once($_SESSION["CURRENT_PAGE"]); ?><!--main content-->
         </div>
         <div class="clear">
         </div>

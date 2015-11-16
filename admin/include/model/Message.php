@@ -1,7 +1,7 @@
 <?php
 class Message{
 	public $messageId;
-	public $title;
+	public $email;
 	public $phone;
 	public $uname;
 	public $content;
@@ -36,14 +36,13 @@ class Message{
 			$sql = "";
 			$conn = DBHelp::getConnection();
 			
-			$sql = sprintf("insert into message(title, phone, uname, content) values('%s', '%s', '%s', '%s');", $message->title, $message->phone, $message->uname, $message->content);	
-			Tool::logger(__METHOD__, __LINE__, sprintf("插入留言SQL:%s", $sql), _LOG_DEBUG);
+			$sql = sprintf("insert into message(email, phone, uname, content) values('%s', '%s', '%s', '%s');", $message->email, $message->phone, $message->uname, $message->content);	
 
 			$conn->query($sql);
 			
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
-			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("数据插入成功SQL:%s", $sql), _LOG_DEBUG);
 		}
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, sprintf("数据插入失败:%s", $e->getMessage()), _LOG_ERROR);
@@ -68,7 +67,7 @@ class Message{
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -97,7 +96,7 @@ class Message{
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -113,7 +112,7 @@ class Message{
 		$messages = array();
 		
 		try{		
-			$sql = "select message_id, title, phone, uname, reply_date, rec_date from message where 1 = 1";
+			$sql = "select message_id, email, phone, uname, reply_date, rec_date from message where 1 = 1";
 			
 			if(is_numeric($query->messageId) && $query->messageId > 0){
 				$sql .= sprintf(" and message_id=%u", $query->messageId);
@@ -139,7 +138,7 @@ class Message{
 				while($row = $data->fetch_assoc()) {
 					$temp = new Message(_NONE);
 					$temp->messageId = $row["message_id"];
-					$temp->title = $row["title"];
+					$temp->email = $row["email"];
 					$temp->uname = $row["uname"];
 					$temp->phone = $row["phone"];
 					$temp->rec_date = $row["rec_date"];
@@ -149,7 +148,7 @@ class Message{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容%u条.", count($messages)), _LOG_DEBUG);
 			
 			return $messages;
@@ -164,7 +163,7 @@ class Message{
 
 	public static function read($query){
 		try{			
-			$sql = "select message_id, title, phone, uname, reply, content, reply_date, rec_date from message where 1 = 1";
+			$sql = "select message_id, email, phone, uname, reply, content, reply_date, rec_date from message where 1 = 1";
 			
 			if(is_numeric($query->messageId) && $query->messageId > 0){
 				$sql .= sprintf(" and message_id=%u", $query->messageId);
@@ -181,7 +180,7 @@ class Message{
 				while($row = $data->fetch_assoc()) {
 					$message = new Message(_NONE);
 					$message->messageId = $row["message_id"];
-					$message->title = $row["title"];
+					$message->email = $row["email"];
 					$message->uname = $row["uname"];
 					$message->phone = $row["phone"];
 					$message->content = $row["content"];
@@ -193,7 +192,7 @@ class Message{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return $message;
 		}		
@@ -222,7 +221,7 @@ class Message{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容 总%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

@@ -90,9 +90,15 @@ BS_Pro.loadList = function(curPage, newSearch){
 						var data = {type: "detail", module: "product", action: "delete", productId: $(row).parent().parent().find(".proCheck input:first").val()};						
 						var shade1 = BS_Popup.shade(true);
 
-						BS_Common.update(data, function(){
+						BS_Common.update(data, function(result){
 							BS_Popup.close(shade1);
-							BS_Pro.loadList(parseInt($("#curPage").val()), true);
+							
+							if(result.status == true){
+								BS_Pro.loadList(parseInt($("#curPage").val()), true);
+							}
+							else{
+								BS_Popup.create({message: result.data});
+							}							
 						});
 					});
 				});
@@ -159,9 +165,15 @@ BS_Pro.loadSortList = function(curPage, newSearch){
 						var data = {type: "detail", module: "sort", action: "delete", sortId: $(row).parent().parent().find(".sortCheck input:first").val()};	
 						var shade1 = BS_Popup.shade(true);
 
-						BS_Common.update(data, function(){
+						BS_Common.update(data, function(result){
 							BS_Popup.close(shade1);
-							BS_Pro.loadSortList(parseInt($("#curPage").val()), true);
+							
+							if(result.status == true){
+								BS_Pro.loadSortList(parseInt($("#curPage").val()), true);
+							}
+							else{
+								BS_Popup.create({message: result.data});
+							}							
 						});
 					});
 				});
@@ -246,7 +258,13 @@ BS_Pro.setRecommend = function(productId, isRecommend){
 	var data = {type: "isRecommend", module: "product", action: "update"};
 	data.productId = productId;
 	data.isRecommend = isRecommend ? 1 : 0;
-	BS_Common.update(data);
+	BS_Common.update(data, function(result){
+		if(result.status == true){
+		}
+		else{
+			BS_Popup.create({message: result.data});
+		}
+	});
 };
 
 BS_Pro.setShowHome = function(productId, isShowHome){
@@ -257,5 +275,11 @@ BS_Pro.setShowHome = function(productId, isShowHome){
 	var data = {type: "isShowHome", module: "product", action: "update"};
 	data.productId = productId;
 	data.isShowHome = isShowHome ? 1 : 0;
-	BS_Common.update(data);
+	BS_Common.update(data, function(result){
+		if(result.status == true){
+		}
+		else{
+			BS_Popup.create({message: result.data});
+		}
+	});
 };

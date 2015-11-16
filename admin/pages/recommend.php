@@ -1,29 +1,52 @@
 <script charset="utf-8" src="scripts/kindeditor/kindeditor.js"></script>
 <script charset="utf-8" src="scripts/kindeditor/lang/zh_CN.js"></script>
-<script language="javascript" type="text/javascript">
-	$(function(){
-		BS_Common.setMenu(".m_site");
-		
-		var initLinks = function (companyKey, callback){
-			BS_Common.query({module: "company", type: "list", companyKey: companyKey}, true, function(data){
-				if(data instanceof Array){
-					var htmlStr = "";
+<script language="javascript" type="text/javascript">	
+	//删除推荐
+	function dRecom(obj){
+		var $obj = $(obj).prev(); //兄弟节点
+		var data = {type: "content", module: "company", action: "del", companyId: $obj.attr("id")};
 
-					for(var i in data){
-						var desc = data[i].subject;
-						var url = data[i].content;
-						var id = data[i].id;
+		BS_Common.update(data, function(result){
+			if(result.status == true){
+				$obj.parent().remove();
+			}
+			else{
+				BS_Popup.create({message: result.data});
+			}
+		});	
+	}
+	
+	//初使化推荐产品连接
+	function initLinks(companyKey, callback){
+		BS_Common.query({module: "company", type: "list", companyKey: companyKey}, true, function(data){
+			if(data instanceof Array){
+				var htmlStr = "";
 
-						htmlStr += "<a id='" + id + "' href='" + url + "' target='_blank'>" + desc + "</a>";
-					}
-					
-					callback(htmlStr);
+				for(var i in data){
+					var desc = data[i].subject;
+					var url = data[i].content;
+					var id = data[i].id;
+
+					htmlStr += "<label><a id='" + id + "' href='" + url + "' target='_blank'>" + desc + "</a><span onclick='dRecom(this)'>X</span></label>";
 				}
-			});
-		};
+					
+				callback(htmlStr);
+			}
+		});
+	}
+	
+	$(function(){
+		BS_Common.setMenu(".m_site");		
 		
-		initLinks("brand_recommend", function(links){$("#brandPnl").html(links);});		
-		initLinks("hot_search", function(links){$("#hotPnl").html(links);});		
+		//初使化推荐产品
+		initLinks("brand_recommend", function(links){
+			$("#brandPnl").html(links);
+		});	
+		
+		//初使化热门
+		initLinks("hot_search", function(links){
+			$("#hotPnl").html(links);
+		});		
 
 		//添加推荐品牌
 		$("#btnAddBrand").click(function(){
@@ -33,7 +56,9 @@
 			if($("#brandPnl a").size() >= 4) message += "|最多只能添加4个";
 			if($.trim($("#txtBrand").val()) == "") message += "|产品名称不能为空";
 			if($.trim($("#txtBrandUrl").val()) == "") message += "|产品连接不能为空";
-			if($.trim($("#txtBrand").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtBrand").val())) >= 0) message += "|推荐产品已经添加";
+			if($.trim($("#txtBrand").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtBrand").val())) >= 0){
+				message += "|推荐产品已经添加";
+			}
 
 			if(message != ""){
 				BS_Popup.close(shade);
@@ -44,15 +69,14 @@
 			var data = {type: "content", module: "company", action: "insert", companyKey: "brand_recommend", subject: $.trim($("#txtBrand").val()), content: $.trim($("#txtBrandUrl").val())};
 			
 			BS_Common.update(data, function(result){
-				BS_Popup.close(shade);	
-				BS_Popup.create({message: result ? "[推荐产品]保存成功" : "[推荐产品]保存失败", title: "站点信息"});
-
-				if(result){
-					$("#brandPnl").append("<a href='" + $.trim($("#txtBrandUrl").val()) + "' target='_blank'>" + $.trim($("#txtBrand").val()) + "</a>");
-				}
+				BS_Popup.close(shade);				
 				
-				$("#txtBrand").val("");
-				$("#txtBrandUrl").val("");
+				if(result.status == true){
+					location.reload();
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}
 			});	
 		});
 
@@ -64,7 +88,9 @@
 			if($("#hotPnl a").size() >= 3) message += "|最多只能添加3个";
 			if($.trim($("#txtHot").val()) == "") message += "|产品名称不能为空";
 			if($.trim($("#txtHotUrl").val()) == "") message += "|产品连接不能为空";
-			if($.trim($("#txtHot").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtHot").val())) >= 0) message += "|热门产品已经添加";
+			if($.trim($("#txtHot").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtHot").val())) >= 0){
+				message += "|热门产品已经添加";
+			}
 
 			if(message != ""){
 				BS_Popup.close(shade);
@@ -75,30 +101,20 @@
 			var data = {type: "content", module: "company", action: "insert", companyKey: "hot_search", subject: $.trim($("#txtHot").val()), content: $.trim($("#txtHotUrl").val())};
 			
 			BS_Common.update(data, function(result){
-				BS_Popup.close(shade);	
-				BS_Popup.create({message: result ? "[热门产品]保存成功" : "[热门产品]保存失败", title: "站点信息"});
-
-				if(result){
-					$("#hotPnl").append("<a href='" + $.trim($("#txtHotUrl").val()) + "' target='_blank'>" + $.trim($("#txtHot").val()) + "</a>");
-				}
+				BS_Popup.close(shade);
 				
-				$("#txtHot").val("");
-				$("#txtHotUrl").val("");
+				if(result.status == true){	
+					BS_Popup.create({message: result ? "[热门产品]保存成功" : "[热门产品]保存失败", title: "站点信息"});
+					$("#hotPnl").append("<a href='" + $.trim($("#txtHotUrl").val()) + "' target='_blank'>" + $.trim($("#txtHot").val()) + "</a>");
+					
+					$("#txtHot").val("");
+					$("#txtHotUrl").val("");
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}
 			});	
-		});
-
-		//移除已添加的
-		$("#hotPnl, #brandPnl").find("a").each(function(){
-			$(this).click(function(){
-				alert($(this).attr("id"));
-				var data = {type: "content", module: "company", action: "del", companyId: $(this).attr("id")};
-
-				BS_Common.update(data);	
-				$(this).remove();
-
-				return false;
-			});
-		});		
+		});	
 	});
 </script>
 <div id="location">管理中心<b>></b><strong>网站信息</strong><b>></b><strong>产品推荐</strong></div><!--location-->
@@ -134,7 +150,7 @@
 				<td width="90" align="right">
 				</td>
 				<td>
-					<div id="brandPnl"></div>
+					<div id="brandPnl" class="reonPnl"></div>
 				</td>
 			</tr>
 		</tbody>

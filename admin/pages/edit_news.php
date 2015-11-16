@@ -30,18 +30,24 @@
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#newsContent");
 					
-			BS_Common.update(data, function(){
-				BS_Popup.close(shade1);
-				if(newsId > 0){
-					BS_Common.nav("news");
+			BS_Common.update(data, function(result){
+				BS_Popup.close(shade1);					
+				
+				if(result.status == true){
+					if(newsId > 0){
+						BS_Common.nav("news");
+					}
+					else{
+						BS_Popup.create({message: "保存新闻成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+							BS_Common.nav("news");
+						}, 
+						function(){
+							location.reload();
+						});
+					}
 				}
 				else{
-					BS_Popup.create({message: "保存新闻成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
-						BS_Common.nav("news");
-					}, 
-					function(){
-						location.reload();
-					});
+					BS_Popup.create({message: result.data});
 				}
 			});
 		});

@@ -4,7 +4,7 @@
 	Tool::print_request(__METHOD__, __LINE__);
 	Tool::logger(__METHOD__, __LINE__, $_SERVER["QUERY_STRING"], _LOG_DEBUG);
 		
-	$_SESSION[$lbl_current_page] = $default;
+	$_SESSION["CURRENT_PAGE"] = $default;
 	
 	if(isset($_REQUEST["page"])){
 		$page = strtolower($_REQUEST["page"]);
@@ -22,8 +22,8 @@
 		}
 		*/
 
-		$_SESSION[$lbl_current_page] =  sprintf("pages/%s", $pages[$page]);
+		$_SESSION["CURRENT_PAGE"] =  sprintf("pages/%s", $pages[$page]);
 	}
 	
-	echo "{\"status\":\"true\", \"data\": \"" . $_SESSION[$lbl_current_page] . "\"}";
+	echo "{\"status\":\"true\", \"data\": \"" . $_SESSION["CURRENT_PAGE"] . "\"}";
 ?>

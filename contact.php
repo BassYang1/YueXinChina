@@ -1,4 +1,4 @@
-﻿	
+	
     <!-- bottom start -->
 	<?php 
 		//二维码

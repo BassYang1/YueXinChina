@@ -9,8 +9,14 @@ $(function(){
 function uploadCompleted(params){
     if(params.status == 1){
         BS_Upload.show(BS_Upload.Mode.Single, BS_Upload.Button.None, [{savedPath: params.data}]);
-        BS_Common.update({type: "content", module: "company", company_contact: BS_Common.getEDContent("#txtContact")});
-        $("#flUpload").val("");
+        BS_Common.update({type: "content", module: "company", company_contact: BS_Common.getEDContent("#txtContact")}, function(result){				
+			if(result.status == true){
+				$("#flUpload").val("");
+			}
+			else{
+				BS_Popup.create({message: result.data});
+			}	
+		});        
     }
     else{
         BS_Popup.create({message: params.data});

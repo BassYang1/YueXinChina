@@ -61,17 +61,16 @@ class Content{
 			
 		try{
 			$sql = "";
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			
 			foreach($content as $key=>$value){
 				$sql = sprintf("insert into content(content_type, content_key, content) values('%s', '%s', '%s');", $type, $key, $value);	
 				$conn->query($sql);			
 			}		
 			
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			
-			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
-			Tool::logger(__METHOD__, __LINE__, sprintf("SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("数据插入成功, SQL: %s", $sql), _LOG_DEBUG);
 		}
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, sprintf("数据插入失败:%s", $e->getMessage()), _LOG_ERROR);
@@ -80,27 +79,20 @@ class Content{
 	}
 
 	public static function insert2($content){
-		Tool::test("", "step3 1 ");		
 		if(empty($content)){
 			Tool::logger(__METHOD__, __LINE__, "没有数据需插入", _LOG_DEBUG);
 			throw new Exception("数据异常");
 		}
 			
-		Tool::test("", "step3 2 ");
-			
 		try{
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			
-			Tool::test("", "step3 3 ");
 			$sql = sprintf("insert into content(content_type, content_key, subject, content, m_image) values('%s', '%s', '%s', '%s', '%s');", $content->contentType, $content->contentKey, $content->subject, $content->content, $content->mImage);	
 			Tool::logger(__METHOD__, __LINE__, sprintf("插入文本内容SQL:%s", $sql), _LOG_DEBUG);
 
-			Tool::test("", "step3 4 ");
 			$conn->query($sql);
-			Tool::test("", "step3 5 ");
 			
-			DBHelp2::close($conn);
-			Tool::test("", "step3 6 ");
+			DBHelp::close($conn);
 			
 			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
 		}
@@ -126,7 +118,7 @@ class Content{
 				Tool::logger(__METHOD__, __LINE__, sprintf("更新Content SQL: %s", $sql), _LOG_DEBUG);
 			}			
 	
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, "Content数据更新成功", _LOG_DEBUG);
 		}
 		catch(Exception $e){
@@ -154,9 +146,9 @@ class Content{
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("更新文本内容SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -177,7 +169,7 @@ class Content{
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("删除Content SQL: %s", $sql), _LOG_DEBUG);
 	
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, "Content数据删除成功", _LOG_DEBUG);
 		}
 		catch(Exception $e){
@@ -199,15 +191,15 @@ class Content{
 				$sql .= sprintf(" and content_id=%u", $content->contentId);
 			}
 
-			if(empty($content->contentKey)){
-				$sql .= sprintf(" and content_key='%s'", $content->$contentKey);
+			if(!empty($content->contentKey)){
+				$sql .= sprintf(" and content_key='%s'", $content->contentKey);
 			}
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("删除文本内容SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -256,7 +248,7 @@ class Content{
 				}
 			}
 			
-			DBHelp::closeConn($conn);			
+			DBHelp::close($conn);			
 		}
 		
 		catch(Exception $e){
@@ -302,7 +294,7 @@ class Content{
 				
 				Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容SQL: %s", $sql), _LOG_DEBUG);
 							
-				$conn = DBHelp2::getConnection();
+				$conn = DBHelp::getConnection();
 				$data = $conn->query($sql);
 
 				if(!empty($data) && $data->num_rows > 0){
@@ -314,13 +306,14 @@ class Content{
 						$temp->content = $row["content"];
 						$temp->subject = $row["subject"];
 						$temp->mImage = $row["m_image"];
+						$temp->recDate = $row["rec_date"];
 
 						array_push($contents, $temp); 
 					}
 				}
 				
-				DBHelp2::free($data);
-				DBHelp2::close($conn);
+				DBHelp::free($data);
+				DBHelp::close($conn);
 			}
 			else{
 				$all = self::queryAll();
@@ -329,7 +322,6 @@ class Content{
 					$got = true;
 
 					if($got && is_numeric($query->contentId) && $query->contentId > 0 && $query->contentId !== $one->contentId){
-						Tool::test("", $one->contentType );
 						$got = false;
 					}
 
@@ -376,7 +368,7 @@ class Content{
 				
 				Tool::logger(__METHOD__, __LINE__, sprintf("查询所有Content数据: %s", $sql), _LOG_DEBUG);
 							
-				$conn = DBHelp2::getConnection();
+				$conn = DBHelp::getConnection();
 				$data = $conn->query($sql);
 
 				if(!empty($data) && $data->num_rows > 0){
@@ -394,8 +386,8 @@ class Content{
 					}
 				}
 				
-				DBHelp2::free($data);
-				DBHelp2::close($conn);
+				DBHelp::free($data);
+				DBHelp::close($conn);
 				Tool::logger(__METHOD__, __LINE__, sprintf("查询所有Content数据%u条.", count($contents)), _LOG_DEBUG);
 				
 				self::$cache = $contents;
@@ -452,7 +444,7 @@ class Content{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总数SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -462,8 +454,8 @@ class Content{
 				}
 			}
 				
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
+			DBHelp::free($data);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询文本内容总%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

@@ -58,7 +58,7 @@
 #menu li i.m_message { background-position: 13px -399px;}
 #menu li i.m_sort { background-position: 13px -439px;}
 #menu li i.m_edit_product { background-position: 13px -479px;}
-#menu li i.link {background-position: 13px -519px;}
+#menu li i.m_sys {background-position: 13px -519px;}
 #menu li i.guestbook {background-position: 13px -559px;}
 #menu li i.mobile { background-position: 13px -599px;}
 #menu li i.user { background-position: 13px -639px;}
@@ -100,3 +100,20 @@
 .shade {background: #000; filter: alpha(opacity=20);/* IE的透明度 */ opacity: 0.2; /* 透明度 */ position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display:none; text-align:center; vertical-align:middle;}
 .shade  iframe{filter: alpha(opacity=50);/* IE的透明度 */ opacity: 0.5; /* 透明度 */ width: 100%; height: 100%;}
 .shade  .loading{margin:auto; margin-top:250px; /*background:url("images/load.gif") center center no-repeat;*/}
+
+/* login */
+.login {position:absolute; border:2px solid #beb185; font-size: 13px; font-weight: bold;}
+.login .lTitlePnl {width:100%; line-height:24px; background-color:#b7a66d; height:24px; font-size: 15px;}
+.login .lTitlePnl .lTitleMsg{width:80%; overflow:hidden;}
+.login .lUserInfoPnl {width: 100%; background:#F9F9F9; overflow:hidden;text-align:center; line-height:30px;}
+.login .lUserInfoPnl .userInfo{padding-top:5px; margin:5px auto;}
+.login .lUserInfoPnl .userInfo p{line-height:25px; margin:5px auto;}
+.login .lUserInfoPnl .userInfo span{text-align:right; display:inline-block; width: 60px;}
+.login .lUserInfoPnl .userInfo .ctt-sep{margin:5px; margin-bottom:10px; border-bottom: dashed 1px #cfcfcf;}
+.login .lUserInfoPnl .userInfo .linput{border: 1px solid #DBDBDB; background-color: #FFF; padding: 2px; color: #999; font-size: 12px; line-height: 16px; width:140px; vertical-align: bottom;}
+
+/* recomment product*/
+.recoPnl {}
+.reonPnl label{ background-color:#E0E0E0; padding:5px; margin-right:5px;}
+.reonPnl label span {color: #333; cursor:pointer;}
+.reonPnl label span:hover {color: #0072C6;}

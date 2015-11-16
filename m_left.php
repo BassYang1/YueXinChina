@@ -7,7 +7,8 @@
 	$caseList = "";
 
 	if($sections["case"] === 1){
-		$query = new Content(8);
+		$newsCount = empty($newsCount) ? 8 : $newsCount; //显示数目
+		$query = new Content($newsCount);
 		$query->contentType = "case";
 		$contents = Content::query2($query);
 
@@ -58,7 +59,7 @@
 <?php //推荐产品	
 	$recommendHtml = "";
 	if($sections["recommend"] === 1){
-		$query = new Product(10);
+		$query = new Product(8);
 		$query->isRecommend = 1;
 		
 		$products = Product::query($query); 
@@ -69,11 +70,26 @@
 		else{
 			foreach($products as $product){
 				$recommendHtml .= sprintf("
-					<li>
-						<a href='pdetail.php?id=%u' title='%s' target='_blank'>%s</a>
-					</li>", 
+					<dl class='l_m_prod'>
+						<dd class='f_left'>
+							<a href='pdetail.php?id=%u' title='%s'>
+								<img src='%s' width='42' height='42' alt='%s' title='%s' class='mm' />
+							</a>
+						</dd>
+						<dt class='f_left' style='width:160px;'>
+							<div class='nowrap'><a href='pdetail.php?id=%u' title='%s'>%s</a></div>		
+							<div><a href='%s' target='_blank'><img src='images/buy_s.png' width='70px' height='20px' alt='%s' /></a></div>		
+						</dt>
+					</dl>", 
 					$product->productId, 
 					$product->productName, 
+					str_replace("../", "", $product->mImage), 
+					$product->productName, 
+					$product->productName, 
+					$product->productId, 
+					$product->productName, 
+					$product->productName, 
+					$product->aliUrl, 
 					$product->productName
 				);
 			}
@@ -103,9 +119,10 @@
 	$ali_wangwang = Company::content("ali_wangwang");
 ?>
 <style>
-#contact_info{padding-top:5px; text-align:left;}
-#contact_info p{padding-left:20px; line-height:25px; text-align:left;}
-#contact_info .ctt-sep{margin-top:5px; margin-bottom:10px; border-bottom: dashed 1px #cfcfcf;}
+#contact_info{padding-top:5px;}
+#contact_info p{line-height:25px;}
+#contact_info span{text-align:right; display:inline-block; width: 90px;}
+#contact_info .ctt-sep{margin:5px; margin-bottom:10px; border-bottom: dashed 1px #cfcfcf;}
 </style>
 <?php if($sections["contact"] === 1){ ?>
 <!-- contact start -->
@@ -122,17 +139,17 @@
         </div>
     </div>
     <div class="l_menu" style="width: 100%;">
-        <div class="center">
+        <div>
             <div id="contact_info">
-                <p>扫一扫，关注我们最新动态</p>
-                <p>
+                <p class="center">扫一扫，关注我们最新动态</p>
+                <p class="center">
                     <a href="#comtact"><img src="<?php echo str_replace("../", "", $barcode->savedPath); ?>" title="<?php echo Company::content("site_desc", false); ?>" alt="<?php echo Company::content("site_desc", false); ?>" /></a>
                 </p>
 				<div class="ctt-sep"></div>
-				<p>联系人：<?php echo Company::content("contact_person"); ?></p>
-				<p>电话：<?php echo Company::content("company_phone"); ?></p>
-				<p>手机：<?php echo Company::content("mobile_phone"); ?></p>
-				<p>
+				<p><span>联系人：</span><?php echo Company::content("contact_person"); ?></p>
+				<p><span>电话：</span><?php echo Company::content("company_phone"); ?></p>
+				<p><span>手机：</span><?php echo Company::content("mobile_phone"); ?></p>
+				<p class="center">
 					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<?php echo $company_qq; ?>&<?php echo $official_site; ?>&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:<?php echo $company_qq; ?>:41" alt="<?php echo $company_name; ?>" title="<?php echo $company_name; ?>"></a>
 					<a class="ml5" target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" alt="<?php echo $company_name; ?>" /></a>
 				</p>
@@ -163,8 +180,8 @@
         <div class="m_title_name">
             产品类型
         </div>
-        <div class="m_title_more_link hidden">
-            <a href="">
+        <div class="m_title_more_link">
+            <a href="product.php">
                 <img src="images/small_24.jpg" width="44" height="13" />
             </a>
         </div>
@@ -188,7 +205,7 @@
             走进岳信
         </div>
         <div class="m_title_more_link hidden">
-            <a href="recommendProduct.html">
+            <a href="">
                 <img src="images/small_24.jpg" width="44"
                      height="13" />
             </a>
@@ -197,11 +214,10 @@
         </div>
     </div>
     <div class="l_menu">
-        <dl>
-            <dt style="cursor: hand; float: left;"><span class="l_m_item3"><a href="company.php">公司简介 &nbsp;>></a></span> </dt>
-            <dt style="cursor: hand; float: left;"><span class="l_m_item3"><a href="culture.php">公司文化 &nbsp;>></a></span> </dt>
-            <dt style="cursor: hand; float: left;"><span class="l_m_item3"><a href="spirit.php">企业风貌 &nbsp;>></a></span> </dt>
-            <dt style="cursor: hand; float: left;"><span class="l_m_item3"><a href="honor.php">资质证书 &nbsp;>></a></span> </dt>
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="company.php">公司简介</a></span> </dt></dl>
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="culture.php">公司文化</a></span> </dt></dl>
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="spirit.php">企业风貌</a></span> </dt></dl>
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="honor.php">资质证书</a></span> </dt></dl>  
         </dl>
     </div>
 </div>
@@ -218,7 +234,7 @@
             推荐产品
         </div>
         <div class="m_title_more_link">
-            <a href="recommendProduct.html">
+            <a href="product.php">
                 <img src="images/small_24.jpg" width="44"
                      height="13" />
             </a>
@@ -227,9 +243,7 @@
         </div>
     </div>
     <div class="l_menu">
-		<ul class="f_left">
-			<?php echo $recommendHtml; ?>
-        </ul>
+		<?php echo $recommendHtml; ?>
     </div>
 </div>
 <!-- recommend end -->
@@ -245,7 +259,7 @@
             成功案例
         </div>
         <div class="m_title_more_link">
-            <a href="recommendProduct.html">
+            <a href="case.php">
                 <img src="images/small_24.jpg" width="44"
                      height="13" />
             </a>
@@ -272,7 +286,7 @@
             新闻动态
         </div>
         <div class="m_title_more_link">
-            <a href="recommendProduct.html">
+            <a href="news.php">
                 <img src="images/small_24.jpg" width="44"
                      height="13" />
             </a>

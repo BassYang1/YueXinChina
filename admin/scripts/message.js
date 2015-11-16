@@ -45,7 +45,7 @@ BS_Msg.loadList = function(curPage, newSearch){
 				var newItem = $(".messages").append(BS_Msg.ListItem).find(".pList:last");
 
 				newItem.find(".msgCheck input:first").val(message.messageId);
-				newItem.find(".msgTitle").text(message.title);
+				newItem.find(".msgTitle").text(message.email);
 				newItem.find(".uname").text(message.uname);
 				newItem.find(".phone").text(message.phone);
 
@@ -60,9 +60,15 @@ BS_Msg.loadList = function(curPage, newSearch){
 						var data = {type: "detail", module: "message", action: "delete", messageId: $(row).parent().parent().find(".msgCheck input:first").val()};
 						var shade1 = BS_Popup.shade(true);
 
-						BS_Common.update(data, function(){
+						BS_Common.update(data, function(result){
 							BS_Popup.close(shade1);
-							BS_Msg.loadList(parseInt($("#curPage").val()), true);
+							
+							if(result.status == true){
+								BS_Msg.loadList(parseInt($("#curPage").val()), true);
+							}
+							else{
+								BS_Popup.create({message: result.data});
+							}							
 						});
 					});
 				});

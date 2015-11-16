@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 	$navHtml = "";
 	$query = new Company(_QUERY_ALL);
 	$query->companyKey = "brand_recommend";
 	$brands = Company::query($query);
-	
+		
 	if(!empty($brands)){
 		foreach($brands as $brand){
 			$navHtml .= sprintf("
@@ -60,7 +60,7 @@
         <!--店招_LOGO_二维码_连接电话 开始-->
         <div class="header">
             <div class="logo f_left">
-                <a href="index.html" title="首页">
+                <a href="index.php" title="首页">
                     <img src="images/yuexin13_03.png" height="85"
                         alt=""></a></div>
             <!--logo-->
@@ -115,6 +115,12 @@
                 <li class="n_menu f_left">
                     <h3>
                         <a title="资料下载" style="width: 80px;" href="material.php">资料下载</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="人才招聘" style="width: 80px;" href="recruit.php">人才招聘</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>

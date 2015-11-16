@@ -9,7 +9,7 @@
 			var detail = BS_Msg.loadDetail(messageId);
 
 			$(".main h3").text("留言回复");
-			$("#title").val(detail.title);
+			$("#email").val(detail.email);
 			$("#uname").val(detail.uname);
 			$("#phone").val(detail.phone);
 			$("#content").val(detail.content);
@@ -23,14 +23,32 @@
 
 				var shade1 = BS_Popup.shade(true);
 
-				var data = {type: "detail", module: "message", action: action, messageId: messageId};
+				var data = {type: "detail", module: "message", action: action, id: messageId};
 				data.reply = $.trim($("#reply").val());
 				
-				BS_Common.update(data, function(){
-					if(messageId > 0){
-						BS_Popup.create({message: "回复留言成功"}, function(){
-							BS_Common.nav("message");
-						});
+				if(data.reply == "" || detail.reply == data.reply){
+					BS_Popup.close(shade1);
+					
+					if(data.reply == ""){
+						BS_Popup.create({message: "留言回复不能为空"});
+					}
+					else if(data.reply == detail.reply){
+						BS_Popup.create({message: "请修改你的留言回复"});
+					}
+					
+					return false;
+				}
+			
+				BS_Common.update(data, function(result){				
+					if(result.status == true){	
+						if(messageId > 0){
+							BS_Popup.create({message: "回复留言成功"}, function(){
+								BS_Common.nav("message");
+							});
+						}
+					}
+					else{
+						BS_Popup.create({message: result.data});
 					}
 				});
 			});
@@ -51,10 +69,10 @@
         <tbody>
             <tr>
                 <td width="90" align="right">
-                    标题
+                    邮箱
                 </td>
                 <td>
-                    <input type="text" id="title" name="title" readonly value="" maxlength="40" size="40" class="inputText disabled" style="background-color:#EEE;">
+                    <input type="text" id="email" name="email" readonly value="" maxlength="40" size="40" class="inputText disabled" style="background-color:#EEE;">
                 </td>
             </tr>
             <tr>

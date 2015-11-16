@@ -12,7 +12,7 @@
 <div id="location">管理中心<b>></b><strong>留言管理</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
 	<h3>客户留言管理</h3>
-	<div class="filter">
+	<div class="filter hidden">
 		<input id="keyword" name="keyword" type="text" class="inpMain" value="" size="20">
 		<input name="btnSearch" id="btnSearch" class="btnGray" type="submit" value="查找">
 		<span>
@@ -22,7 +22,7 @@
          <tbody>
 			 <tr>
 				  <th width="5%" class="c_align"></th>
-				  <th width="30%">标题</th>
+				  <th width="30%">邮箱</th>
 				  <th width="20%">姓名</th>
 				  <th width="10%">电话</th>
 				  <th width="15%">操作</th>

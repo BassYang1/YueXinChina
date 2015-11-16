@@ -48,7 +48,7 @@ class Sort{
 				}
 			}
 			
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
 		}
@@ -75,7 +75,7 @@ class Sort{
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -100,7 +100,7 @@ class Sort{
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -152,7 +152,7 @@ class Sort{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型%u条.", $data->num_rows), _LOG_DEBUG);
 			
 			return $sorts;
@@ -200,7 +200,7 @@ class Sort{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

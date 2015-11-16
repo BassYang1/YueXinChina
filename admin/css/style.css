@@ -1,8 +1,8 @@
 /*(C) 2012-2013 Douco Inc.*/
 /* 主体框架
 ----------------------------------------------- */
-.l_float{float:left;}
-.r_float{float:right;}
+.f_left{float:left;}
+.f_right{float:right;}
 .clear{height:0px; line-height:0px;	font-size:0px;clear:both;}
 .h_space{margin-left:5px; margin-right:5px;}
 .v_space{margin-top:5px; margin-bottom:5px;}

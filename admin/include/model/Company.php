@@ -25,14 +25,12 @@ class Company{
 		}
 
 		try{
-			Tool::test("", "step2 2");
 			$content = new Content(_NONE);
 			$content->contentKey = $company->companyKey;
 			$content->subject = $company->subject;
 			$content->content = $company->content;
 			$content->mImage = $company->mFile;
 			$content->contentType = "company";
-			Tool::test("", "step2 2 1");
 
 			Content::insert2($content);
 		}
@@ -57,9 +55,7 @@ class Company{
 			$content->mImage = $company->mFile;
 			$content->contentType = "company";
 						
-			Tool::test("", "step3");
 			Content::update2($content);
-			Tool::test("", "step4");
 		}
 		catch(Exception $e){
 			Tool::logger(__METHOD__, __LINE__, "更新公司数据异常", _LOG_DEBUG);
@@ -67,7 +63,7 @@ class Company{
 		}		
 	}
 
-	public static function delete($content){
+	public static function delete($company){
 		if(empty($company)){
 			Tool::logger(__METHOD__, __LINE__, "参数为空", _LOG_DEBUG);
 			throw new Exception("参数为空");
@@ -173,7 +169,6 @@ class Company{
 			$companys = self::query($query);
 
 			//读取数据
-			Tool::test("", "step1");
 			if(!empty($companys) && count($companys) > 0){
 				return true;
 			}

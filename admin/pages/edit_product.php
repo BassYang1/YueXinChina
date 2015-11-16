@@ -50,18 +50,24 @@
 			data.productDetail = BS_Common.getEDContent("#productDetail");
 
 
-			BS_Common.update(data, function(){
-				BS_Popup.closeAll();
-				if(productId > 0){
-					BS_Common.nav("product");
+			BS_Common.update(data, function(result){
+				BS_Popup.closeAll();				
+				
+				if(result.status == true){
+					if(productId > 0){
+						BS_Common.nav("product");
+					}
+					else{
+						BS_Popup.create({message: "保存商品信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+							BS_Common.nav("product");
+						}, 
+						function(){
+							location.reload();
+						});
+					}
 				}
 				else{
-					BS_Popup.create({message: "保存商品信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
-						BS_Common.nav("product");
-					}, 
-					function(){
-						location.reload();
-					});
+					BS_Popup.create({message: result.data});
 				}
 			});
 		}
@@ -82,8 +88,9 @@
 				BS_Popup.create({message: message.substr(1).replace("|", "<br />")});
 				return false;
 			}
-
-			$(BS_Upload.Forms[form].Button).click();
+			
+			setTimeout(function(){$(BS_Upload.Forms[form].Button).click();}, 1000);
+			
 		});
 	});
 </script>

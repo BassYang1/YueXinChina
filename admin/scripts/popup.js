@@ -76,11 +76,11 @@ BS_Popup.validParams = function(params){
 BS_Popup.html = function (params){
 	var html = "<div class=\"popup\" id=\"" + params.ppId + "\">";
 	html += "<div class=\"ppTitlePnl\" id=\"" + params.ppTitlePnlId + "\">";
-	html += "<div class=\"ppTitleMsg l_float\" id=\"" + params.ppTitleId + "\">" + params.title + "</div>";
-	html += "<div class=\"ppTitleBtn r_float\"><a onclick=\"BS_Popup.close('" + params.ppId + "');\" href=\"javascript:void;\">关闭</a></div>";
+	html += "<div class=\"ppTitleMsg f_left\" id=\"" + params.ppTitleId + "\">" + params.title + "</div>";
+	html += "<div class=\"ppTitleBtn f_right\"><a onclick=\"BS_Popup.close('" + params.ppId + "');\" href=\"javascript:void;\">关闭</a></div>";
 	
 	if(params.type == BS_Popup.PopupType.WINDOW){
-		html += "<div class=\"ppTitleBtn r_float\"><a onclick=\"BS_Popup.hide('" + params.ppId + "');\" href=\"javascript:void;\">隐藏</a></div>";
+		html += "<div class=\"ppTitleBtn f_right\"><a onclick=\"BS_Popup.hide('" + params.ppId + "');\" href=\"javascript:void;\">隐藏</a></div>";
 	}
 	
 	html += "</div>";
@@ -107,7 +107,7 @@ BS_Popup.html = function (params){
 //遮罩层
 BS_Popup.shade = function(loading){
 	for(var key in BS_Popup.Wins){ //防止同时显示多个进度条
-		if(key.indexOf("shade")){
+		if(key.indexOf("shade") && $("#" + key).length > 0){
 			return "";
 		}
 	}
@@ -234,7 +234,7 @@ BS_Popup.close = function(popupId){
 
 	var popup = BS_Popup.Wins[popupId];
 	
-	if(typeof popup == "object"){
+	if(typeof popup == "object" && popup != null){
 		BS_Popup.destroy(popupId, popup.Close);
 	}
 }

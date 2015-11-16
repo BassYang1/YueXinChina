@@ -32,4 +32,7 @@ p.cue { margin-top: 5px;}
 .l_align {text-align:left;}
 .f_width{width:100%;}
 .relative{position:relative;}
+.nowrap {overflow:hidden; white-space: nowrap; }
+.cursor{cursor:pointer;}
+.em1{text-indent:1em;}
 /*common end*/

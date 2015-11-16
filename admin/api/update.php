@@ -15,9 +15,9 @@
 				$companyKey = strtolower(isset($_REQUEST["companyKey"]) ? $_REQUEST["companyKey"] : "");
 				$subject = strtolower(isset($_REQUEST["subject"]) ? $_REQUEST["subject"] : "");
 				$content = strtolower(isset($_REQUEST["content"]) ? $_REQUEST["content"] : "");
-				$contentId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0; //是否允许重置添加
+				$contentId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0; //是否允许重复添加
 				
-				if(!empty($companyKey) && $companyKey == "brand_recommend"){
+				if(!empty($companyKey) && $companyKey == "brand_recommend"){ //推荐品牌
 					$company = new Company();
 					$company->companyKey = $companyKey;
 					$company->subject = $subject;
@@ -31,7 +31,7 @@
 						Company::insert($company);
 					}
 				}
-				else{ //将会被移出			
+				else{ //分支将会被移出			
 					foreach($_REQUEST as $key=>$value){
 						$key = strtolower($key);
 						$nokeys = array("type", "module", "action");
@@ -40,7 +40,7 @@
 							$company->content = empty($value) ? "" : $value;
 							$company->companyKey = $key;							
 					
-							if($action == "update" && Company::exist($companyKey )){ //存在，并且需要更新
+							if($action == "update" && Company::exist($key)){ //存在，并且需要更新
 								Company::update($company);
 							}
 							else{
@@ -51,7 +51,7 @@
 				}
 			}
 			else if($action == "del"){
-				$id = isset($_REQUEST["companyId"]) ? $_REQUEST["companyId"] : 0; //是否允许重置添加
+				$id = isset($_REQUEST["companyId"]) ? $_REQUEST["companyId"] : 0; //是否允许重置添
 				$company = new Company(_NONE);
 				$company->id = $id;
 				
@@ -207,7 +207,11 @@
 		try{	
 			Tool::logger(__METHOD__, __LINE__, sprintf("action: %s", $action), _LOG_DEBUG);		
 			$message = new Message(_NONE);
-			$message->messageId = (isset($_REQUEST["messageId"]) ? $_REQUEST["messageId"] : _NONE);
+			$message->messageId = (isset($_REQUEST["id"]) ? $_REQUEST["id"] : _NONE);
+			$message->email = (isset($_REQUEST["email"]) ? $_REQUEST["email"] : "");
+			$message->uname = Tool::unescape((isset($_REQUEST["uname"]) ? $_REQUEST["uname"] : ""));
+			$message->phone = (isset($_REQUEST["phone"]) ? $_REQUEST["phone"] : "");
+			$message->content = Tool::unescape((isset($_REQUEST["message"]) ? $_REQUEST["message"] : ""));
 			
 			if($message->messageId > 0){
 				$message = Message::read($message);
@@ -221,6 +225,14 @@
 			}
 			else if($action == "update"){
 				Message::update($message);
+				
+				$emailResult = false; //发送结果
+				include("email.php"); //发送邮件
+				
+				if($emailResult === false){
+					$result = "邮件回复失败，请重试";
+					Tool::logger(__METHOD__, __LINE__, sprintf("回复邮件[%s]失败，请重试", $message->email), _LOG_ERROR);
+				}
 			}
 			else if($action == "delete"){
 				Message::delete($message);
@@ -231,11 +243,39 @@
 			Tool::logger(__METHOD__, __LINE__, sprintf("数据保存失败: %s", $e->getMessage()), _LOG_ERROR);
 		}
 	}
+	else if($module == "user"){ //用户
+		if($action == "modifypwd"){
+			$loginName = isset($_REQUEST["loginName"]) ? $_REQUEST["loginName"] : "";
+			$password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : "";
+			$npassword = isset($_REQUEST["npassword"]) ? $_REQUEST["npassword"] : "";
+			
+			try{
+				$query = new User(1);
+				$query->loginName = $loginName;
+				$user = User::first($query);
+
+				if (empty($user->loginName)){
+					$result = "用户不存在";					
+				}
+				else if ($user->password != $password){
+					$result = "原始密码不正确";					
+				}
+				else{
+					$user->password = $npassword;
+					User::update($user);
+				}
+			}
+			catch(Exception $e){
+				$result = $e->getMessage();	
+				Tool::logger(__METHOD__, __LINE__, sprintf("数据更新失败: %s", $e->getMessage()), _LOG_ERROR);
+			}			
+		}
+	}
 
 	
 	if(strlen($result) > 0){			
-		Tool::logger(__METHOD__, __LINE__, "{\"status\":\"false\", \"data\": \"" + $result + "\"}", _LOG_DEBUG);
-		echo "{\"status\":\"false\", \"data\": \"" + $result + "\"}";
+		Tool::logger(__METHOD__, __LINE__, "{\"status\":\"false\", \"data\": \"" . $result . "\"}", _LOG_DEBUG);
+		echo "{\"status\":\"false\", \"data\": \"" . $result . "\"}";
 	}
 	else{
 		Tool::logger(__METHOD__, __LINE__, "{\"status\":\"true\", \"data\": \"数据保存成功\"}", _LOG_DEBUG);

@@ -1,6 +1,12 @@
-﻿<?php 
+<?php 
 	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
+	
+	//静态化
+	if(is_file("index.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+		header("Location: index.html");
+		exit; 
+	}
 	
 	//设置模块权限
 	$sections = array("contact" => 1, "company" => 0, "sort" => 1, "recommend" => 1, "case" => 0, "news" => 0);
@@ -11,7 +17,7 @@
 ?>
 <?php 
 	//加载首页显示商器
-	$query = new Product(15);
+	$query = new Product(12);
 	$query->isShowHome = 1;
 	$products = Product::query($query); 	
 	$productHtml = Util::generateProcuctHtml($products);
@@ -56,7 +62,15 @@
 	}
 	else{
 		foreach($contents as $case){
-			$caseHtml .= sprintf("<li><div class=\"pic\"><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\"><img src=\"%s\" width=\"157\" height=\"132\" alt=\"%s\"></a></div><div class=\"p1\"><p><a href=\"case.php?id=%u\" title=\"%s\" target=\"_blank\">%s</a></p><b class=\"red\"><a href=\"case.php?id=%u\" target=\"_blank\">【案例详情介绍】</a></b></div></li>", 
+			$caseHtml .= sprintf("<li>
+				<div class='pic'>
+					<a href='cdetail.php?id=%u' title='%s' target='_blank'><img src='%s' width='157' height='132' alt='%s'></a>
+				</div>
+				<div class='p1'>
+					<p><a href='cdetail.php?id=%u' title='%s' target='_blank'>%s</a></p>
+					<b class='red'><a href='cdetail.php?id=%u' target='_blank'>【案例详情介绍】</a></b>
+				</div>
+			</li>", 
 			$case->contentId, 
 			$case->subject, 
 			str_replace("../", "", $case->mImage), 
@@ -74,6 +88,7 @@
 	<?php include_once("include.php"); ?>
 	</head>
 	<body>
+    <img src="countor.php" width="0" height="0" /> <!--访问量统计-->
 	<!-- head & nav & share-->
 	<?php include_once("head.php"); ?>
 

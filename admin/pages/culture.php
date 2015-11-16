@@ -10,7 +10,13 @@
 			
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	
-				BS_Popup.create({message: result? "[公司文化]保存成功" : "[公司文化]保存失败", title: "公司信息"});
+				
+				if(result.status == true){
+					BS_Popup.create({message: result? "[公司文化]保存成功" : "[公司文化]保存失败", title: "公司信息"});
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}				
 			});
 		});
 	});

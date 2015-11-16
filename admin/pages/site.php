@@ -51,7 +51,13 @@
 
 			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);	
-				BS_Popup.create({message: result? "[网站基本信息]保存成功" : "[网站基本信息]保存失败", title: "网站信息"});
+				
+				if(result.status == true){
+					BS_Popup.create({message: result? "[网站基本信息]保存成功" : "[网站基本信息]保存失败", title: "网站信息"});
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}				
 			});	
 		});			
 	});

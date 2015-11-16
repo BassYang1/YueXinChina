@@ -1,4 +1,4 @@
-﻿<!-- bottom start -->
+<!-- bottom start -->
 <?php
 
 	//读取友情连接
@@ -57,32 +57,15 @@
             </ul>
         </div>
         <div class="feedback f_right">
-            <form id="form2" name="form2" method="post" action="">
-                <ul>
-                    <li>
-                        <div class="b_title">
-                            在线留言<a name="messages">&nbsp;</a>
-                        </div>
-                    </li>
-                    <li>
-                        <input name="name" type="text" class="input" id="name" maxlength="50" value="姓名">
-                    </li>
-                    <li>
-                        <input name="phone" type="text" class="input" id="phone" maxlength="100" value="联系电话">
-                    </li>
-                    <li>
-                        <input name="title" type="text" class="input" id="title" maxlength="100" value="标题">
-                    </li>
-                    <li>
-                        <textarea name="content" class="input1" id="content">内容</textarea>
-                    </li>
-                    <li>
-                        <input type="image" src="images/submit.jpg"
-                               width="48" height="21" class="f_right">
-                    </li>
-                    <li class="clear"></li>
-                </ul>
-            </form>
+			<ul>
+                <li><div class="b_title">在线留言<a name="messages">&nbsp;</a></div></li>
+				<li><input type="text" class="input" id="name" maxlength="50" value="姓名"></li>
+				<li><input type="text" class="input" id="email" maxlength="100" value="邮箱"></li>
+				<li><input type="text" class="input" id="phone" maxlength="100" value="联系电话"></li>
+				<li><textarea class="input1" id="message">内容</textarea></li>
+				<li><span id="validMsg" class="f_left" style="font-size:11px; color:#AB2F2F;"></span><input type="image" onclick="addMessage()" src="images/submit.jpg" width="48" height="21" class="f_right"></li>
+				<li class="clear"></li>
+			</ul>
         </div>
         <div class="clear">
         </div>
@@ -107,12 +90,37 @@
 <div id="asid_share" style="position: fixed; width: 40px; bottom: 20%; right: 0; z-index: 890;">
 	<div class="asid_share_box relative"><a href="#messages">
 		<img alt="给我留言" class="adid_icon" src="images/icon_cj.png" style="display: inline;"></a></div>
-	<div class="asid_share_box relative"><a href="#online_contact">
+	<div class="asid_share_box relative"><a href="index.php#online_contact">
 		<img alt="在线交流" class="adid_icon" src="images/icon_qq.png" style="display: inline;"></a></div>
 	<div class="asid_share_box relative">
-		<a href="#online_contact">
+		<a href="index.php#online_contact">
 			<img alt="扫二微码" class="adid_icon" src="images/icon_sweep.png" style="display: inline;"></a>	</div>
 	<div class="asid_share_box relative" id="Div2" style="display: block;"><a href="#top">
 		<img alt="返回顶部" class="adid_icon" src="images/icon_back.png" style="display: inline;"></a></div>
 </div>
+<!--
+<div class="asid_share" id="asid_share">
+        <div class="asid_share_box relative"><a href="mailto:sales@kirgen.com">
+            <img alt="给我留言" class="adid_icon" src="images/icon_cj.png" style="display: inline;"></a></div>
+        <div class="asid_share_box relative"><a href="Askus.asp">
+            <img alt="在线咨询" class="adid_icon" src="images/icon_qq.png" style="display: inline;"></a></div>
+        <div class="asid_share_box relative">
+            <a href="#">
+                <img alt="扫二微码" class="adid_icon" src="images/icon_sweep.png" style="display: inline;"></a>
+            <div class="asid_share_triangle" id="all-none" style="display: none;">
+                <em class="border_sj"></em>
+                <span class="con_sj"></span>
+            </div>
+            <div class="asid_sha_layer" id="Div1" style="display: none;">
+                <p class="sweep_img">
+
+                    <img src="images/科进网页二维码.png" alt="二维码">
+
+                </p>
+            </div>
+        </div>
+        <div class="asid_share_box relative" id="Div2" style="display: block;"><a href="javascript:void(0);">
+            <img alt="返回顶部" class="adid_icon" src="images/icon_back.png" style="display: inline;"></a></div>
+</div>
+-->
 <!--contact float div end -->

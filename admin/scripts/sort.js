@@ -81,10 +81,15 @@ BS_Pro.loadList = function(curPage, newSearch){
 
 					BS_Popup.create({message: "确定删除此商品?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
 						var data = {type: "detail", module: "product", action: "delete", productId: $(row).parent().parent().find(".proCheck input:first").val()};
-						BS_Common.update(data, function(){
-							BS_Popup.create({message: "删除成功"});
-							//$(row).parent().parent().remove();
-							BS_Pro.loadList(parseInt($("#curPage").val()), true);
+						BS_Common.update(data, function(result){
+							if(result.status == true){
+								BS_Popup.create({message: "删除成功"});
+								//$(row).parent().parent().remove();
+								BS_Pro.loadList(parseInt($("#curPage").val()), true);
+							}
+							else{
+								BS_Popup.create({message: result.data});
+							}
 						});
 					});
 				});
@@ -172,7 +177,13 @@ BS_Pro.setRecommend = function(productId, isRecommend){
 	var data = {type: "isRecommend", module: "product", action: "update"};
 	data.productId = productId;
 	data.isRecommend = isRecommend ? 1 : 0;
-	BS_Common.update(data);
+	BS_Common.update(data, function(result){
+		if(result.status == true){
+		}
+		else{
+			BS_Popup.create({message: result.data});
+		}
+	});
 };
 
 BS_Pro.setShowHome = function(productId, isShowHome){
@@ -183,5 +194,11 @@ BS_Pro.setShowHome = function(productId, isShowHome){
 	var data = {type: "isShowHome", module: "product", action: "update"};
 	data.productId = productId;
 	data.isShowHome = isShowHome ? 1 : 0;
-	BS_Common.update(data);
+	BS_Common.update(data, function(result){
+		if(result.status == true){
+		}
+		else{
+			BS_Popup.create({message: result.data});
+		}
+	});
 };

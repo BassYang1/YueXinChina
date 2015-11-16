@@ -46,7 +46,7 @@ class Product{
 			Tool::logger(__METHOD__, __LINE__, sprintf("插入商品SQL:%s", $sql), _LOG_DEBUG);
 			
 			
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$conn->query($sql);	
 
 			$sql = "select max(product_id) as product_id from product;";
@@ -59,8 +59,8 @@ class Product{
 				}
 			}
 			
-			DBHelp2::free($data);
-			DBHelp2::close($conn);
+			DBHelp::free($data);
+			DBHelp::close($conn);
 			
 			Tool::logger(__METHOD__, __LINE__, "数据插入成功", _LOG_DEBUG);
 		}
@@ -85,9 +85,9 @@ class Product{
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("更新商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -110,9 +110,9 @@ class Product{
 
 			Tool::logger(__METHOD__, __LINE__, sprintf("删除商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			
 			return true;
 		}		
@@ -165,7 +165,7 @@ class Product{
 			
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品SQL: %s", $sql), _LOG_DEBUG);
 						
-			$conn = DBHelp2::getConnection();
+			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
 
 			if(!empty($data) && $data->num_rows > 0){
@@ -187,7 +187,7 @@ class Product{
 				}
 			}
 				
-			DBHelp2::close($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品%u条.", count($products)), _LOG_DEBUG);
 			
 			return $products;
@@ -261,7 +261,7 @@ class Product{
 				}
 			}
 				
-			DBHelp::closeConn($conn);
+			DBHelp::close($conn);
 			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品总数%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;

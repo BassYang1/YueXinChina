@@ -22,7 +22,7 @@ select * from doc_file;
 drop table message;
 create table message(
 	message_id int primary key auto_increment,
-	title varchar(30),
+	email varchar(30),
 	content text,
 	phone varchar(30),
 	uname varchar(30),
@@ -65,6 +65,27 @@ create table product(
 	is_showhome tinyint default 0,
 	rec_date timestamp default now()
 )engine=innodb default charset=utf8 auto_increment=1;
+
+--用户表
+drop table yuser;
+create table yuser(
+	user_id int primary key auto_increment,
+	login_name varchar(20) unique,
+	password varchar(20),
+	rec_date timestamp default now()
+)engine=innodb default charset=utf8 auto_increment=1;
+insert into yuser(login_name, password) values('admin', 'yuexinchina');
+
+--统计器
+drop table countor;
+create table countor(
+	count_id int primary key auto_increment,
+	visit_count int,
+	count_date varchar(10),
+	rec_date timestamp default now()
+)engine=innodb default charset=utf8 auto_increment=1;
+--insert into countor(visit_count, count_date)
+--values(10, '2015.11.10'),(21, '2015.11.12'),(4, '2015.11.13'),(7, '2015.11.14'),(45, '2015.11.15'),(83, '2015.11.16');
 
 select * from doc_file;
 select * from message;

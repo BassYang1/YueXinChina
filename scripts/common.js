@@ -9,8 +9,15 @@ $(function() {
 		 autoPage:true,
 		 trigger:"click",
 		 interTime:8000
-	});	
+	});		
 	
+	/*
+	$("#name").val("陈先生");
+	$("#email").val("672836012@qq.com");
+	$("#phone").val("12345678901");
+	$("#message").val("很高兴认识你，来你们的官网看看。");
+	*/
+
 	//联系我们滚动特效
     $('#asid_share').hhShare({
         cenBox: 'asid_share_box',  //里边的小层
@@ -71,24 +78,24 @@ $(function() {
                 $("#phone").val("联系电话");
             }
         });
-        $("#title").focus(function() {			  
-            if ($("#title").val() == "标题") {
-            	$("#title").val("");
+        $("#email").focus(function() {			  
+            if ($("#email").val() == "邮箱") {
+            	$("#email").val("");
 			}
         });
-        $("#title").blur(function() {
-            if ($("#title").val() == "") {
-                $("#title").val("标题");
+        $("#email").blur(function() {
+            if ($("#email").val() == "") {
+                $("#email").val("邮箱");
             }
         });
-        $("#content").focus(function() {	  
-            if ($("#content").val() == "内容") {
-            	$("#content").val("");
+        $("#message").focus(function() {	  
+            if ($("#message").val() == "内容") {
+            	$("#message").val("");
 			}
         });
-        $("#content").blur(function() {
-            if ($("#content").val() == "") {
-                $("#content").val("内容");
+        $("#message").blur(function() {
+            if ($("#message").val() == "") {
+                $("#message").val("内容");
             }
         });
 });
@@ -129,4 +136,61 @@ function addFavorite() {
 //替换空格
 String.prototype.trim = function () {
     return this.replace(/[ ]/g, "");
+}
+
+//留言处理
+function addMessage(){
+	var name = $.trim($("#name").val());
+	var email = $.trim($("#email").val());
+	var phone = $.trim($("#phone").val());
+	var message = $.trim($("#message").val());
+				
+	var validMsg = "";
+	var emailReg = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+	var mobileReg=/^1\d{10}$/;   
+	var phoneReg=/^0\d{2,3}-?\d{7,8}$/;
+	
+	if(name == "" || name == "姓名"){
+		validMsg += "<div>*姓名不能为空</div>";
+	}
+	
+	if(!emailReg.test(email)){
+		validMsg += "<div>*邮箱格式不正确</div>";
+	}
+	
+	if(!mobileReg.test(phone) && !phoneReg.test(phone)){
+		validMsg += "<div>*联系电话不正确</div>";
+	}
+	
+	if(validMsg != ""){
+		$("#validMsg").html(validMsg);		
+		setTimeout("$('#validMsg').html('')", 3000);
+		return false;
+	}
+
+	var data = {module: "message", type: "detail", action: "insert", uname: escape(name), email: email, phone: phone, message: escape(message)};
+	var url = "admin/api/update.php";
+
+	var result = "我们收到你的留言了";
+    $.ajax({ url: url, data: data, type: "POST", async: false, dataType: "JSON", 
+		success: function(response){
+			if(typeof response != "object" || "FALSE" == response.status.toUpperCase()){
+				result = "对不起, 暂时无法接收你的留言";
+			}
+			else{
+				$("#name").val("");
+				$("#email").val("");
+				$("#phone").val("");
+				$("#message").val("");
+			}
+		}, 
+		error: function(a, b, c){
+			result = "对不起, 暂时无法接收你的留言";
+		}
+	});
+
+	$("#validMsg").html(result);		
+	setTimeout("$('#validMsg').html('')", 3000);
+
+	return true;
 }

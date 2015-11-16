@@ -1,39 +1,28 @@
-﻿<?php 
+<?php 
+	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 
-	$sections = array("sort" => 1, "company" => 0, "recommend" => 1, "contact" => 0);
+	//设置模块权限
+	$sections = array("contact" => 0, "company" => 0, "sort" => 0, "recommend" => 1, "case" => 0, "news" => 1);
+?>
 
-	$caseId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-	$case = new Content(_QUERY_ALL);
-	$case->contentId = $caseId;
+<?php //案例信息
+	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0;
+	$query = new Content(_QUERY_ALL);
+	$query->contentId = $id;
 
-	$case = Content::read($case);
+	$detail = Content::read($query);
+	$contentDetail = $detail->content;
+	if(empty($content)) $content = "<b>暂无详细</b>";
 
-	$location = sprintf("当前位置 > <span>成功案例</span> > <span>%s</span>", $case->subject);
+	//当前位置
+	$location = sprintf("当前位置 > <span><a href='case.php'>成功案例</a></span> > <span>%s</span>", $detail->subject);
+	$page_title = $detail->subject;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo Company::content("site_name", false); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
-		<meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
-		<link href="css/base.css" rel="stylesheet" type="text/css" />
-		<link href="css/frame.css" rel="stylesheet" type="text/css" />
-		<!--flash jq-->
-		<script src="scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-		<!-- customized js-->
-		<script src="scripts/common.js" type="text/javascript"></script>
-		<script src="scripts/rollpic.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript">
-			function show(i) {
-				if (i.style.display == "none") {
-					i.style.display = "";
-				} else {
-					i.style.display = "none";
-				}
-			}
-		</script>
+	<?php include_once("include.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
@@ -56,21 +45,23 @@
                 <div class="ct_right">
                     <div class="clear">
                     </div>
-                    <div class="m_title hidden">
-                        <div class="m_title_name"></div>
-                        <div class="m_title_more_link">
+                    <div class="m_title">
+                        <div class="m_title_name">成功案例</div>
+                        <div class="m_title_more_link hidden">
                             <a href="">
                                 <img src="images/small_24.jpg" width="44"
                                     height="13" /></a></div>
-                        <div class="clear">
-                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="ct_r_panel">
-                        <div>
-							<div class="f_left"><img src="<?php echo empty($case->mImage) ? "images/noimg.jpg" : str_replace("../", "", $case->mImage); ?>" alt="<?php echo $case->subject; ?>" width="300" height= "200" /></div>
-							<div class="f_right"><?php echo $case->subject; ?></div>
+                    <div class="ct_r_content">
+						<div class="d_title_pnl">
+							<div class='d_title'>
+								<div class="d_t_name"><?php echo $detail->subject; ?></div>		
+							</div>
+							<div class="clear"></div>
 						</div>
-						<div><?php echo $case->content; ?></div>
+						<div class="d_detail"><?php echo $contentDetail; ?></div>
+						<div class="d_d_links"><?php echo Util::linkOtherContent($id, "case"); ?></div>
                     </div>
                 </div>
             </div>
@@ -81,6 +72,8 @@
 
 	<!-- barcode & contact & link & reply -->
 	<?php include_once("foot.php"); ?>
-	
+	<script language="javascript" type="text/javascript">
+		$(".d_detail").find("*").css({"font-size": "13px", "text-indent" : "2em"});
+	</script>
 	</body>
 </html>

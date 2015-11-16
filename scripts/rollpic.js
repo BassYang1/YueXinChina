@@ -9,9 +9,20 @@
           var MoveTimeObj_1;
           var MoveWay_1 = "right";
           var Comp_1 = 0;
-          var AutoPlayObj_1 = null; GetObj("List2_1").innerHTML = GetObj("List1_1").innerHTML; GetObj('ISL_Cont_1').scrollLeft = fill_1 >= 0 ? fill_1 : GetObj('List1_1').scrollWidth - Math.abs(fill_1); GetObj("ISL_Cont_1").onmouseover = function() { clearInterval(AutoPlayObj_1) }
+          var AutoPlayObj_1 = null; 
+		  GetObj("List2_1").innerHTML = GetObj("List1_1").innerHTML; 
+		  GetObj('ISL_Cont_1').scrollLeft = fill_1 >= 0 ? fill_1 : GetObj('List1_1').scrollWidth - Math.abs(fill_1); 
+		  
+		  GetObj("ISL_Cont_1").onmouseover = function() { 
+			clearInterval(AutoPlayObj_1) 
+		  }
+		  
           GetObj("ISL_Cont_1").onmouseout = function() { AutoPlay_1() }
-          AutoPlay_1(); function GetObj(objName) { if (document.getElementById) { return eval('document.getElementById("' + objName + '")') } else { return eval('document.all.' + objName) } }
+          AutoPlay_1(); 
+		  function GetObj(objName) { 
+		  if (document.getElementById) 
+		  { 
+	  return eval('document.getElementById("' + objName + '")') } else { return eval('document.all.' + objName) } }
           function AutoPlay_1() { clearInterval(AutoPlayObj_1); AutoPlayObj_1 = setInterval('ISL_GoDown_1();ISL_StopDown_1();', 5000) }
           function ISL_GoUp_1() { if (MoveLock_1) return; clearInterval(AutoPlayObj_1); MoveLock_1 = true; MoveWay_1 = "left"; MoveTimeObj_1 = setInterval('ISL_ScrUp_1();', Speed_1); }
           function ISL_StopUp_1() {

@@ -9,8 +9,14 @@
 			var data = {type: "content", module: "company", action: "update", company_honor: BS_Common.getEDContent("#txtHonor")};
 				
 			BS_Common.update(data, function(result){
-				BS_Popup.close(shade);	
-				BS_Popup.create({message: result? "[资质证书]保存成功" : "[公司文化]保存失败", title: "资质证书"});
+				BS_Popup.close(shade);				
+				
+				if(result.status == true){
+					BS_Popup.create({message: result? "[资质证书]保存成功" : "[公司文化]保存失败", title: "资质证书"});
+				}
+				else{
+					BS_Popup.create({message: result.data});
+				}				
 			});
 		});
 	});

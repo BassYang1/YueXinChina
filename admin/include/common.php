@@ -1,4 +1,7 @@
-﻿<?php
+<?php
+	//auto load classes
+	require_once("loadClass.php");
+	
 	session_start();
 	error_reporting(0);
 	ini_set('display_errors', 'On'); 
@@ -9,14 +12,14 @@
 		echo wddx_serialize_value($vars, "Variables");
 		die();
 	}
-	set_error_handler("handleError");
-	
-	//auto load classes
-	require_once("loadClass.php");
+	set_error_handler("handleError");	
 	
 	//page map
 	$pages = array(
 		"home" => "home.php", 
+		//用户
+		"modfypwd" => "modify_pwd.php",
+		
 		//公司信息
 		"company" => "company.php", 
 		"contact" => "contact.php", 
@@ -53,10 +56,4 @@
 	);
 
 	$default = "pages/home.php";
-	$lbl_current_page = "CURRENT_PAGE";
-	
-	//login user
-	$lblCurrentUser = "CURRENT_USER";
-	$user = new User("admin1");
-	$_SESSION[$lblCurrentUser] = $user;
 ?>

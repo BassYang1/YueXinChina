@@ -77,10 +77,8 @@
 						Tool::logger(__METHOD__, __LINE__, "删除可能的历史记录", _LOG_INFOR);
 						
 						$notDel = array("company_banner", "case_image", "company_links", "material_file"); //不需要删除旧数据
-						$docFile = new DocFile(_QUERY_ALL);
-						
-						$docFile->fileKey = $fileKey;
-;
+						$docFile = new DocFile(_QUERY_ALL);						
+						$docFile->fileKey = $fileKey;;
 						$docFile->inModule = $module;
 
 						if(!in_array($fileKey, $notDel)){

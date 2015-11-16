@@ -1,4 +1,4 @@
-﻿<?php //init
+<?php //init
 	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 	

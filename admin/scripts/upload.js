@@ -347,12 +347,17 @@ BS_Upload.choose = function(link){
 
 BS_Upload.del = function(link){
 	BS_Upload.CopyLink = "";
-	BS_Common.update({type: "file", action: "del", file_path: link}, function(){
-		$("img[src$='" + link + "']").parent().remove();
+	BS_Common.update({type: "file", action: "del", file_path: link}, function(result){
+		if(result.status == true){
+			$("img[src$='" + link + "']").parent().remove();
 
-		if($(".flUploadView").find("img").size() <= 0){
-			var newImg = $(".flUploadView").prepend(BS_Upload.ImgHtml).find(".viewItem:first");
-			newImg.find("img").attr({"src": BS_Upload.NoImg, "alt": "noimg"}).parent().find("a").hide();
+			if($(".flUploadView").find("img").size() <= 0){
+				var newImg = $(".flUploadView").prepend(BS_Upload.ImgHtml).find(".viewItem:first");
+				newImg.find("img").attr({"src": BS_Upload.NoImg, "alt": "noimg"}).parent().find("a").hide();
+			}
+		}
+		else{
+			BS_Popup.create({message: result.data});
 		}
 	});
 }

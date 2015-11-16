@@ -1,32 +1,33 @@
-﻿<?php 
+<?php 
+	require_once("include/Util.php"); 
 	require_once("admin/include/common.php"); 
 
-	$sections = array("sort" => 0, "company" => 1, "recommend" => 1, "contact" => 0);
-	$location = "当前位置 > <span>公司信息</span> > <span>公司文化</span>";
+	//静态化
+	if(is_file("culture.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+		header("Location: culture.html");
+		exit; 
+	}
+	
+	//设置模块权限
+	$sections = array("contact" => 0, "company" => 1, "sort" => 0, "recommend" => 1, "case" => 1, "news" => 1);
+?>
+
+<?php //新闻信息
+	$query = new Content(_QUERY_ALL);
+	$query->contentKey = "company_culture";
+
+	$detail = Content::read($query);
+	$contentDetail = $detail->content;
+	if(empty($content)) $content = "<b>暂无详细</b>";
+
+	//当前位置
+	$location = "当前位置 > <span>公司文化</span>";
+	$page_title = "公司文化";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo Company::content("site_name", false); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
-		<meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
-		<link href="css/base.css" rel="stylesheet" type="text/css" />
-		<link href="css/frame.css" rel="stylesheet" type="text/css" />
-		<!--flash jq-->
-		<script src="scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-		<!-- customized js-->
-		<script src="scripts/common.js" type="text/javascript"></script>
-		<script src="scripts/rollpic.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript">
-			function show(i) {
-				if (i.style.display == "none") {
-					i.style.display = "";
-				} else {
-					i.style.display = "none";
-				}
-			}
-		</script>
+	<?php include_once("include.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
@@ -49,17 +50,22 @@
                 <div class="ct_right">
                     <div class="clear">
                     </div>
-                    <div class="m_title hidden">
-                        <div class="m_title_name"></div>
-                        <div class="m_title_more_link">
+                    <div class="m_title">
+                        <div class="m_title_name">公司文化</div>
+                        <div class="m_title_more_link hidden">
                             <a href="">
                                 <img src="images/small_24.jpg" width="44"
                                     height="13" /></a></div>
-                        <div class="clear">
-                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="ct_r_panel">
-                        <?php echo Company::content("company_culture", false); ?>
+                    <div class="ct_r_content">
+						<div class="d_title_pnl hidden">
+							<div class='d_title'>
+								<div class="d_t_name"><?php echo $detail->subject; ?></div>		
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="d_detail"><?php echo $contentDetail; ?></div>
                     </div>
                 </div>
             </div>
@@ -70,6 +76,8 @@
 
 	<!-- barcode & contact & link & reply -->
 	<?php include_once("foot.php"); ?>
-	
+	<script language="javascript" type="text/javascript">
+		//$(".d_detail").find("*").css({"font-size": "13px", "text-indent" : "2em"});
+	</script>
 	</body>
 </html>

@@ -30,18 +30,24 @@
 			data.subject = $.trim($("#subject").val());
 			data.content = BS_Common.getEDContent("#recruitContent");
 					
-			BS_Common.update(data, function(){
-				BS_Popup.close(shade1);
-				if(recruitId > 0){
-					BS_Common.nav("recruit");
+			BS_Common.update(data, function(result){
+				BS_Popup.close(shade1);				
+				
+				if(result.status == true){
+					if(recruitId > 0){
+						BS_Common.nav("recruit");
+					}
+					else{
+						BS_Popup.create({message: "保存招聘信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+							BS_Common.nav("recruit");
+						}, 
+						function(){
+							location.reload();
+						});
+					}
 				}
 				else{
-					BS_Popup.create({message: "保存招聘信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
-						BS_Common.nav("recruit");
-					}, 
-					function(){
-						location.reload();
-					});
+					BS_Popup.create({message: result.data});
 				}
 			});
 		});

@@ -34,9 +34,9 @@ $banner = DocFile::first("site_banner");
         <div class="banner">
 			<?php echo $bannerHtml; ?>
         </div>
-        <div class="banner_btn">
-			<?php echo $bannerBtn; ?>
-        </div>
+        <!--<div class="banner_btn">
+			<?php //echo $bannerBtn; ?>
+        </div>-->
     </div>
     <!--banner end-->
 

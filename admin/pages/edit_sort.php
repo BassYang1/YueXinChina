@@ -26,7 +26,7 @@
 				return;
 			}
 
-			BS_Common.update(data, function(){
+			BS_Common.update(data, function(result){
 				BS_Popup.close(shade);
 				if(sortId > 0){
 					BS_Common.nav("sort");

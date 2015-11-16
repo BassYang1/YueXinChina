@@ -5,7 +5,6 @@
 	var action = (materialId > 0 ? "update" : "insert");
 
 	$(function(){
-		BS_Common.loadContentEditor("#materialContent");
 		BS_Common.initEditor();
 		BS_Common.setMenu(".m_material");
 
@@ -31,24 +30,30 @@
 			var data = {type: "detail", module: BS_Content.Module, action: action, contentId: materialId};
 
 			data.subject = $.trim($("#subject").val());
-			data.content = BS_Common.getEDContent("#materialContent");
+			data.content = $.trim($("#materialContent").val());
 
 			if(files != null && files.savedPath != ""){
 				data.mImage = files.savedPath;
 			}
 
-			BS_Common.update(data, function(){
-				BS_Popup.closeAll();
-				if(materialId > 0){
-					BS_Common.nav("material");
+			BS_Common.update(data, function(result){
+				BS_Popup.closeAll();					
+				
+				if(result.status == true){
+					if(materialId > 0){
+						BS_Common.nav("material");
+					}
+					else{
+						BS_Popup.create({message: "上传资料成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+							BS_Common.nav("material");
+						}, 
+						function(){
+							location.reload();
+						});
+					}
 				}
 				else{
-					BS_Popup.create({message: "上传资料成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
-						BS_Common.nav("material");
-					}, 
-					function(){
-						location.reload();
-					});
+					BS_Popup.create({message: result.data});
 				}
 			});
 		}
