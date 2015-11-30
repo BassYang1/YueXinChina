@@ -8,24 +8,41 @@
 	$target = explode("\\admin\\", __FILE__, 2)[0];
 	
 	$result = "";
+	
+	/*
 	if(empty($result)){
-		$result = Tool::staticPage(sprintf("%s/index.php", $source), sprintf("%s\\index.html", $target)); //静态化首页
+		$result = Tool::staticPage(sprintf("%s/head.php", $source), sprintf("%s\\head.html", $target)); //页头
+		Tool::logger(__METHOD__, __LINE__, "页头静态化成功", _LOG_DEBUG);
 	}
 	
 	if(empty($result)){
-		Tool::staticPage(sprintf("%s/company.php", $source), sprintf("%s\\company.html", $target)); //静态化公司信息
+		$result = Tool::staticPage(sprintf("%s/foot.php", $source), sprintf("%s\\foot.html", $target)); //页尾
+		Tool::logger(__METHOD__, __LINE__, "页尾静态化成功", _LOG_DEBUG);
+	}*/
+
+	if(empty($result)){
+		$result = Tool::staticPage(sprintf("%s/index.php", $source), sprintf("%s\\index.html", $target)); //首页
+		Tool::logger(__METHOD__, __LINE__, "首页静态化成功", _LOG_DEBUG);
 	}
 	
 	if(empty($result)){
-		Tool::staticPage(sprintf("%s/culture.php", $source), sprintf("%s\\culture.html", $target)); //静态化企业文化
+		Tool::staticPage(sprintf("%s/company.php", $source), sprintf("%s\\company.html", $target)); //公司信息
+		Tool::logger(__METHOD__, __LINE__, "公司信息静态化成功", _LOG_DEBUG);
 	}
 	
 	if(empty($result)){
-		Tool::staticPage(sprintf("%s/honor.php", $source), sprintf("%s\\honor.html", $target)); //静态化企业荣誉
+		Tool::staticPage(sprintf("%s/culture.php", $source), sprintf("%s\\culture.html", $target)); //企业文化
+		Tool::logger(__METHOD__, __LINE__, "企业文化静态化成功", _LOG_DEBUG);
 	}
 	
 	if(empty($result)){
-		Tool::staticPage(sprintf("%s/spirit.php", $source), sprintf("%s\\spirit.html", $target)); //静态化企业风貌
+		Tool::staticPage(sprintf("%s/honor.php", $source), sprintf("%s\\honor.html", $target)); //企业荣誉
+		Tool::logger(__METHOD__, __LINE__, "企业荣誉静态化成功", _LOG_DEBUG);
+	}
+	
+	if(empty($result)){
+		Tool::staticPage(sprintf("%s/spirit.php", $source), sprintf("%s\\spirit.html", $target)); //企业风貌
+		Tool::logger(__METHOD__, __LINE__, "企业风貌静态化成功", _LOG_DEBUG);
 	}
 	
 	if(empty($result)){

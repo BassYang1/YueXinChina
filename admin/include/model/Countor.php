@@ -28,7 +28,7 @@ class Countor{
 				$sql = sprintf("update countor set visit_count=visit_count+1, rec_date=now() where count_date='%s'", date("Y.m.d"));
 			}
 			else{
-				$sql = sprintf("insert into countor(visit_count, count_date) values(1, %s);", date("Y.m.d"));
+				$sql = sprintf("insert into countor(visit_count, count_date) values(1, '%s');", date("Y.m.d"));
 			}
 			
 			$conn->query($sql);			

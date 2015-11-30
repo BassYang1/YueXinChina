@@ -1,5 +1,14 @@
 <!-- bottom start -->
 <?php
+	/*require_once("include/Util.php"); 
+	require_once("admin/include/common.php"); 
+
+	//静态化
+	if(is_file("foot.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+		//header("Location: foot.html");		
+		require_once("head.html"); 
+		exit; 
+	}*/
 
 	//读取友情连接
 	$links = DocFile::get("company_links");
@@ -28,6 +37,8 @@
 	);
 ?>
 
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div class="bottom_box">
     <div class="bottom">
         <div id="barcode" class="f_left barcode">

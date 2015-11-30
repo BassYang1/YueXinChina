@@ -71,7 +71,7 @@
 			<!-- menu start -->
             <div class="ct_left f_left">
 				<!-- contact & recommend & sort & company -->
-				<?php include_once("m_left.php"); ?>
+				<?php include_once("mleft.php"); ?>
             </div>
             <!-- menu end -->
 			

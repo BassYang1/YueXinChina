@@ -1,16 +1,48 @@
 ﻿
 $(function() {
 	//banner
-	jQuery("#banner_box").slide({
+	/*jQuery("#banner_box").slide({
 		 titCell:".banner_btn ul", 
 		 mainCell:".banner ul", 
 		 effect:"fold",  
 		 autoPlay:true, 
 		 autoPage:true,
 		 trigger:"click",
-		 interTime:8000
-	});		
+		 interTime:3000
+	});*/
 	
+	var adapt = function(){
+		$(".banner img").height($(".banner img").width() * 0.4); //banner长宽自适应
+	};
+
+	//页面大小改变
+	adapt();
+	$(window).resize(adapt);
+
+	var silde = function(){
+		var len = $(".banner img").length;
+
+		var banner = null;
+
+		$(".banner img").each(function(i){
+			if($(this).hasClass("cur_banner")){
+				if(i < len - 2){
+					banner = $(".banner img:eq(" + (i + 1) + ")");					
+				}
+			}
+		});
+		
+		if(banner == null){
+			banner = $(".banner img:eq(0)");	
+		}
+
+		$(".banner img").removeClass("cur_banner").addClass("hidden");
+		banner.removeClass("hidden").addClass("cur_banner");
+	}
+	
+	silde();
+	setInterval(silde, 3000);
+
 	/*
 	$("#name").val("陈先生");
 	$("#email").val("672836012@qq.com");
@@ -32,36 +64,26 @@ $(function() {
 	$(".ct_l_section :first").removeClass("mt5");
 
 	//content部分左右等高
-    var h1 = $(".ct_left").height();
-	var h2 = $(".ct_right").height();
-	var h3 = $(".ct_left").find(".ct_l_section:last").height();
-
-	if (h1 > h2) {
-		$(".ct_right").height(h1);
-	}
-	else {
-		$(".ct_left").find(".ct_l_section:last").height(h3 + h2 - h1);
-	}
-
-	/*
-	var h1 = $(".company").parent().height();
-	var h2 = $(".news").parent().height();
-
-	if (h1 > h2) {
-		$(".news").parent().height(h1);
-	}
-	else {
-		$(".company").parent().height(h2);
-	}
-	*/
+	if(location.href.indexOf("pdetail") < 0){ //商品详细不执行
+		var h1 = $(".ct_left").height();
+		var h2 = $(".ct_right").height();
+		var h3 = $(".ct_left").find(".ct_l_section:last").height();
 	
-	
-	//留言处理
-	$("#name").focus(function() {								  
-        if ($("#name").val() == "姓名") {
-            	$("#name").val("");
+		if (h1 > h2) {
+			$(".ct_right").height(h1);
 		}
-    });
+		else {
+			$(".ct_left").find(".ct_l_section:last").height(h3 + h2 - h1);
+		}
+		
+		
+		//留言处理
+		$("#name").focus(function() {								  
+			if ($("#name").val() == "姓名") {
+					$("#name").val("");
+			}
+		});
+	}
 	
     $("#name").blur(function() {
         if ($("#name").val() == "") {

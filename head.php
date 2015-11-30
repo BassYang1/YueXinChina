@@ -1,4 +1,15 @@
 <?php
+	/*require_once("include/Util.php"); 
+	require_once("admin/include/common.php"); 
+
+	//静态化
+	if(is_file("head.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+		Tool::logger(__METHOD__, __LINE__, "加载静态页头", _LOG_DEBUG);
+		//header("Location: head.html");		
+		require_once("head.html"); 
+		exit; 
+	}*/
+
 	$navHtml = "";
 	$query = new Company(_QUERY_ALL);
 	$query->companyKey = "brand_recommend";
@@ -22,6 +33,14 @@
 	}
 	
 ?>
+
+<?php  //二维码
+	if(empty($barcode)){
+		$files = Company::files("company_barcode"); 
+		$barcode = empty($files) ? DocFile::noimg() : $files[0];
+	}
+?>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!--header start-->
     <div id="header_box">
         <!--欢迎_分享连接 开始-->
@@ -65,7 +84,7 @@
                         alt=""></a></div>
             <!--logo-->
             <div class="contact_code f_right">
-                <img src="images/yuexin13_05.png" height="85"
+                <img src="<?php echo str_replace("../", "", $barcode->savedPath); ?>" height="85"
                     alt="" /><img src="images/yuexin13_06.png"
                         height="85" alt="" /></div>
             <!--right-->

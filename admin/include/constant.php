@@ -14,5 +14,5 @@ define("_BOOL", 1); //数据类型: boolean
 define("_INT", 2); //数据类型: int
 
 //是否启用cache
-define("_ENABLE_CACHE", TRUE);
+define("_ENABLE_CACHE", FALSE);
 ?>
