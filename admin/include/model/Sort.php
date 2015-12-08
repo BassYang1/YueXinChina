@@ -34,7 +34,7 @@ class Sort{
 			$conn = DBHelp::getConnection();
 
 			$sql = sprintf("insert into p_sort(sort_name) values('%s');", $sort->sortName);	
-			Tool::logger(__METHOD__, __LINE__, sprintf("插入商品类型SQL:%s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("插入产品类型SQL:%s", $sql), _LOG_DEBUG);
 			
 			$conn->query($sql);	
 
@@ -71,7 +71,7 @@ class Sort{
 			
 			$sql = sprintf($sql, $sort->sortName, $sort->sortId);
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("更新商品类型SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("更新产品类型SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
@@ -96,7 +96,7 @@ class Sort{
 
 			$sql = sprintf("delete from p_sort where sort_id=%u", $sort->sortId);
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("删除商品类型SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("删除产品类型SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
@@ -137,7 +137,7 @@ class Sort{
 				}
 			}
 			
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
@@ -153,7 +153,7 @@ class Sort{
 			}
 				
 			DBHelp::close($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型%u条.", $data->num_rows), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型%u条.", $data->num_rows), _LOG_DEBUG);
 			
 			return $sorts;
 		}		
@@ -188,7 +188,7 @@ class Sort{
 				$sql = $sql . sprintf(" and p.sortName = ''", $query->sortName);
 			}
 			
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型总数SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
@@ -201,7 +201,7 @@ class Sort{
 			}
 				
 			DBHelp::close($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数%u.", $rcount), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型总数%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;
 		}		

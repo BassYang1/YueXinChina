@@ -79,7 +79,7 @@
 #content_box .content .ct_r_box .ct_right{ width:723px; }
 #content_box .content .ct_r_box .ct_right .ct_r_content{ width:721px; }
 
-/*右侧, 主体, 图片列表：商品列表*/
+/*右侧, 主体, 图片列表：产品列表*/
 #content_box .content .ct_r_box .ct_right .ct_r_content .in_mall{display:inline-block; height:25px; color:#006EB9;}
 #content_box .content .ct_r_box .ct_right .ct_r_content dl{margin:6px 0 4px 9px; display:inline; float:left;  width:228px; border:1px solid #ccc;}
 #content_box .content .ct_r_box .ct_right .ct_r_content dl:hover{border:1px solid #206AB3;}

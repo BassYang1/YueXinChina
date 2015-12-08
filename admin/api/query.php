@@ -126,7 +126,7 @@
 		exit();
 	}
 
-	//读取商品类型数据
+	//读取产品类型数据
 	if($module == "sort"){
 		if($dataType == "list" || $dataType == "count"){	
 			$query = new Sort($querySize);
@@ -148,18 +148,18 @@
 						$listJson = "[]";
 					}
 
-					Tool::logger(__METHOD__, __LINE__, sprintf("查询类型商品Json: %s", $listJson), _LOG_ERROR);
+					Tool::logger(__METHOD__, __LINE__, sprintf("查询类型产品Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
 					$listJson = Sort::rcount($query);
-					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型总数: %s", $listJson), _LOG_ERROR);
+					Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型总数: %s", $listJson), _LOG_ERROR);
 				}
 
 				echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 			}
 			catch(Exception $e){
 				echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型: %s", $e->getMessage()), _LOG_ERROR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型: %s", $e->getMessage()), _LOG_ERROR);
 			}
 		}
 		else if($dataType == "detail"){
@@ -178,19 +178,19 @@
 
 				echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 				
-				Tool::logger(__METHOD__, __LINE__, "查询商品类型详细", _LOG_INFOR);
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型详细Json: %s", $listJson), _LOG_DEBUG);
+				Tool::logger(__METHOD__, __LINE__, "查询产品类型详细", _LOG_INFOR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型详细Json: %s", $listJson), _LOG_DEBUG);
 			}
 			catch(Exception $e){
 				echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品类型详细: %s", $e->getMessage()), _LOG_ERROR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品类型详细: %s", $e->getMessage()), _LOG_ERROR);
 			}
 		}
 
 		exit();
 	}
 
-	//读取商品数据
+	//读取产品数据
 	if($module == "product"){
 		if($dataType == "list" || $dataType == "count"){	
 			$query = new Product($querySize);
@@ -216,18 +216,18 @@
 						$listJson = "[]";
 					}
 
-					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品Json: %s", $listJson), _LOG_ERROR);
+					Tool::logger(__METHOD__, __LINE__, sprintf("查询产品Json: %s", $listJson), _LOG_ERROR);
 				}
 				else if($dataType == "count"){
 					$listJson = Product::rcount($query);
-					Tool::logger(__METHOD__, __LINE__, sprintf("查询商品总数: %s", $listJson), _LOG_ERROR);
+					Tool::logger(__METHOD__, __LINE__, sprintf("查询产品总数: %s", $listJson), _LOG_ERROR);
 				}
 
 				echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 			}
 			catch(Exception $e){
 				echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品: %s", $e->getMessage()), _LOG_ERROR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品: %s", $e->getMessage()), _LOG_ERROR);
 			}
 		}
 		else if($dataType == "detail"){
@@ -246,12 +246,12 @@
 
 				echo "{\"status\":\"true\", \"data\": " . $listJson . "}";
 				
-				Tool::logger(__METHOD__, __LINE__, "查询商品详细", _LOG_INFOR);
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品详细Json: %s", $listJson), _LOG_DEBUG);
+				Tool::logger(__METHOD__, __LINE__, "查询产品详细", _LOG_INFOR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品详细Json: %s", $listJson), _LOG_DEBUG);
 			}
 			catch(Exception $e){
 				echo "{\"status\":\"false\", \"data\": \"" . $e->getMessage() . "\"}";
-				Tool::logger(__METHOD__, __LINE__, sprintf("查询商品详细: %s", $e->getMessage()), _LOG_ERROR);
+				Tool::logger(__METHOD__, __LINE__, sprintf("查询产品详细: %s", $e->getMessage()), _LOG_ERROR);
 			}
 		}
 

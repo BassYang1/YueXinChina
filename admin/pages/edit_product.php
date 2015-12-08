@@ -20,7 +20,7 @@
 		if(productId > 0){
 			var detail = BS_Pro.loadDetail(productId);
 
-			$(".main h3").text(productId > 0 ? "编辑商品" : "添加商品");
+			$(".main h3").text(productId > 0 ? "编辑产品" : "添加产品");
 			$("#productName").val(detail.productName);
 			$("#productNo").val(detail.productNo);
 			$("#productDetail").val(detail.content);
@@ -58,7 +58,7 @@
 						BS_Common.nav("product");
 					}
 					else{
-						BS_Popup.create({message: "保存商品信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+						BS_Popup.create({message: "保存产品信息成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
 							BS_Common.nav("product");
 						}, 
 						function(){
@@ -96,12 +96,12 @@
 </script>
 <div id="location">管理中心<b>></b><strong class="cursor" onclick="BS_Common.nav('product')">产品管理</strong><b>></b><strong>添加产品</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-    <h3>编辑商品</h3>	
+    <h3>编辑产品</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>
                 <td width="90" align="right">
-                    商品名称
+                    产品名称
                 </td>
                 <td>
                     <input type="text" id="productName" name="productName" value="" maxlength="40" size="40" class="inputText">
@@ -109,7 +109,7 @@
             </tr>
             <tr class="hidden">
                 <td width="90" align="right">
-                    商品编码
+                    产品编码
                 </td>
                 <td>
                     <input type="text" id="productNo" name="productNo" value="" maxlength="40" size="40" class="inputText">
@@ -125,7 +125,7 @@
             </tr>
             <tr>
                 <td width="90" align="right">
-                    商品分类
+                    产品分类
                 </td>
                 <td>
                     <select id="productType" name="productType" class="inputText">

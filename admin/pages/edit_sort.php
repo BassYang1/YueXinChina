@@ -10,7 +10,7 @@
 		var sortNo = null;
 
 		if(sortId > 0){
-			$(".main h3").text(sortId > 0 ? "编辑商品类型" : "添加商品类型");
+			$(".main h3").text(sortId > 0 ? "编辑产品类型" : "添加产品类型");
 			$("#sortName").val(sortName);
 		}
 		
@@ -32,7 +32,7 @@
 					BS_Common.nav("sort");
 				}
 				else{
-					BS_Popup.create({message: "保存商品类型成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
+					BS_Popup.create({message: "保存产品类型成功, 是否继续添加?", type: BS_Popup.PopupType.CONFIRM}, function(){
 						BS_Common.nav("sort");
 					}, 
 					function(){
@@ -45,7 +45,7 @@
 </script>
 <div id="location">管理中心<b>></b><strong onclick="BS_Common.nav('product')">产品管理</strong><b>></b><strong onclick="BS_Common.nav('sort')">产品类别</strong><b>></b><strong>编辑类别</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
-    <h3>编辑商品类型</h3>	
+    <h3>编辑产品类型</h3>	
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
         <tbody>
             <tr>

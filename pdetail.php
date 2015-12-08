@@ -6,7 +6,7 @@
 	$sections = array("contact" => 0, "company" => 0, "sort" => 1, "recommend" => 1, "case" => 1, "news" => 0);
 ?>
 
-<?php //商品信息
+<?php //产品信息
 	$productId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0;
 	$productDetail = new Product(_QUERY_ALL);
 	$productDetail->productId = $productId;

@@ -37,7 +37,7 @@ BS_Upload.validParams = function(params){
 	if(typeof params.showSort == "undefined") params.showSort = false;
 	
 	//已上传文件及视图
-	if(typeof params.files != "object") params.files = null; //需要初使指定图片(如，商品详细，成功案例)
+	if(typeof params.files != "object") params.files = null; //需要初使指定图片(如，产品详细，成功案例)
 	if(typeof params.view == "undefined") params.view = BS_Upload.Mode.Single; //显示多个或单个: 默认单个
 	if(typeof params.outview == "undefined") params.outview = false; //已经上传的图片显示在控件外部	
 	
@@ -92,7 +92,12 @@ BS_Upload.create = function(params){
 	
 	//Form文件上传控件
 	htmlStr += "<tr>";
-	htmlStr += "<td width='90' align='right'>选择图片</td>";
+
+	if(params.fileKey != "material_file")
+		htmlStr += "<td width='90' align='right'>选择图片</td>";
+	else
+		htmlStr += "<td width='90' align='right'>选择附件</td>";
+
 	htmlStr += "<td>";
 	htmlStr += "<iframe name='ifrmUpload" + params.ID + "' class='hidden'></iframe>";
 	htmlStr += "<input id='" + params.FileID + "' type='file' name='flUpload' class='inputFile' value=''>";
@@ -170,7 +175,7 @@ BS_Upload.load = function(params, newSearch){
 	var parent = params.outview ? document : BS_Upload.Forms[params.FormID]; //已上传文件显示在上传控件中，或者显示在控件之外
 	var query = {module: params.module, type: "file", fileKey: params.fileKey, isPaging: params.isPaging, size: params.viewSize, curPage: params.curPage};
 	
-	if(params.files != null){ ////需要初使指定图片(如，商品详细，成功案例)
+	if(params.files != null){ ////需要初使指定图片(如，产品详细，成功案例)
 		if(params.module != "material"){
 			BS_Upload.show({parent: parent, mode: params.view, button: params.viewBtn, files: params.files});
 		}

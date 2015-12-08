@@ -20,6 +20,12 @@
 	}
 ?>
 
+<script>
+	$(function(){
+		BS_Common.setMenu(".m_home");
+	});
+</script>
+
 <div id="location">管理中心<b>></b><strong>首页</strong></div><!--location-->
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
 	<h3>今日访问量:<font color="#FF0000"><?php echo $today; ?></font>，历史访问量:<font color="#FF0000"><?php echo $total; ?></font></h3>

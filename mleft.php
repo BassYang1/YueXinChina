@@ -67,7 +67,7 @@
 		$products = Product::query($query); 
 
 		if(empty($products)){
-			$recommendHtml = "<b>暂无商品</b>";
+			$recommendHtml = "<b>暂无产品</b>";
 		}
 		else{
 			foreach($products as $product){

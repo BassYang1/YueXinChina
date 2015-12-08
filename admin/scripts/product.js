@@ -86,7 +86,7 @@ BS_Pro.loadList = function(curPage, newSearch){
 				newItem.find(".del_product").click(function(){		
 					var row = this;
 
-					BS_Popup.create({message: "确定删除此商品?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
+					BS_Popup.create({message: "确定删除此产品?", type: BS_Popup.PopupType.CONFIRM}, null, function(){
 						var data = {type: "detail", module: "product", action: "delete", productId: $(row).parent().parent().find(".proCheck input:first").val()};						
 						var shade1 = BS_Popup.shade(true);
 
@@ -222,6 +222,7 @@ BS_Pro.setPaging = function (query, callBack){
 				
 		$("#pnext").click(function(){
 			curPage = parseInt($("#curPage").val());
+			//curPage = parseInt(document.getElementById("curPage").value);
 
 			if(curPage < BS_Pro.PageCount){
 				callBack(curPage + 1, false);

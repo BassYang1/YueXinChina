@@ -4,7 +4,7 @@ class Util{
 		$productHtml = "";
 
 		if(empty($products)){
-			$productHtml = "<b>暂无商品</b>";
+			$productHtml = "<b>暂无产品</b>";
 		}
 		else{
 			foreach($products as $product){

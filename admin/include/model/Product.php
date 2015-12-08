@@ -43,7 +43,7 @@ class Product{
 		}
 		try{
 			$sql = sprintf("insert into product(product_no, product_name, sort_id, order_no, m_image, ali_url, is_recommend, is_showhome) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->aliUrl, $product->isRecommend, $product->isShowHome);	
-			Tool::logger(__METHOD__, __LINE__, sprintf("插入商品SQL:%s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("插入产品SQL:%s", $sql), _LOG_DEBUG);
 			
 			
 			$conn = DBHelp::getConnection();
@@ -83,7 +83,7 @@ class Product{
 			
 			$sql = sprintf($sql, $product->productNo, $product->productName, $product->productType, $product->orderNo, $product->mImage, $product->aliUrl, $product->isRecommend, $product->isShowHome, $product->productId);
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("更新商品SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("更新产品SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
@@ -108,7 +108,7 @@ class Product{
 
 			$sql = sprintf("delete from product where product_id=%u", $product->productId);
 
-			Tool::logger(__METHOD__, __LINE__, sprintf("删除商品SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("删除产品SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);				
@@ -163,7 +163,7 @@ class Product{
 				}
 			}
 			
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
@@ -188,7 +188,7 @@ class Product{
 			}
 				
 			DBHelp::close($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品%u条.", count($products)), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品%u条.", count($products)), _LOG_DEBUG);
 			
 			return $products;
 		}		
@@ -249,7 +249,7 @@ class Product{
 				$sql = $sql . sprintf(" and sort_id='%s'", $query->productType);
 			}
 			
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品总数SQL: %s", $sql), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品总数SQL: %s", $sql), _LOG_DEBUG);
 						
 			$conn = DBHelp::getConnection();
 			$data = $conn->query($sql);
@@ -262,7 +262,7 @@ class Product{
 			}
 				
 			DBHelp::close($conn);
-			Tool::logger(__METHOD__, __LINE__, sprintf("查询商品总数%u.", $rcount), _LOG_DEBUG);
+			Tool::logger(__METHOD__, __LINE__, sprintf("查询产品总数%u.", $rcount), _LOG_DEBUG);
 			
 			return $rcount;
 		}		

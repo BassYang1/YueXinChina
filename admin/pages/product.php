@@ -24,24 +24,24 @@
 		<input id="keyword" name="keyword" type="text" class="inpMain" value="" size="20">
 		<input name="btnSearch" id="btnSearch" class="btnGray" type="submit" value="查找">
 		<span>
-			<label class="btnGray" for="cbIsRecommend"><input type="checkbox" id="cbIsRecommend" class="h_space" /><span>查看推荐商品</span></label>
-			<label class="btnGray" for="cbIsShowHome"><input type="checkbox" id="cbIsShowHome" class="h_space" /><span>查看首页商品</span></label>
+			<label class="btnGray" for="cbIsRecommend"><input type="checkbox" id="cbIsRecommend" class="h_space" /><span>查看推荐产品</span></label>
+			<label class="btnGray" for="cbIsShowHome"><input type="checkbox" id="cbIsShowHome" class="h_space" /><span>查看首页产品</span></label>
 		</span>
     </div>
     <table width="100%" border="0" cellspacing="0" cellpadding="7" class="tableBasic products">
          <tbody>
 			 <tr>
 				  <th width="5%" class="c_align"></th>
-				  <th width="30%">商品名称</th>
-				  <th width="20%">商品类型</th>
-				  <th width="10%">推荐商品</th>
-				  <th width="10%">首页商品</th>
+				  <th width="30%">产品名称</th>
+				  <th width="20%">产品类型</th>
+				  <th width="10%">推荐产品</th>
+				  <th width="10%">首页产品</th>
 				  <th width="15%">操作</th>
 			 </tr>
          </tbody>
 	</table>
 	<div class="paging">
-		总计<span id="rcount">15</span>个商品，每页<span id="psize">15</span>个商品，共<span id="pcount">1</span>页
+		总计<span id="rcount">15</span>个产品，每页<span id="psize">15</span>个产品，共<span id="pcount">1</span>页
 		<span id="pfirst" class="disabled cursor"><b>«</b></span>
 		<span id="pprev" class="disabled cursor">‹</span>
 		<input type="text" id="curPage" value="1" class="pcur" />

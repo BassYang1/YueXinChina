@@ -44,7 +44,8 @@ BS_Common.nav = function (page, data) {
     });
 };
 
-BS_Common.setMenu = function(selector){	
+BS_Common.setMenu = function(selector){
+	$("#menu").find("li").removeClass("cur");
 	$(selector).parent().parent().addClass("cur");
 };
 

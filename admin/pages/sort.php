@@ -18,7 +18,7 @@
          <tbody>
 			 <tr>
 				  <th width="5%" class="c_align"></th>
-				  <th width="30%">商品类型</th>
+				  <th width="30%">产品类型</th>
 				  <th class="hidden" width="20%">产品数目</th>
 				  <th width="15%">操作</th>
 			 </tr>
