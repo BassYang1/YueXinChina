@@ -22,8 +22,8 @@
         <div class="lUserInfoPnl" style="width: 300px; height: 119px; padding-top:5px;">  
             <div class="userInfo">
                 <div>
-                    <p><span>用户名：</span><input type="text" id="uname" class="linput" value="admin" /></p>
-                    <p><span>密码：</span><input type="password" id="upassword" class="linput" value="yuexinchina" /></p>
+                    <p><span>用户名：</span><input type="text" id="uname" class="linput" value="" /></p>
+                    <p><span>密码：</span><input type="password" id="upassword" class="linput" value="" /></p>
                 </div>
                 <div>
                     <input id="btnLogin" onClick="login()" class="button" type="button" value="登录" style="margin-left:100px; margin-top:5px; width:80px;"/>

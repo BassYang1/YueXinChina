@@ -128,6 +128,7 @@ class Company{
 	
 	//获取content
 	public static function content($companyKey, $admin=true){
+		$companyKey = trim($companyKey);
 		$content = self::get($companyKey);
 
 		if(!$admin){

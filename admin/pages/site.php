@@ -6,17 +6,20 @@
 
 	$siteDesc = trim(Company::content("site_desc"));
 	if($siteDesc == ""){
-		$siteDesc = "IP防水试验机, IPX12滴雨试验机, IPX34摆管淋雨试验机, IPX56强喷水试验机, IPX78浸水试验机, UL喷水试验装置, 日标淋雨试验箱, 手持式淋雨试验装置, IPX9K高压喷淋试验箱, IPX8压力浸水试验机防尘箱, IP56防尘试验箱";
+		//$siteDesc = "IP防水试验机, IPX12滴雨试验机, IPX34摆管淋雨试验机, IPX56强喷水试验机, IPX78浸水试验机, UL喷水试验装置, 日标淋雨试验箱, 手持式淋雨试验装置, IPX9K高压喷淋试验箱, IPX8压力浸水试验机防尘箱, IP56防尘试验箱";
+		$siteDesc = "";
 	}
 
 	$seoKey = trim(Company::content("seo_key"));
 	if($seoKey == ""){
-		$seoKey = "IP防水试验机, IPX12滴雨试验机, IPX34摆管淋雨试验机, IPX56强喷水试验机, IPX78浸水试验机, UL喷水试验装置, 日标淋雨试验箱, 手持式淋雨试验装置, IPX9K高压喷淋试验箱, IPX8压力浸水试验机防尘箱, IP56防尘试验箱";
+		//$seoKey = "IP防水试验机, IPX12滴雨试验机, IPX34摆管淋雨试验机, IPX56强喷水试验机, IPX78浸水试验机, UL喷水试验装置, 日标淋雨试验箱, 手持式淋雨试验装置, IPX9K高压喷淋试验箱, IPX8压力浸水试验机防尘箱, IP56防尘试验箱";
+		$seoKey = "";
 	}
 
 	$siteNotice = trim(Company::content("site_notice"));
 	if($siteNotice == ""){
-		$siteNotice = "您好,欢迎来到本网站！专业生产：IP防水试验机,摆管淋雨试验机和压力浸水试验机等产品.";
+		//$siteNotice = "您好,欢迎来到本网站！专业生产：IP防水试验机,摆管淋雨试验机和压力浸水试验机等产品.";
+		$siteNotice = "";
 	}
 ?>
 <script language="javascript" type="text/javascript">
