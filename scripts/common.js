@@ -64,7 +64,7 @@ $(function() {
 	$(".ct_l_section :first").removeClass("mt5");
 
 	//content部分左右等高
-	if(location.href.indexOf("pdetail") < 0){ //产品详细不执行
+	if(location.href.indexOf("pdetail") < 0 && location.href.indexOf("honor") < 0){ //产品详细不执行 && 企业荣誉
 		var h1 = $(".ct_left").height();
 		var h2 = $(".ct_right").height();
 		var h3 = $(".ct_left").find(".ct_l_section:last").height();
