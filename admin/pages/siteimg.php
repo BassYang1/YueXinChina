@@ -3,7 +3,9 @@ $(function(){
 
 	BS_Upload.create({parent: ".main", title:"二维码", module: "company", fileKey: "company_barcode", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false});
 	
-	BS_Upload.create({parent: ".main", title:"Banner", module: "company", fileKey: "company_banner", view: BS_Upload.Mode.Multi, viewBtn: BS_Upload.Button.OnlyDel});
+	BS_Upload.create({parent: ".main", title:"首页Banner", module: "company", fileKey: "company_banner", view: BS_Upload.Mode.Multi, viewBtn: BS_Upload.Button.OnlyDel});
+
+	BS_Upload.create({parent: ".main", title:"内页Banner", module: "company", fileKey: "company_banner2", view: BS_Upload.Mode.Single, viewBtn: BS_Upload.Button.None, showLink: false, showDesc: false});
 });
 
 //判断是否上传成功后执行

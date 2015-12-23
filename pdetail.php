@@ -25,6 +25,12 @@
 	<?php include_once("include.php"); ?>
 	</head>
 	<body>
+	<script language="javascript" type="text/javascript">
+	$(function(){
+		//产品详细图片固定宽度
+		$(".d_detail").find("img[src*='attached/image']").width("100%");
+	});
+	</script>
 	<!-- head & nav & share-->
 	<?php include_once("head.php"); ?>
 

@@ -1,11 +1,17 @@
 <?php
+	$url = $_SERVER["REQUEST_URI"];
+	$isHomePage = stripos($url, "index.php");
+?>
+<?php
 	$bannerHtml = "";
 	$bannerBtn = "";
+
 	$query = new DocFile(_QUERY_ALL);
 	$query->fileKey = "company_banner";
 	$query->inModule = "company";
 	$banners = DocFile::query($query);
 	
+
 	if(empty($banners)){
 		$banner = new DocFile(_NONE);
 		$banner->savedPath = "images/banner.jpg";

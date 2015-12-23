@@ -18,6 +18,7 @@
 
 	$detail = Content::read($query);
 	$contentDetail = $detail->content;
+
 	if(empty($content)) $content = "<b>暂无详细</b>";
 
 	//当前位置

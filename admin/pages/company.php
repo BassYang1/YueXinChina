@@ -62,7 +62,7 @@
 <div class="main" style="height: auto!important; height: 550px; min-height: 550px;">
     <h3>公司简介</h3>
     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
-        <tbody>$
+        <tbody>
             <tr>
                 <td width="90" align="right">
                     公司名称
