@@ -103,7 +103,7 @@ BS_Upload.create = function(params){
 	htmlStr += "<input id='" + params.FileID + "' type='file' name='flUpload' class='inputFile' value=''>";
 	
 	//上传文档大小
-	if(params.width > 0 && typeof params.height > 0){
+	if(params.width > 0 && params.height > 0){
 		htmlStr += "<span class='comment'>(图片大小" + params.width + "*" + params.height + ")</span>";
 	}
 	

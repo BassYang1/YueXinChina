@@ -11,37 +11,41 @@ $(function() {
 		 interTime:3000
 	});*/
 	
-	var adapt = function(){
-		$(".banner img").height($(".banner img").width() * 0.4); //banner长宽自适应
+	//首页Banner大小自适应
+	var adaptHomeBanner = function(){
+		//$(".banner_imgs li img").height($(".banner_imgs li img").width() * 0.4); //banner长宽自适应
 	};
 
-	//页面大小改变
-	adapt();
-	$(window).resize(adapt);
+	//首页Banner大小改变
+	//adaptHomeBanner();
+	//$(window).resize(adaptHomeBanner);
 
-	var silde = function(){
-		var len = $(".banner img").length;
+
+	//首页Banner滚动
+	var sildeHomeBanner = function(){
+		var len = $(".banner_imgs li").length;
 
 		var banner = null;
 
-		$(".banner img").each(function(i){
+		$(".banner_imgs li").each(function(i){
 			if($(this).hasClass("cur_banner")){
 				if(i < len - 2){
-					banner = $(".banner img:eq(" + (i + 1) + ")");					
+					banner = $(".banner_imgs li:eq(" + (i + 1) + ")");					
 				}
 			}
 		});
 		
 		if(banner == null){
-			banner = $(".banner img:eq(0)");	
+			banner = $(".banner_imgs li:eq(0)");	
 		}
 
-		$(".banner img").removeClass("cur_banner").addClass("hidden");
+		$(".banner_imgs li").removeClass("cur_banner").addClass("hidden");
 		banner.removeClass("hidden").addClass("cur_banner");
 	}
 	
-	silde();
-	setInterval(silde, 3000);
+	//首页Banner滚动
+	sildeHomeBanner();
+	setInterval(sildeHomeBanner, 3000);
 
 	/*
 	$("#name").val("陈先生");
@@ -90,36 +94,41 @@ $(function() {
             $("#name").val("姓名");
         }
     });
+	$("#name").blur(function() {
+		if ($("#name").val() == "姓名") {
+			$("#name").val("姓名");
+		}
+	});
 	$("#phone").focus(function() {					  
             if ($("#phone").val() == "联系电话") {
             $("#phone").val("");
 		}
-        });
-        $("#phone").blur(function() {
-            if ($("#phone").val() == "") {
-                $("#phone").val("联系电话");
-            }
-        });
-        $("#email").focus(function() {			  
-            if ($("#email").val() == "邮箱") {
-            	$("#email").val("");
-			}
-        });
-        $("#email").blur(function() {
-            if ($("#email").val() == "") {
-                $("#email").val("邮箱");
-            }
-        });
-        $("#message").focus(function() {	  
-            if ($("#message").val() == "内容") {
-            	$("#message").val("");
-			}
-        });
-        $("#message").blur(function() {
-            if ($("#message").val() == "") {
-                $("#message").val("内容");
-            }
-        });
+	});
+	$("#phone").blur(function() {
+		if ($("#phone").val() == "") {
+			$("#phone").val("联系电话");
+		}
+	});
+	$("#email").focus(function() {			  
+		if ($("#email").val() == "邮箱") {
+			$("#email").val("");
+		}
+	});
+	$("#email").blur(function() {
+		if ($("#email").val() == "") {
+			$("#email").val("邮箱");
+		}
+	});
+	$("#message").focus(function() {	  
+		if ($("#message").val() == "内容") {
+			$("#message").val("");
+		}
+	});
+	$("#message").blur(function() {
+		if ($("#message").val() == "") {
+			$("#message").val("内容");
+		}
+	});
 });
 
 //顶部广告语
@@ -161,7 +170,7 @@ String.prototype.trim = function () {
 }
 
 //留言处理
-function addMessage(){
+function addMessage(callback){
 	var name = $.trim($("#name").val());
 	var email = $.trim($("#email").val());
 	var phone = $.trim($("#phone").val());
@@ -204,6 +213,10 @@ function addMessage(){
 				$("#email").val("");
 				$("#phone").val("");
 				$("#message").val("");
+				
+				if(typeof callback == "function"){
+					callback();
+				}
 			}
 		}, 
 		error: function(a, b, c){

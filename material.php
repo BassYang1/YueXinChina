@@ -38,7 +38,7 @@
 			$materialListHtml .= sprintf("
 				<li>
 					<div>
-						<span class='f_left l_t_name'>%s</span><span class='f_left l_u_date'>更新日期：%s</span><a href='%s' title='%s' class='f_right'>[点击下载]</a>
+						<span class='f_left l_t_name'>%s</span><span class='f_left l_u_date'>更新日期：%s</span><a onclick='addFeedback(\"%s\")' href='javascript:void(0)' title='%s' class='f_right'>[点击下载]</a>
 						<span class='clear'></span>
 					</div>
 					<div class='l_u_text'><span class='showlittle'>%s</span><span class='showall hidden'>%s</span><a class='cursor' onclick='javascript:showMText(this)'>[查看所有]</a></div>
@@ -62,6 +62,14 @@
 	<body>
 	<!-- head & nav & share-->
 	<?php include_once("head.php"); ?>
+    
+    <style type="text/css">
+		.material_feedback_title{font-size: 16px;color: #8f8f8f;margin-bottom: 8px; margin-top: 5px; padding-bottom:5px; font-family:"微软雅黑"; background:url(../images/b_title_bg.jpg) left bottom no-repeat}
+		.material_feedback{padding:5px; width:290px; color: #8f8f8f; line-height: 20px; text-align:left; position:absolute; background:#B3DEF2}
+		.material_feedback .input{width: 280px; height: 26px; margin-bottom: 6px; border:0px; color: #6e6e6e; padding-left: 10px;}
+		.material_feedback .input1{width:280px;height:26px;margin-bottom: 6px; border: 0px;color:#6e6e6e; padding-left: 10px; height: 70px;}
+		.closeFeedback{ color: #8f8f8f}
+	</style>
 
 	<!-- banner & location & hot -->
 	<?php include_once("banner.php"); ?>
@@ -108,6 +116,17 @@
 			<!-- content end -->
 		</div>
     </div>
+    <div class="material_feedback hidden">
+      <ul>
+          <li><div class="material_feedback_title">在线留言<a class="f_right cursor closeFeedback" onclick="closeFeedback(false)">关闭</a></div></li>
+          <li><input type="text" class="input" id="name" maxlength="50" value="姓名"></li>
+          <li><input type="text" class="input" id="email" maxlength="100" value="邮箱"></li>
+          <li><input type="text" class="input" id="phone" maxlength="100" value="联系电话"></li>
+          <li><textarea class="input1" id="message">内容</textarea></li>
+          <li><span id="validMsg" class="f_left" style="font-size:11px; color:#AB2F2F;"></span><input type="image" onclick="addMessage(closeFeedback)" src="images/submit.jpg" width="48" height="21" class="f_right"></li>
+          <li class="clear"></li>
+      </ul>
+    </div>
     <!-- main end -->	
 
 	<!-- barcode & contact & link & reply -->
@@ -124,6 +143,26 @@
 			$(obj).parent().find(".showlittle").show();
 			$(obj).parent().find(".showall").hide();
 			$(obj).text("[查看所有]");
+		}
+	}
+	
+	var material = "";
+	function addFeedback(url){
+		material = url;
+		
+		var top = ($(window).height() - $(".material_feedback").height()) / 2;   
+        var left = ($(window).width() - $(".material_feedback").width()) / 2;   
+        var scrollTop = $(document).scrollTop();   
+        var scrollLeft = $(document).scrollLeft();   
+        $(".material_feedback").css( { position : 'absolute', 'top' : top + scrollTop, left : left + scrollLeft });
+		$(".material_feedback").show();
+	}
+	
+	function closeFeedback(cancel){
+		$(".material_feedback").addClass("hidden");
+		
+		if(material != "" && typeof cancel == "undefined"){
+			location.href = material;
 		}
 	}
 	</script>
