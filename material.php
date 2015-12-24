@@ -64,8 +64,9 @@
 	<?php include_once("head.php"); ?>
     
     <style type="text/css">
+		.material_feedback_shade{background: #000; filter: alpha(opacity=20);/* IE的透明度 */ opacity: 0.2; /* 透明度 */ position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display:none; z-index:998;}
+		.material_feedback{padding:5px; width:290px; color: #8f8f8f; line-height: 20px; text-align:left; position:absolute; background:#B3DEF2; z-index:999;}
 		.material_feedback_title{font-size: 16px;color: #8f8f8f;margin-bottom: 8px; margin-top: 5px; padding-bottom:5px; font-family:"微软雅黑"; background:url(../images/b_title_bg.jpg) left bottom no-repeat}
-		.material_feedback{padding:5px; width:290px; color: #8f8f8f; line-height: 20px; text-align:left; position:absolute; background:#B3DEF2}
 		.material_feedback .input{width: 280px; height: 26px; margin-bottom: 6px; border:0px; color: #6e6e6e; padding-left: 10px;}
 		.material_feedback .input1{width:280px;height:26px;margin-bottom: 6px; border: 0px;color:#6e6e6e; padding-left: 10px; height: 70px;}
 		.closeFeedback{ color: #8f8f8f}
@@ -116,6 +117,7 @@
 			<!-- content end -->
 		</div>
     </div>
+    <div class="material_feedback_shade hidden"></div>
     <div class="material_feedback hidden">
       <ul>
           <li><div class="material_feedback_title">在线留言<a class="f_right cursor closeFeedback" onclick="closeFeedback(false)">关闭</a></div></li>
@@ -155,12 +157,13 @@
         var scrollTop = $(document).scrollTop();   
         var scrollLeft = $(document).scrollLeft();   
         $(".material_feedback").css( { position : 'absolute', 'top' : top + scrollTop, left : left + scrollLeft });
+		$(".material_feedback_shade").show();
 		$(".material_feedback").show();
 	}
 	
 	function closeFeedback(cancel){
-		$(".material_feedback").addClass("hidden");
-		
+		$(".material_feedback_shade").hide();
+		$(".material_feedback").hide();
 		if(material != "" && typeof cancel == "undefined"){
 			location.href = material;
 		}

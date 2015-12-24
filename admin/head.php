@@ -9,9 +9,10 @@
 				<div class="dd_menu_item dd_item">
 					<a href="javascript:void(0)" onclick="BS_Common.nav('company')">公司简介</a>
 					<a href="javascript:void(0)" onclick="BS_Common.nav('culture')">公司文化</a>
-					<a href="javascript:void(0)" onclick="BS_Common.nav('contact')">联系方式</a>
 					<a href="javascript:void(0)" onclick="BS_Common.nav('spirit')">企业风貌</a>
 					<a href="javascript:void(0)" onclick="BS_Common.nav('honor')">资质证书</a>
+					<a href="javascript:void(0)" onclick="BS_Common.nav('contact')">联系方式</a>
+					<a href="javascript:void(0)" onclick="BS_Common.nav('comaddr')">公司地址</a>
 				</div>
 			</li>
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">网站信息</a>

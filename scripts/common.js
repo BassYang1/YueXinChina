@@ -26,26 +26,32 @@ $(function() {
 		var len = $(".banner_imgs li").length;
 
 		var banner = null;
+		var bannerBtn = null;
 
 		$(".banner_imgs li").each(function(i){
 			if($(this).hasClass("cur_banner")){
 				if(i < len - 2){
-					banner = $(".banner_imgs li:eq(" + (i + 1) + ")");					
+					banner = $(".banner_imgs li:eq(" + (i + 1) + ")");	
+					bannerBtn = $(".banner_btn li:eq(" + (i + 1) + ")");				
 				}
 			}
 		});
 		
 		if(banner == null){
 			banner = $(".banner_imgs li:eq(0)");	
+			bannerBtn = $(".banner_btn li:eq(0)");
 		}
 
 		$(".banner_imgs li").removeClass("cur_banner").addClass("hidden");
 		banner.removeClass("hidden").addClass("cur_banner");
+		
+		$(".banner_btn li").removeClass("selected");
+		bannerBtn.addClass("selected");
 	}
 	
 	//首页Banner滚动
 	sildeHomeBanner();
-	setInterval(sildeHomeBanner, 3000);
+	setInterval(sildeHomeBanner, 5000);
 
 	/*
 	$("#name").val("陈先生");
@@ -89,16 +95,16 @@ $(function() {
 		});
 	}*/
 	
+	$("#name").focus(function() {
+		if ($("#name").val() == "姓名") {
+			$("#name").val("");
+		}
+	});
     $("#name").blur(function() {
         if ($("#name").val() == "") {
             $("#name").val("姓名");
         }
     });
-	$("#name").blur(function() {
-		if ($("#name").val() == "姓名") {
-			$("#name").val("姓名");
-		}
-	});
 	$("#phone").focus(function() {					  
             if ($("#phone").val() == "联系电话") {
             $("#phone").val("");

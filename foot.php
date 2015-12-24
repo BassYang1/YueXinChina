@@ -38,7 +38,51 @@
 ?>
 
 
+<style type="text/css">
+.sitemap_sec{z-index:10;  font-size:14px; color:#8f8f8f;  position:relative; background:#333; height:180px;}
+.sitemap{margin: 5px auto 0 auto; width: 960px;}
+.link_sec {width: 25%; float:left;}
+.sitemap_sec p{font-size: 16px;color: #fff;margin-bottom: 8px; margin-top: 5px; padding-bottom:5px; font-family:"微软雅黑";}
+.sitemap_sec a{line-height:27px; font-size:12px; color: #8f8f8f;}
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div class="sitemap_sec">
+	<div class="sitemap">
+    	<div class="link_sec">
+          <ul>
+              <li><p>阿里商铺</p></li>
+              <?php echo $proMapHtml ?>
+          </ul>
+        </div>
+    	<div class="link_sec">
+          <ul>
+              <li><p>关于我们</p></li>
+              <li><a target="_blank" href="contact.php">联系我们</a></li>
+              <li><a target="_blank" href="company.php">走进岳信</a></li>
+              <li><a target="_blank" href="product.php">产品中心</a></li>
+              <li><a target="_blank" href="material.php">资料下载</a></li>
+          </ul>
+        </div>
+    	<div class="link_sec">
+          <ul>
+              <li><p>公司动态</p></li>
+              <li><a target="_blank" href="case.php">最新案例</a></li>
+              <li><a target="_blank" href="news.php">公司新闻</a></li>
+              <li><a target="_blank" href="recruit.php">人才招聘</a></li>
+          </ul>
+        </div>
+    	<div class="link_sec">
+          <ul>
+              <li><p>常见问题</p></li>
+              <li><a target="_blank" href="#">高压喷淋试验箱适用范围大爆料</a></li>
+              <li><a target="_blank" href="#">了解摆管淋雨试验机的技术参数是什么</a></li>
+              <li><a target="_blank" href="#">摆管淋雨试验箱 知识小百科</a></li>
+              <li><a target="_blank" href="#">花洒淋雨 基础知识大普及</a></li>
+          </ul>
+        </div>
+    </div>
+</div> <!--site map end-->
 <div class="bottom_box">
     <div class="bottom">
         <div id="barcode" class="f_left barcode">
@@ -109,29 +153,4 @@
 	<div class="asid_share_box relative" id="Div2" style="display: block;"><a href="#top">
 		<img alt="返回顶部" class="adid_icon" src="images/icon_back.png" style="display: inline;"></a></div>
 </div>
-<!--
-<div class="asid_share" id="asid_share">
-        <div class="asid_share_box relative"><a href="mailto:sales@kirgen.com">
-            <img alt="给我留言" class="adid_icon" src="images/icon_cj.png" style="display: inline;"></a></div>
-        <div class="asid_share_box relative"><a href="Askus.asp">
-            <img alt="在线咨询" class="adid_icon" src="images/icon_qq.png" style="display: inline;"></a></div>
-        <div class="asid_share_box relative">
-            <a href="#">
-                <img alt="扫二微码" class="adid_icon" src="images/icon_sweep.png" style="display: inline;"></a>
-            <div class="asid_share_triangle" id="all-none" style="display: none;">
-                <em class="border_sj"></em>
-                <span class="con_sj"></span>
-            </div>
-            <div class="asid_sha_layer" id="Div1" style="display: none;">
-                <p class="sweep_img">
-
-                    <img src="images/科进网页二维码.png" alt="二维码">
-
-                </p>
-            </div>
-        </div>
-        <div class="asid_share_box relative" id="Div2" style="display: block;"><a href="javascript:void(0);">
-            <img alt="返回顶部" class="adid_icon" src="images/icon_back.png" style="display: inline;"></a></div>
-</div>
--->
 <!--contact float div end -->

@@ -91,6 +91,7 @@
     <img src="countor.php" width="0" height="0" /> <!--访问量统计-->
 	<!-- head & nav & share-->
 	<?php include_once("head.php"); ?>
+	<?php $showBanner = true; ?>
 
 	<!-- banner & location & hot -->
 	<?php include_once("banner.php"); ?>

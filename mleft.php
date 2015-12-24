@@ -219,7 +219,8 @@
 			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="company.php">公司简介</a></span> </dt></dl>
 			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="culture.php">公司文化</a></span> </dt></dl>
 			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="spirit.php">企业风貌</a></span> </dt></dl>
-			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="honor.php">资质证书</a></span> </dt></dl>  
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="honor.php">资质证书</a></span> </dt></dl> 
+			<dl><dt style="cursor: hand; float: left;"><span class="l_m_item"><a href="contact.php">联系我们</a></span> </dt></dl>   
         </dl>
     </div>
 </div>

@@ -1,78 +1,88 @@
+<?php 
+	require_once("include/Util.php"); 
+	require_once("admin/include/common.php"); 
+
+	//静态化
+	if(is_file("company.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+		header("Location: company.html");
+		exit; 
+	}
 	
-    <!-- bottom start -->
-	<?php 
-		//二维码
-		$barcode = DocFile::first("company_barcode"); 
+	//设置模块权限
+	$sections = array("contact" => 0, "company" => 1, "sort" => 0, "recommend" => 1, "case" => 1, "news" => 1);
+?>
 
-		//读取友情连接
-		$links = DocFile::get("company_links");
-		$linkTemp = "<p><a href=\"%s\" title=\"%s\"><img src=\"%s\" width=\"88\" height=\"31\" alt=\"%s\" /></a></p>";
-		$linkStr = "";
+<?php	
+	$addrMap = trim(Company::content("addr_map")); //公司地图
+	$addrOther = trim(Company::content("addr_other")); //公司其它信息
+	$companyName = trim(Company::content("company_name")); //公司名称
+	$companyName  = $companyName == "" ? "广州岳信试验设备有限公司" : $companyName;
+	
+	//当前位置
+	$location = "当前位置 > <span>公司地址</span>";
+	$page_title = "公司地址";
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<?php include_once("include.php"); ?>
+	</head>
+	<body>
+	<!-- head & nav & share-->
+	<?php include_once("head.php"); ?>
 
-		foreach($links as $link){ 								
-			$linkStr .= sprintf($linkTemp, $link->fileUrl, $link->fileDesc, str_replace("../", "", $link->savedPath), $link->fileDesc);							
-		} 
-	?>
-    <div class="bottom_box">
-        <div class="bottom">
-            <div id="barcode" class="f_left barcode">
-                <img src="<?php echo substr($barcode->savedPath, 3); ?>" title="<?php echo $barcode->fileDesc; ?>"
-                    alt="岳信.中国IP防水试验机第一品牌,给您提供最专业的IP防水检测设备系统解决方案" />
+	<!-- banner & location & hot -->
+	<?php include_once("banner.php"); ?>
+    <!-- main start -->
+    <div id="content_box">
+        <div class="content">
+			<!-- menu start -->
+            <div class="ct_left f_left">
+				<!-- contact & recommend & sort & company -->
+				<?php include_once("mleft.php"); ?>
             </div>
-            <div class="contacts f_left">
-				<ul>
-					<li>
-						<div class="b_title">
-							联系我们</div>
-					</li>
-					<li><?php echo Company::content("company_contact", false); ?></li>
-				</ul>
+            <!-- menu end -->
+			
+			<!-- content start -->
+            <div class="ct_r_box f_right">
+                <div class="ct_right">
+                    <div class="clear">
+                    </div>
+                    <div class="m_title">
+                        <div class="m_title_name">公司地址</div>
+                        <div class="m_title_more_link hidden">
+                            <a href="">
+                                <img src="images/small_24.jpg" width="44"
+                                    height="13" /></a></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="ct_r_content">
+						<div class="d_title_pnl hidden">
+							<div class='d_title'>
+								<div class="d_t_name"></div>		
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="d_detail">
+						<?php echo $companyName; ?><br />
+                        地址：<?php echo Company::content("company_addr"); ?><br />
+                        联系人：<?php echo Company::content("contact_person"); ?><br />
+                        电话：<?php echo Company::content("company_phone"); ?><br /><br />
+						<?php include_once("map.html"); ?><br /><br />
+						<?php echo $addrOther; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="f_left links">
-                <ul>
-                    <li>
-                        <div class="b_title">
-                            友情连接</div>
-                    </li>
-                    <li>
-						<?php echo $linkStr; ?>
-                    </li>
-                </ul>
-            </div>
-            <div class="feedback f_right">
-                <form id="form2" name="form2" method="post" action="">
-                <ul>
-                    <li>
-                        <div class="b_title">
-                            在线留言</div>
-                    </li>
-                    <li>
-                        <input name="name" type="text" class="input" id="name" maxlength="50" value="姓名"></li>
-                    <li>
-                        <input name="phone" type="text" class="input" id="phone" maxlength="100" value="联系电话"></li>
-                    <li>
-                        <input name="title" type="text" class="input" id="title" maxlength="100" value="标题"></li>
-                    <li>
-                        <textarea name="content" class="input1" id="content">内容</textarea></li>
-                    <li>
-                        <input type="image" src="images/submit.jpg"
-                            width="48" height="21" class="f_right"></li>
-                    <li class="clear"></li>
-                </ul>
-                </form>
-            </div>
-            <div class="clear">
-            </div>
-            <div class="copy">
-                <div class="f_left">
-                    粤ICP备13080521号· Copyright &copy; 广州岳信试验设备有限公司. All Rights Reserved.</div>
-                <div class="f_right">
-                    <a href="#top">
-                        <img src="images/back_top.jpg" width="22"
-                            height="22" alt="" /></a></div>
-            </div>
-            <div class="clear">
-            </div>
-        </div>
+			<!-- content end -->
+		</div>
     </div>
-    <!-- bottom end -->
+    <!-- main end -->	
+
+	<!-- barcode & contact & link & reply -->
+	<?php include_once("foot.php"); ?>
+	<script language="javascript" type="text/javascript">
+		//$(".d_detail").find("*").css({"font-size": "13px", "text-indent" : "2em"});
+	</script>
+	</body>
+</html>

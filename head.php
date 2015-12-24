@@ -9,8 +9,10 @@
 		require_once("head.html"); 
 		exit; 
 	}*/
+	$showBanner = false; //显示banner
 
 	$navHtml = "";
+	$proMapHtml = "";
 	$query = new Company(_QUERY_ALL);
 	$query->companyKey = "brand_recommend";
 	$brands = Company::query($query);
@@ -21,11 +23,16 @@
 				<li class='sep f_left hidden'>|</li>
                 <li class='n_menu f_left'>
                     <h3>
-                        <a title='%s' style='width: 105px;' href='%s'>%s</a>
+                        <a title='%s' target='_blank' style='width: 105px;' href='%s'>%s</a>
                     </h3>
                 </li>
 				",
 				$brand->subject,
+				$brand->content,
+				$brand->subject			
+			);
+			
+			$proMapHtml .= sprintf("<li><a target='_blank' href='%s'>%s</a></li>",
 				$brand->content,
 				$brand->subject			
 			);
@@ -101,51 +108,51 @@
                             首页</a>
                     </h3>
                 </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
-                        <a title="走进岳信" style="width: 80px;" href="company.php">
-                            走进岳信</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
-                        <a title="产品中心" style="width: 80px;" href="product.php">
-                            产品中心</a>
-                    </h3>
-                </li>
 				<?php echo $navHtml; ?>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="公司新闻" style="width: 80px;" href="news.php">
-                            公司新闻</a>
+                        <a title="产品中心" target="_blank" style="width: 80px;" href="product.php">
+                            产品中心</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="成功案例" style="width: 80px;" href="case.php">
+                        <a title="岳信动态" target="_blank" style="width: 80px;" href="news.php">
+                            岳信动态</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="成功案例" target="_blank" style="width: 80px;" href="case.php">
                             成功案例</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="资料下载" style="width: 80px;" href="material.php">资料下载</a>
+                        <a title="走进岳信" target="_blank" style="width: 80px;" href="company.php">
+                            走进岳信</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="人才招聘" style="width: 80px;" href="recruit.php">人才招聘</a>
+                        <a title="联系我们" target="_blank" href="contact.php">联系我们</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="联系我们" href="#contacts">联系我们</a>
+                        <a title="人才招聘" target="_blank" style="width: 80px;" href="recruit.php">人才招聘</a>
+                    </h3>
+                </li>
+                <li class="sep f_left hidden">|</li>
+                <li class="n_menu f_left">
+                    <h3>
+                        <a title="资料下载" target="_blank" style="width: 80px;" href="material.php">资料下载</a>
                     </h3>
                 </li>
                 <li class="clear hidden"></li>

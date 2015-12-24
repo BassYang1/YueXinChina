@@ -23,6 +23,7 @@
 		//公司信息
 		"company" => "company.php", 
 		"contact" => "contact.php", 
+		"comaddr" => "comaddr.php", 
 		"culture" => "culture.php", 
 		"spirit" => "spirit.php", 
 		"honor" => "honor.php", 

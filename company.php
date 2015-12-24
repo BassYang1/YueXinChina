@@ -62,7 +62,9 @@
                     <div class="ct_r_content">
 						<div class="d_title_pnl hidden">
 							<div class='d_title'>
-								<div class="d_t_name"><?php echo $detail->subject; ?></div>		
+								<div class="d_t_name">
+									<?php echo $detail->subject; ?>
+                                </div>		
 							</div>
 							<div class="clear"></div>
 						</div>
