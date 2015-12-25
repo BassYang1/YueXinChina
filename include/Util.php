@@ -17,7 +17,7 @@ class Util{
 						</dd>
 						<dt class='a_text'>
 							<div style='margin: auto 5px;'><a href='pdetail.php?id=%u' title='%s'>%s</a></div>		
-							<div style='margin: auto 5px;'><a href='%s' target='_blank'><img src='images/buy_s.png' width='70px' height='20px' alt='%s' /></div>		
+							<div style='margin: auto 5px;'><a href='%s' target='_blank'><img src='images/buy_s.png' width='70px' height='20px' alt='%s' /></a></div>		
 						</dt>
 					</dl>",
 					$product->productId, 

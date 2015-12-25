@@ -18,7 +18,7 @@
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">网站信息</a>
 				<div class="dd_menu_item dd_item">
 					<a href="javascript:void(0)" onclick="BS_Common.nav('site')">基本信息</a>
-					<a href="javascript:void(0)" onclick="BS_Common.nav('siteimg')">首页图片</a> 
+					<a href="javascript:void(0)" onclick="BS_Common.nav('siteimg')">网站Banner</a> 
 					<a href="javascript:void(0)" onclick="BS_Common.nav('links')">友情连接</a> 
 				</div>
 			</li>

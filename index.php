@@ -121,7 +121,9 @@
                         </div>
                     </div>
                     <div class="ct_r_content">
-					<?php echo $productHtml; ?>	
+						<?php echo $productHtml; ?>	
+						<div class="clear">
+						</div>
                     </div>
                 </div>
             </div>
