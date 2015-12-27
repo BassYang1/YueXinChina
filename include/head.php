@@ -1,15 +1,14 @@
 <?php
-	/*require_once("include/Util.php"); 
-	require_once("admin/include/common.php"); 
+	/*require_once("Util.php"); 
+	require_once("../admin/include/common.php"); 
 
 	//静态化
-	if(is_file("head.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
+	if(is_file("../head.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
 		Tool::logger(__METHOD__, __LINE__, "加载静态页头", _LOG_DEBUG);
 		//header("Location: head.html");		
-		require_once("head.html"); 
+		require_once("../head.html"); 
 		exit; 
 	}*/
-	$showBanner = false; //显示banner
 
 	$navHtml = "";
 	$proMapHtml = "";
@@ -17,7 +16,10 @@
 	$query->companyKey = "brand_recommend";
 	$brands = Company::query($query);
 		
+	$cusNavCount = 0; //自定义导航栏个数
 	if(!empty($brands)){
+		$cusNavCount = count($brands);
+		
 		foreach($brands as $brand){
 			$navHtml .= sprintf("
 				<li class='sep f_left hidden'>|</li>
@@ -37,8 +39,7 @@
 				$brand->subject			
 			);
 		}
-	}
-	
+	}	
 ?>
 
 <?php  //二维码
@@ -86,13 +87,13 @@
         <!--店招_LOGO_二维码_连接电话 开始-->
         <div class="header">
             <div class="logo f_left">
-                <a href="index.php" title="首页">
-                    <img src="images/yuexin13_03.png" height="85"
+                <a href="../index.php" title="首页">
+                    <img src="../images/yuexin13_03.png" height="85"
                         alt=""></a></div>
             <!--logo-->
             <div class="contact_code f_right">
                 <img src="<?php echo str_replace("../", "", $barcode->savedPath); ?>" height="85"
-                    alt="" /><img src="images/yuexin13_06.png"
+                    alt="" /><img src="../images/yuexin13_06.png"
                         height="85" alt="" /></div>
             <!--right-->
             <div class="clear">
@@ -104,7 +105,7 @@
             <ul class="nav">
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="首页" style="width: 60px;" href="index.php">
+                        <a title="首页" href="../index.php">
                             首页</a>
                     </h3>
                 </li>
@@ -112,47 +113,47 @@
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="产品中心" target="_blank" style="width: 80px;" href="product.php">
+                        <a title="产品中心" target="_blank" href="../product.php">
                             产品中心</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="岳信动态" target="_blank" style="width: 80px;" href="news.php">
+                        <a title="岳信动态" target="_blank" href="../news.php">
                             岳信动态</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="成功案例" target="_blank" style="width: 80px;" href="case.php">
+                        <a title="成功案例" target="_blank" href="../case.php">
                             成功案例</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="走进岳信" target="_blank" style="width: 80px;" href="company.php">
+                        <a title="走进岳信" target="_blank" href="../company.php">
                             走进岳信</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="联系我们" target="_blank" href="contact.php">联系我们</a>
+                        <a title="联系我们" target="_blank" href="../contact.php">联系我们</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="人才招聘" target="_blank" style="width: 80px;" href="recruit.php">人才招聘</a>
+                        <a title="人才招聘" target="_blank" href="../recruit.php">人才招聘</a>
                     </h3>
                 </li>
                 <li class="sep f_left hidden">|</li>
                 <li class="n_menu f_left">
                     <h3>
-                        <a title="资料下载" target="_blank" style="width: 80px;" href="material.php">资料下载</a>
+                        <a title="资料下载" target="_blank" href="../material.php">资料下载</a>
                     </h3>
                 </li>
                 <li class="clear hidden"></li>
@@ -162,3 +163,13 @@
         <!--导航 结束-->
     </div>
     <!--header end-->
+<script language="javascript" type="text/javascript">
+$(function(){
+	var navIndex = <?php echo $navIndex; ?>;
+	var cusNavCount = <?php echo $cusNavCount; ?>;
+	
+	navIndex = navIndex == 0 ? 0 : navIndex + cusNavCount;	
+	
+	$(".n_menu:eq(" + navIndex + ")").addClass("selected");
+});
+</script>

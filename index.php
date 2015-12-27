@@ -1,6 +1,5 @@
 <?php 
-	require_once("include/Util.php"); 
-	require_once("admin/include/common.php"); 
+	require_once("include/init.php"); 
 	
 	//静态化
 	if(is_file("index.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
@@ -14,6 +13,8 @@
 	//当前位置
 	$location = "当前位置 > <span>首页</span>";
 	$page_title = "首页";
+	$showHomeBanner = true; //是否显示首页banne
+	$navIndex = 0;
 ?>
 <?php 
 	//加载首页显示商器
@@ -85,16 +86,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<?php include_once("include.php"); ?>
+	<?php include_once("include/page.php"); ?>
 	</head>
 	<body>
     <img src="countor.php" width="0" height="0" /> <!--访问量统计-->
 	<!-- head & nav & share-->
-	<?php include_once("head.php"); ?>
-	<?php $showBanner = true; ?>
+	<?php include_once("include/head.php"); ?>
 
 	<!-- banner & location & hot -->
-	<?php include_once("banner.php"); ?>
+	<?php include_once("include/banner.php"); ?>
     <!-- main start -->
     <div id="content_box">
         <div class="content">
@@ -219,7 +219,7 @@
     <!-- main end -->	
 
 	<!-- barcode & contact & link & reply -->
-	<?php include_once("foot.php"); ?>
+	<?php include_once("include/foot.php"); ?>
 	
 	</body>
 </html>

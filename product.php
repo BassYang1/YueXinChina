@@ -1,6 +1,5 @@
-<?php //init
-	require_once("include/Util.php"); 
-	require_once("admin/include/common.php"); 
+<?php
+	require_once("include/init.php"); 
 	
 	//设置模块权限
 	$sections = array("contact" => 0, "company" => 0, "sort" => 0, "recommend" => 1, "case" => 1, "news" => 1);
@@ -29,6 +28,7 @@
 	//当前位置
 	$location = sprintf("当前位置 > 产品列表 > <span>%s</span>", $curSort);	
 	$page_title = $curSort;
+	$navIndex = 1;
 ?>
 
 <?php //product list paging
@@ -55,14 +55,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<?php include_once("include.php"); ?>
+	<?php include_once("include/page.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
-	<?php include_once("head.php"); ?>
+	<?php include_once("include/head.php"); ?>
 
 	<!-- banner & location & hot -->
-	<?php include_once("banner.php"); ?>
+	<?php include_once("include/banner.php"); ?>
     <!-- main start -->
     <div id="content_box">
         <div class="content">
@@ -113,7 +113,7 @@
     <!-- main end -->	
 
 	<!-- barcode & contact & link & reply -->
-	<?php include_once("foot.php"); ?>
+	<?php include_once("include/foot.php"); ?>
 	
 	</body>
 <script language="javascript" type="text/javascript">

@@ -10,48 +10,6 @@ $(function() {
 		 trigger:"click",
 		 interTime:3000
 	});*/
-	
-	//首页Banner大小自适应
-	var adaptHomeBanner = function(){
-		//$(".banner_imgs li img").height($(".banner_imgs li img").width() * 0.4); //banner长宽自适应
-	};
-
-	//首页Banner大小改变
-	//adaptHomeBanner();
-	//$(window).resize(adaptHomeBanner);
-
-
-	//首页Banner滚动
-	var sildeHomeBanner = function(){
-		var len = $(".banner_imgs li").length;
-
-		var banner = null;
-		var bannerBtn = null;
-
-		$(".banner_imgs li").each(function(i){
-			if($(this).hasClass("cur_banner")){
-				if(i < len - 2){
-					banner = $(".banner_imgs li:eq(" + (i + 1) + ")");	
-					bannerBtn = $(".banner_btn li:eq(" + (i + 1) + ")");				
-				}
-			}
-		});
-		
-		if(banner == null){
-			banner = $(".banner_imgs li:eq(0)");	
-			bannerBtn = $(".banner_btn li:eq(0)");
-		}
-
-		$(".banner_imgs li").removeClass("cur_banner").addClass("hidden");
-		banner.removeClass("hidden").addClass("cur_banner");
-		
-		$(".banner_btn li").removeClass("selected");
-		bannerBtn.addClass("selected");
-	}
-	
-	//首页Banner滚动
-	sildeHomeBanner();
-	setInterval(sildeHomeBanner, 5000);
 
 	/*
 	$("#name").val("陈先生");

@@ -1,6 +1,5 @@
-<?php //init
-	require_once("include/Util.php"); 
-	require_once("admin/include/common.php"); 
+<?php
+	require_once("include/init.php"); 
 	
 	//设置模块权限
 	$sections = array("contact" => 0, "company" => 0, "sort" => 0, "recommend" => 1, "case" => 1, "news" => 1);
@@ -8,6 +7,7 @@
 	$location = "当前位置 > <span>资料下载</span>";
 	$page_title = "资料下载";
 	$materialCount = 10; //显示资料个数
+	$navIndex = 7;
 ?>
 
 <?php //material list paging
@@ -57,11 +57,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<?php include_once("include.php"); ?>
+	<?php include_once("include/page.php"); ?>
 	</head>
 	<body>
 	<!-- head & nav & share-->
-	<?php include_once("head.php"); ?>
+	<?php include_once("include/head.php"); ?>
     
     <style type="text/css">
 		.material_feedback_shade{background: #000; filter: alpha(opacity=20);/* IE的透明度 */ opacity: 0.2; /* 透明度 */ position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display:none; z-index:998;}
@@ -73,7 +73,7 @@
 	</style>
 
 	<!-- banner & location & hot -->
-	<?php include_once("banner.php"); ?>
+	<?php include_once("include/banner.php"); ?>
     <!-- main start -->
     <div id="content_box">
         <div class="content">
@@ -132,7 +132,7 @@
     <!-- main end -->	
 
 	<!-- barcode & contact & link & reply -->
-	<?php include_once("foot.php"); ?>
+	<?php include_once("include/foot.php"); ?>
 	
 	<script language="javascript" type="text/javascript">
 	function showMText(obj){

@@ -1,12 +1,12 @@
 <!-- bottom start -->
 <?php
-	/*require_once("include/Util.php"); 
-	require_once("admin/include/common.php"); 
+	/*require_once("Util.php"); 
+	require_once("../admin/include/common.php"); 
 
 	//静态化
 	if(is_file("foot.html") && !isset($_GET["sp"])){ //存在静态页面，并且不是执行静态化处理
 		//header("Location: foot.html");		
-		require_once("head.html"); 
+		require_once("../head.html"); 
 		exit; 
 	}*/
 
@@ -58,18 +58,18 @@
     	<div class="link_sec">
           <ul>
               <li><p>关于我们</p></li>
-              <li><a target="_blank" href="contact.php">联系我们</a></li>
-              <li><a target="_blank" href="company.php">走进岳信</a></li>
-              <li><a target="_blank" href="product.php">产品中心</a></li>
-              <li><a target="_blank" href="material.php">资料下载</a></li>
+              <li><a target="_blank" href="../contact.php">联系我们</a></li>
+              <li><a target="_blank" href="../company.php">走进岳信</a></li>
+              <li><a target="_blank" href="../product.php">产品中心</a></li>
+              <li><a target="_blank" href="../material.php">资料下载</a></li>
           </ul>
         </div>
     	<div class="link_sec">
           <ul>
               <li><p>公司动态</p></li>
-              <li><a target="_blank" href="case.php">最新案例</a></li>
-              <li><a target="_blank" href="news.php">公司新闻</a></li>
-              <li><a target="_blank" href="recruit.php">人才招聘</a></li>
+              <li><a target="_blank" href="../case.php">最新案例</a></li>
+              <li><a target="_blank" href="../news.php">公司新闻</a></li>
+              <li><a target="_blank" href="../recruit.php">人才招聘</a></li>
           </ul>
         </div>
     	<div class="link_sec">
@@ -118,7 +118,7 @@
 				<li><input type="text" class="input" id="email" maxlength="100" value="邮箱"></li>
 				<li><input type="text" class="input" id="phone" maxlength="100" value="联系电话"></li>
 				<li><textarea class="input1" id="message">内容</textarea></li>
-				<li><span id="validMsg" class="f_left" style="font-size:11px; color:#AB2F2F;"></span><input type="image" onclick="addMessage()" src="images/submit.jpg" width="48" height="21" class="f_right"></li>
+				<li><span id="validMsg" class="f_left" style="font-size:11px; color:#AB2F2F;"></span><input type="image" onclick="addMessage()" src="../images/submit.jpg" width="48" height="21" class="f_right"></li>
 				<li class="clear"></li>
 			</ul>
         </div>
@@ -130,7 +130,7 @@
             </div>
             <div class="f_right">
                 <a href="#top" class="hidden">
-                    <img src="images/back_top.jpg" width="22"
+                    <img src="../images/back_top.jpg" width="22"
                          height="22" alt="" />
                 </a>
             </div>
@@ -144,13 +144,13 @@
 <!--contact float div start-->
 <div id="asid_share" style="position: fixed; width: 40px; bottom: 20%; right: 0; z-index: 890;">
 	<div class="asid_share_box relative"><a href="#messages">
-		<img alt="给我留言" class="adid_icon" src="images/icon_cj.png" style="display: inline;"></a></div>
-	<div class="asid_share_box relative"><a href="index.php#online_contact">
-		<img alt="在线交流" class="adid_icon" src="images/icon_qq.png" style="display: inline;"></a></div>
+		<img alt="给我留言" class="adid_icon" src="../images/icon_cj.png" style="display: inline;"></a></div>
+	<div class="asid_share_box relative"><a href="../index.php#online_contact">
+		<img alt="在线交流" class="adid_icon" src="../images/icon_qq.png" style="display: inline;"></a></div>
 	<div class="asid_share_box relative">
-		<a href="index.php#online_contact">
-			<img alt="扫二微码" class="adid_icon" src="images/icon_sweep.png" style="display: inline;"></a>	</div>
+		<a href="../index.php#online_contact">
+			<img alt="扫二微码" class="adid_icon" src="../images/icon_sweep.png" style="display: inline;"></a>	</div>
 	<div class="asid_share_box relative" id="Div2" style="display: block;"><a href="#top">
-		<img alt="返回顶部" class="adid_icon" src="images/icon_back.png" style="display: inline;"></a></div>
+		<img alt="返回顶部" class="adid_icon" src="../images/icon_back.png" style="display: inline;"></a></div>
 </div>
 <!--contact float div end -->

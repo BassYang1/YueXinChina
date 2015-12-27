@@ -1,5 +1,5 @@
 <?php
-	require_once("admin/include/common.php"); 
+	require_once("include/init.php");
 	
 	$cIP = getenv('REMOTE_ADDR');   
 	$cIP1 = getenv('HTTP_X_FORWARDED_FOR');   
