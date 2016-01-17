@@ -1,8 +1,9 @@
 <?php
 class DBHelp{
-	private static $dbServer = "localhost";
-	private static $dbRoot = "root";
-	private static $dbPassword = "111111";
+	private static $dbHost = "localhost";
+	private static $dbPort = "3306";
+	private static $dbUser = "yuexinchina_f";
+	private static $dbPassword = "@75133255";
 	private static $dbName = "yuexinchina";
 	private static $template = array();
 	
@@ -10,21 +11,21 @@ class DBHelp{
 	public static function getDbConfig(){	
 		unset($_SESSION["DB_CONFIG"]);
 		if(isset($_SESSION["DB_CONFIG"])){
-			return $_SESSION["DB_CONFIG"];
+			//return $_SESSION["DB_CONFIG"];
 		}
 		
-		$dbHost = Config::getValueByKey("DB_HOST");
-		$dbPort = Config::getValueByKey("DB_PORT");
-		$dbUser = Config::getValueByKey("DB_USER");
-		$dbPassword = Config::getValueByKey("DB_PASSWROD");
-		$dbName = Config::getValueByKey("DB_NAME");
+		self::$dbHost = Config::getValueByKey("DB_HOST");
+		self::$dbPort = Config::getValueByKey("DB_PORT");
+		self::$dbUser = Config::getValueByKey("DB_USER");
+		self::$dbPassword = Config::getValueByKey("DB_PASSWROD");
+		self::$dbName = Config::getValueByKey("DB_NAME");
 
 		$db = array(
-				"host" => $dbHost,
-				"port" => $dbPort,
-				"user" => $dbUser,
-				"password" => $dbPassword,
-				"db" => $dbName
+				"host" => self::$dbHost,
+				"port" => self::$dbPort,
+				"user" => self::$dbUser,
+				"password" => self::$dbPassword,
+				"db" => self::$dbName
 			);
 		
 		$_SESSION["DB_CONFIG"] = $db;

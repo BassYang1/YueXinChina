@@ -35,6 +35,22 @@
 		Company::content("company_addr"),
 		Company::content("other_contact")
 	);
+
+	//读取常见问题
+	$pro_problems = "";
+	$query = new Company(_QUERY_ALL);
+	$query->companyKey = "product_problem";
+	$problems = Company::query($query);
+		
+	if(!empty($problems)){		
+		foreach($problems as $problem){
+			$pro_problems .= sprintf("<li><a target='_blank' href='%s' title='%s'>%s</a></li>",
+				$problem->content,
+				$problem->subject,
+				$problem->subject			
+			);
+		}
+	}
 ?>
 
 
@@ -51,7 +67,7 @@
 	<div class="sitemap">
     	<div class="link_sec">
           <ul>
-              <li><p>阿里商铺</p></li>
+              <li><p>热门商品</p></li>
               <?php echo $proMapHtml ?>
           </ul>
         </div>
@@ -75,10 +91,7 @@
     	<div class="link_sec">
           <ul>
               <li><p>常见问题</p></li>
-              <li><a target="_blank" href="#">高压喷淋试验箱适用范围大爆料</a></li>
-              <li><a target="_blank" href="#">了解摆管淋雨试验机的技术参数是什么</a></li>
-              <li><a target="_blank" href="#">摆管淋雨试验箱 知识小百科</a></li>
-              <li><a target="_blank" href="#">花洒淋雨 基础知识大普及</a></li>
+              <?php echo $pro_problems ?>
           </ul>
         </div>
     </div>
@@ -142,7 +155,7 @@
 <!-- bottom end -->
 
 <!--contact float div start-->
-<div id="asid_share" style="position: fixed; width: 40px; bottom: 20%; right: 0; z-index: 890;">
+<div id="asid_share" style="position: fixed; width: 40px; bottom: 5%; right: 0; z-index: 890;">
 	<div class="asid_share_box relative"><a href="#messages">
 		<img alt="给我留言" class="adid_icon" src="../images/icon_cj.png" style="display: inline;"></a></div>
 	<div class="asid_share_box relative"><a href="../index.php#online_contact">
@@ -153,4 +166,19 @@
 	<div class="asid_share_box relative" id="Div2" style="display: block;"><a href="#top">
 		<img alt="返回顶部" class="adid_icon" src="../images/icon_back.png" style="display: inline;"></a></div>
 </div>
+
+<script language="javascript" type="text/javascript">
+//商桥代码
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); 
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe638ba0295a9492677e9db020f90c7b0' type='text/javascript'%3E%3C/script%3E"));
+
+//统计代码
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e638ba0295a9492677e9db020f90c7b0";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 <!--contact float div end -->

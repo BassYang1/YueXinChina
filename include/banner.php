@@ -10,7 +10,7 @@
 
 	if(empty($banners)){
 		$banner = new DocFile(_NONE);
-		$banner->savedPath = "images/banner.jpg";
+		$banner->savedPath = "images/banner.png";
 		$banners = array($banner);
 	}
 		
@@ -35,6 +35,25 @@
 				(empty($banner->fileUrl) ? "index.php" : $banner->fileUrl),
 				str_replace("../", "", $banner->savedPath), 
 				(empty($banner->fileDesc) ? Company::content("site_desc", false) : $banner->fileDesc));
+	}
+
+	$hot_search = "";
+	$query = new Company(_QUERY_ALL);
+	$query->companyKey = "hot_search";
+	$hots = Company::query($query);
+		
+	if(!empty($hots)){		
+		foreach($hots as $hot){
+			$hot_search .= sprintf("
+                <span class='n_menu'>
+					<a title='%s' target='_blank' style='width: 105px;' href='%s'>%s</a>
+                </span>
+				",
+				$hot->subject,
+				$hot->content,
+				$hot->subject			
+			);
+		}
 	}
 ?>
 
@@ -134,7 +153,6 @@ $(function(){
             </div>
             <div class="hot_search f_right">				
 				<?php 
-					$hot_search = Company::content("hot_search", false);
 					if(!empty($hot_search)){
 						echo sprintf("热门机型：%s", $hot_search);
 					}

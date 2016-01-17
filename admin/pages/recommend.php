@@ -1,50 +1,16 @@
 <script charset="utf-8" src="scripts/kindeditor/kindeditor.js"></script>
 <script charset="utf-8" src="scripts/kindeditor/lang/zh_CN.js"></script>
 <script language="javascript" type="text/javascript">	
-	//删除推荐
-	function dRecom(obj){
-		var $obj = $(obj).prev(); //兄弟节点
-		var data = {type: "content", module: "company", action: "del", companyId: $obj.attr("id")};
-
-		BS_Common.update(data, function(result){
-			if(result.status == true){
-				$obj.parent().remove();
-			}
-			else{
-				BS_Popup.create({message: result.data});
-			}
-		});	
-	}
-	
-	//初使化推荐产品连接
-	function initLinks(companyKey, callback){
-		BS_Common.query({module: "company", type: "list", companyKey: companyKey}, true, function(data){
-			if(data instanceof Array){
-				var htmlStr = "";
-
-				for(var i in data){
-					var desc = data[i].subject;
-					var url = data[i].content;
-					var id = data[i].id;
-
-					htmlStr += "<label><a id='" + id + "' href='" + url + "' target='_blank'>" + desc + "</a><span onclick='dRecom(this)'>X</span></label>";
-				}
-					
-				callback(htmlStr);
-			}
-		});
-	}
-	
 	$(function(){
 		BS_Common.setMenu(".m_site");		
 		
-		//初使化推荐产品
-		initLinks("brand_recommend", function(links){
+		//显示推荐产品
+		BS_Common.SelfLink.show("brand_recommend", function(links){
 			$("#brandPnl").html(links);
 		});	
 		
-		//初使化热门
-		initLinks("hot_search", function(links){
+		//显示热门产品
+		BS_Common.SelfLink.show("hot_search", function(links){
 			$("#hotPnl").html(links);
 		});		
 
@@ -88,7 +54,7 @@
 			if($("#hotPnl a").size() >= 3) message += "|最多只能添加3个";
 			if($.trim($("#txtHot").val()) == "") message += "|产品名称不能为空";
 			if($.trim($("#txtHotUrl").val()) == "") message += "|产品连接不能为空";
-			if($.trim($("#txtHot").val()) != "" && $("#brandPnl").html().indexOf($.trim($("#txtHot").val())) >= 0){
+			if($.trim($("#txtHot").val()) != "" && $("#hotPnl").html().indexOf($.trim($("#txtHot").val())) >= 0){
 				message += "|热门产品已经添加";
 			}
 
@@ -101,14 +67,10 @@
 			var data = {type: "content", module: "company", action: "insert", companyKey: "hot_search", subject: $.trim($("#txtHot").val()), content: $.trim($("#txtHotUrl").val())};
 			
 			BS_Common.update(data, function(result){
-				BS_Popup.close(shade);
+				BS_Popup.close(shade);				
 				
-				if(result.status == true){	
-					BS_Popup.create({message: result ? "[热门产品]保存成功" : "[热门产品]保存失败", title: "站点信息"});
-					$("#hotPnl").append("<a href='" + $.trim($("#txtHotUrl").val()) + "' target='_blank'>" + $.trim($("#txtHot").val()) + "</a>");
-					
-					$("#txtHot").val("");
-					$("#txtHotUrl").val("");
+				if(result.status == true){
+					location.reload();
 				}
 				else{
 					BS_Popup.create({message: result.data});
@@ -185,7 +147,7 @@
 				<td width="90" align="right">
 				</td>
 				<td>
-					<div id="hotPnl"></div>
+					<div id="hotPnl" class="reonPnl"></div>
 				</td>
 			</tr>
 		</tbody>

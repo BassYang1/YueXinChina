@@ -2,6 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="<?php echo Company::content("seo_key", false); ?>" />
 <meta name="description" content="<?php echo Company::content("site_desc", false); ?>" />
+<meta http-equiv="Cache-Control" content="no-transform " />
 <link href="../css/base.css" rel="stylesheet" type="text/css" />
 <link href="../css/frame.css" rel="stylesheet" type="text/css" />
 <!--flash jq-->

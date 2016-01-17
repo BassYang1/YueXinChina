@@ -1,4 +1,5 @@
 var BS_Common = {};
+
 BS_Common.Editors = {};
 // load content editor
 BS_Common.loadContentEditor = function (editorId) {
@@ -117,3 +118,37 @@ BS_Common.ajax = function (url, data, method, isAsync, callBack, error) {
 
     $.ajax({ url: url, data: data, type: method, async: isAsync, dataType: "JSON", success: success, error: error });
 };
+
+//自定义超连接
+BS_Common.SelfLink = BS_Common.SelfLink || {};
+BS_Common.SelfLink.del = function (obj){ //删除连接
+	var $obj = $(obj).prev(); //兄弟节点
+	var data = {type: "content", module: "company", action: "del", companyId: $obj.attr("id")};
+
+	BS_Common.update(data, function(result){
+		if(result.status == true){
+			$obj.parent().remove();
+		}
+		else{
+			BS_Popup.create({message: result.data});
+		}
+	});	
+}
+	
+BS_Common.SelfLink.show = function(companyKey, callback){//显示连接
+	BS_Common.query({module: "company", type: "list", companyKey: companyKey}, true, function(data){
+		if(data instanceof Array){
+			var htmlStr = "";
+
+			for(var i in data){
+				var desc = data[i].subject;
+				var url = data[i].content;
+				var id = data[i].id;
+
+				htmlStr += "<label><a id='" + id + "' href='" + url + "' target='_blank'>" + desc + "</a><span onclick='BS_Common.SelfLink.del(this)'>X</span></label>";
+			}
+					
+			callback(htmlStr);
+		}
+	});
+}

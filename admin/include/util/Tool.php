@@ -87,8 +87,39 @@ class Tool{
 		}
 	}
 	
+	public static function rmlog(){
+		try{
+			$logDir = sprintf("%s/log", explode("/include/", __FILE__, 2)[0]);
+			$currentTime = time();
+
+			if(is_dir($logDir)){
+				$logs = scandir($logDir);
+				$count = 0;
+
+				foreach($logs  as $log){
+					if((count($logs) - 2 - $count) < 4){
+						break;
+					}
+
+					$createdTime = strtotime(str_replace(array("log_", ".log"), array("", ""), $log));
+
+					if(floor(ceil($currentTime - $createdTime)/86400) > 5){
+						echo $log . "<br />";
+						unlink(sprintf("%s/%s", $logDir, $log));
+					}
+
+					$count ++;
+				}
+			}
+		}
+		catch(Exception $e){
+		}
+	}
+
 	public static function logger($method, $line, $message, $logLevel=_LOG_ERROR){
 		try{
+			self::rmlog();
+
 			if(!_IS_DEBUG && $logLevel == _LOG_DEBUG){
 				return;
 			}

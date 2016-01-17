@@ -22,12 +22,9 @@
 		
 		foreach($brands as $brand){
 			$navHtml .= sprintf("
-				<li class='sep f_left hidden'>|</li>
-                <li class='n_menu f_left'>
-                    <h3>
-                        <a title='%s' target='_blank' style='width: 105px;' href='%s'>%s</a>
-                    </h3>
-                </li>
+                <span class='n_menu'>
+					<a title='%s' target='_blank' style='width: 105px;' href='%s'>%s</a>
+                </span>
 				",
 				$brand->subject,
 				$brand->content,
@@ -102,62 +99,38 @@
         <!--店招_LOGO_二维码_连接电话结束-->
         <!--导航 开始-->
         <div class="nav_box">
-            <ul class="nav">
-                <li class="n_menu f_left">
-                    <h3>
+			<div class="nav">
+				<span class="n_menu">
                         <a title="首页" href="../index.php">
                             首页</a>
-                    </h3>
-                </li>
+                </span>
 				<?php echo $navHtml; ?>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                <span class="n_menu">
                         <a title="产品中心" target="_blank" href="../product.php">
                             产品中心</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="岳信动态" target="_blank" href="../news.php">
                             岳信动态</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="成功案例" target="_blank" href="../case.php">
                             成功案例</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="走进岳信" target="_blank" href="../company.php">
                             走进岳信</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="联系我们" target="_blank" href="../contact.php">联系我们</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="人才招聘" target="_blank" href="../recruit.php">人才招聘</a>
-                    </h3>
-                </li>
-                <li class="sep f_left hidden">|</li>
-                <li class="n_menu f_left">
-                    <h3>
+                </span>
+                <span class="n_menu">
                         <a title="资料下载" target="_blank" href="../material.php">资料下载</a>
-                    </h3>
-                </li>
-                <li class="clear hidden"></li>
-            </ul>
+                </span>
+			</div>
             <!-- menu | end -->
         </div>
         <!--导航 结束-->

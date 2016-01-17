@@ -39,6 +39,7 @@
 		"edit_product" => "edit_product.php", 
 		"sort" => "sort.php", 
 		"edit_sort" => "edit_sort.php", 
+		"problem" => "problem.php", 
 
 		//站内新闻 
 		"recruit" => "recruit.php", 

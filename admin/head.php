@@ -27,6 +27,7 @@
 					<a href="javascript:void(0)" onclick="BS_Common.nav('product')">产品列表</a>
 					<a href="javascript:void(0)" onclick="BS_Common.nav('sort')">产品类别</a> 
 					<a href="javascript:void(0)" onclick="BS_Common.nav('recommend')">产品推荐</a> 
+					<a href="javascript:void(0)" onclick="BS_Common.nav('problem')">常见问题</a>
 				</div>
 			</li>			
             <li class="dd_menu"><a href="javascript:void(0);" class="dd">信息发布</a>

@@ -18,7 +18,6 @@
 --
 -- Table structure for table `content`
 --
-SET NAMES utf8; 
 
 DROP TABLE IF EXISTS `content`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -58,7 +57,7 @@ CREATE TABLE `countor` (
   `count_date` varchar(10) DEFAULT NULL,
   `rec_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`count_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +66,7 @@ CREATE TABLE `countor` (
 
 LOCK TABLES `countor` WRITE;
 /*!40000 ALTER TABLE `countor` DISABLE KEYS */;
-INSERT INTO `countor` VALUES (1,10,'2015.11.10','2015-11-16 08:13:02'),(2,21,'2015.11.12','2015-11-16 08:13:02'),(3,4,'2015.11.13','2015-11-16 08:13:02'),(4,7,'2015.11.14','2015-11-16 08:13:02'),(5,45,'2015.11.15','2015-11-16 08:13:02'),(6,116,'2015.11.16','2015-11-16 13:56:57'),(7,1,'2015.11.18','2015-11-17 22:08:18'),(8,37,'2015.11.20','2015-11-20 15:51:47'),(9,3,'2015.11.21','2015-11-21 10:06:41'),(10,2,'2015.11.22','2015-11-22 09:21:42'),(11,17,'2015.11.26','2015-11-26 08:22:46'),(12,14,'2015.11.28','2015-11-28 15:45:24'),(13,1,'2015.11.29','2015-11-28 16:21:40'),(14,5,'2015.12.01','2015-12-01 14:10:31'),(15,2,'2015.12.03','2015-12-03 01:12:50'),(16,5,'2015.12.07','2015-12-07 04:42:01'),(17,2,'2015.12.08','2015-12-08 01:29:12'),(18,1,'2015.12.09','2015-12-08 16:20:25'),(19,1,'2015.12.14','2015-12-14 14:42:10'),(20,1,'2015.12.15','2015-12-15 14:21:58'),(21,3,'2015.12.16','2015-12-16 01:18:38'),(22,1,'2015.12.17','2015-12-17 03:20:36'),(23,1,'2015.12.19','2015-12-18 23:13:11');
+INSERT INTO `countor` VALUES (1,10,'2015.11.10','2015-11-16 08:13:02'),(2,21,'2015.11.12','2015-11-16 08:13:02'),(3,4,'2015.11.13','2015-11-16 08:13:02'),(4,7,'2015.11.14','2015-11-16 08:13:02'),(5,45,'2015.11.15','2015-11-16 08:13:02'),(6,116,'2015.11.16','2015-11-16 13:56:57'),(7,1,'2015.11.18','2015-11-17 22:08:18'),(8,37,'2015.11.20','2015-11-20 15:51:47'),(9,3,'2015.11.21','2015-11-21 10:06:41'),(10,2,'2015.11.22','2015-11-22 09:21:42'),(11,17,'2015.11.26','2015-11-26 08:22:46'),(12,14,'2015.11.28','2015-11-28 15:45:24'),(13,1,'2015.11.29','2015-11-28 16:21:40'),(14,5,'2015.12.01','2015-12-01 14:10:31'),(15,2,'2015.12.03','2015-12-03 01:12:50'),(16,5,'2015.12.07','2015-12-07 04:42:01'),(17,2,'2015.12.08','2015-12-08 01:29:12'),(18,1,'2015.12.09','2015-12-08 16:20:25'),(19,1,'2015.12.14','2015-12-14 14:42:10'),(20,1,'2015.12.15','2015-12-15 14:21:58'),(21,3,'2015.12.16','2015-12-16 01:18:38'),(22,1,'2015.12.17','2015-12-17 03:20:36'),(23,1,'2015.12.19','2015-12-18 23:13:11'),(24,2,'2015.12.29','2015-12-29 11:28:03'),(25,3,'2016.01.05','2016-01-04 23:05:12'),(26,1,'2016.01.06','2016-01-05 20:30:15');
 /*!40000 ALTER TABLE `countor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +89,7 @@ CREATE TABLE `doc_file` (
   `ext_name` varchar(10) DEFAULT NULL,
   `rec_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +98,7 @@ CREATE TABLE `doc_file` (
 
 LOCK TABLES `doc_file` WRITE;
 /*!40000 ALTER TABLE `doc_file` DISABLE KEYS */;
-INSERT INTO `doc_file` VALUES (49,'product','product1448035693','../upload/product/product1448035693.jpg','200RS官网主图','','',0,'.jpg','2015-11-20 16:08:15'),(50,'product','product1448099056','../upload/product/product1448099056.jpg','400RS官网主图','','',0,'.jpg','2015-11-21 09:44:18'),(51,'product','product1448099451','../upload/product/product1448099451.jpg','600RS官网主图','','',0,'.jpg','2015-11-21 09:50:53'),(52,'company','company_banner','../upload/company/company1448184228.png','banner_20151120_1','','',0,'.png','2015-11-22 09:23:49'),(53,'company','company_banner','../upload/company/company1448184235.png','banner_20151120_2','','',0,'.png','2015-11-22 09:23:56'),(54,'company','company_banner','../upload/company/company1448184241.png','banner_20151120_3','','',0,'.png','2015-11-22 09:24:02'),(55,'company','company_banner','../upload/company/company1448184247.png','banner_20151120_4','','',0,'.png','2015-11-22 09:24:08'),(56,'product','product1448243746','../upload/product/product1448243746.jpg','IPX56A官网主图','','',0,'.jpg','2015-11-23 01:55:48'),(57,'product','product1448245849','../upload/product/product1448245849.jpg','IPX56AS官网主图','','',0,'.jpg','2015-11-23 02:30:51'),(58,'product','product1448246835','../upload/product/product1448246835.jpg','IPX5B官网主图','','',0,'.jpg','2015-11-23 02:47:17'),(60,'company','company_barcode','../upload/company/company1448717851.png','网站二维码1','','',0,'.png','2015-11-28 13:37:34'),(61,'product','product1448725418','../upload/product/product1448725418.jpg','IPX56B官网主图','','',0,'.jpg','2015-11-28 15:43:40'),(62,'company','company_links','../upload/company/company1449441743.gif','company1446366396','http://www.yuexinchina.com','精品生活',0,'.gif','2015-12-06 22:42:24'),(63,'material','material_file','../upload/material/material1449465910.log','server','','',0,'.log','2015-12-07 05:25:11');
+INSERT INTO `doc_file` VALUES (49,'product','product1448035693','../upload/product/product1448035693.jpg','200RS官网主图','','',0,'.jpg','2015-11-20 16:08:15'),(50,'product','product1448099056','../upload/product/product1448099056.jpg','400RS官网主图','','',0,'.jpg','2015-11-21 09:44:18'),(51,'product','product1448099451','../upload/product/product1448099451.jpg','600RS官网主图','','',0,'.jpg','2015-11-21 09:50:53'),(56,'product','product1448243746','../upload/product/product1448243746.jpg','IPX56A官网主图','','',0,'.jpg','2015-11-23 01:55:48'),(57,'product','product1448245849','../upload/product/product1448245849.jpg','IPX56AS官网主图','','',0,'.jpg','2015-11-23 02:30:51'),(58,'product','product1448246835','../upload/product/product1448246835.jpg','IPX5B官网主图','','',0,'.jpg','2015-11-23 02:47:17'),(60,'company','company_barcode','../upload/company/company1448717851.png','网站二维码1','','',0,'.png','2015-11-28 13:37:34'),(61,'product','product1448725418','../upload/product/product1448725418.jpg','IPX56B官网主图','','',0,'.jpg','2015-11-28 15:43:40'),(62,'company','company_links','../upload/company/company1449441743.gif','company1446366396','http://www.yuexinchina.com','精品生活',0,'.gif','2015-12-06 22:42:24'),(63,'material','material_file','../upload/material/material1449465910.log','server','','',0,'.log','2015-12-07 05:25:11'),(64,'company','company_banner','../upload/company/company1451388141.png','company1447981399','','',0,'.png','2015-12-29 11:22:22'),(65,'company','company_banner','../upload/company/company1451388159.png','company1447981404','','',0,'.png','2015-12-29 11:22:40'),(66,'company','company_banner','../upload/company/company1451388167.png','company1447981408','','',0,'.png','2015-12-29 11:22:48'),(67,'company','company_banner','../upload/company/company1451388419.png','company1447981413','','',0,'.png','2015-12-29 11:27:00'),(68,'company','company_banner2','../upload/company/company1451388469.png','company1447981404','','',0,'.png','2015-12-29 11:27:51');
 /*!40000 ALTER TABLE `doc_file` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-19  7:41:10
+-- Dump completed on 2016-01-06  5:51:10

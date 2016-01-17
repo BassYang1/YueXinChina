@@ -155,19 +155,7 @@
 					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<?php echo $company_qq; ?>&<?php echo $official_site; ?>&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:<?php echo $company_qq; ?>:41" alt="<?php echo $company_name; ?>" title="<?php echo $company_name; ?>"></a>
 					<a class="ml5" target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" alt="<?php echo $company_name; ?>" /></a>
 				</p>
-                <!--<div class="hidden"><span class="lbl">联系人:</span><span class="info"><?php echo Company::content("contact_person"); ?></span></div>
-                <div class="hidden"><span class="lbl">公司电话:</span><span class="info"><?php echo Company::content("company_phone"); ?></span></div>
-                <div class="hidden"><span class="lbl">移动电话:</span><span class="info"><?php echo Company::content("mobile_phone"); ?></span></div>
-				<div class="hidden">
-					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<?php echo $company_qq; ?>&<?php echo $official_site; ?>&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:<?php echo $company_qq; ?>:41" alt="<?php echo $company_name; ?>" title="<?php echo $company_name; ?>"></a>
-					&nbsp;&nbsp;
-					<a target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" alt="<?php echo $company_name; ?>" /></a>
-				</div>-->
             </div>
-            <!--<div class="hidden" style="background:url(images/contact1.png) no-repeat;background-position: -75px 10px; padding-bottom:10px; padding-left:20px; padding-top:10px;">
-                <span style="width:160px; text-align:right; display:block; line-height:25px;font-size: 19px;"><?php echo Company::content("company_phone"); ?></span>
-                <span style="width:160px; text-align:right; display:block; line-height:25px;font-size: 19px;"><?php echo Company::content("mobile_phone"); ?></span>
-            </div>-->
         </div>
     </div>
 </div>

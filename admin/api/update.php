@@ -17,7 +17,7 @@
 				$content = strtolower(isset($_REQUEST["content"]) ? $_REQUEST["content"] : "");
 				$contentId = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0; //是否允许重复添加
 				
-				if(!empty($companyKey) && $companyKey == "brand_recommend"){ //推荐品牌
+				if(!empty($companyKey) && ($companyKey == "brand_recommend" || $companyKey == "hot_search" || $companyKey == "product_problem")){ //推荐品牌 || 热门商品 || 常见问题
 					$company = new Company();
 					$company->companyKey = $companyKey;
 					$company->subject = $subject;

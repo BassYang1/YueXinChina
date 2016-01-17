@@ -239,10 +239,12 @@ return $this->smtp_sockopen_relay();
 function smtp_sockopen_relay()
 
 {
+$errno = "";
+$errstr = "";
 
 $this->log_write("Trying to ".$this->relay_host.":".$this->smtp_port."\n");
 
-$this->sock = @fsockopen($this->relay_host, $this->smtp_port, $errno, $errstr, $this->time_out);
+$this->sock = stream_socket_client($this->relay_host . ":" . $this->smtp_port, $errno, $errstr, $this->time_out);
 
 if (!($this->sock && $this->smtp_ok())) {
 
@@ -279,7 +281,7 @@ foreach ($MXHOSTS as $host) {
 
 $this->log_write("Trying to ".$host.":".$this->smtp_port."\n");
 
-$this->sock = @fsockopen($host, $this->smtp_port, $errno, $errstr, $this->time_out);
+$this->sock = stream_socket_client($host . ":" . $this->smtp_port, $errno, $errstr, $this->time_out);
 
 if (!($this->sock && $this->smtp_ok())) {
 
