@@ -24,9 +24,8 @@
 	$productHtml = Util::generateProcuctHtml($products);
 	
 ?>
-
-<!--加载公司新闻-->
 <?php 
+	//加载公司新闻
 	$newsHtml = "";
 	$query = new Content(10);
 	$query->contentType = "news";
@@ -50,9 +49,8 @@
 		}
 	}	
 ?>
-
-<!--加载公司案例-->
 <?php 
+	//加载公司案例
 	$caseHtml = "";
 	$query = new Content(10);
 	$query->contentType = "case";
@@ -115,8 +113,7 @@
                             产品列表</div>
                         <div class="m_title_more_link">
                             <a href="product.php">
-                                <img src="images/small_24.jpg" width="44"
-                                    height="13" /></a></div>
+                                <img src="images/small_24.jpg" width="44" height="13" /></a></div>
                         <div class="clear">
                         </div>
                     </div>

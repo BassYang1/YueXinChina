@@ -153,7 +153,7 @@
 				<p><span>手机：</span><?php echo Company::content("mobile_phone"); ?></p>
 				<p class="center">
 					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<?php echo $company_qq; ?>&<?php echo $official_site; ?>&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:<?php echo $company_qq; ?>:41" alt="<?php echo $company_name; ?>" title="<?php echo $company_name; ?>"></a>
-					<a class="ml5" target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=<?php echo $ali_wangwang; ?>&s=1" alt="<?php echo $company_name; ?>" /></a>
+					<a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid=<?php echo $ali_wangwang; ?>&siteid=cntaobao&status=1&charset=utf-8"><img border="0" src="http://amos.alicdn.com/realonline.aw?v=2&uid=<?php echo $ali_wangwang; ?>&site=cntaobao&s=1&charset=utf-8" alt="点击这里给我发消息" /></a>
 				</p>
             </div>
         </div>
