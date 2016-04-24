@@ -109,7 +109,7 @@ $(function(){
 
 		$(".home_banner_imgs li").each(function(i){
 			if($(this).hasClass("cur_banner")){
-				if(i < len - 2){
+				if(i < len - 1){
 					banner = $(".home_banner_imgs li:eq(" + (i + 1) + ")");	
 					bannerBtn = $(".home_banner_btn li:eq(" + (i + 1) + ")");				
 				}
